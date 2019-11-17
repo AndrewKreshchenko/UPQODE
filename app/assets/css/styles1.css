@@ -1,0 +1,27 @@
+/*----------------------------------------------------------------------------*\
+	$PAGE-STYLES
+\*----------------------------------------------------------------------------*/
+/* BEM */
+/* navigation */
+.nav {
+  margin:10px 5px;
+  text-align: center;
+}
+
+.nav__item, 
+.nav__item--selected {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.nav__item a, 
+.nav__item--selected a {
+  color: #797e83;
+  font-size: 0.9em;
+  padding: 4px;
+}
+
+.nav__item--selected a {
+  color: black;
+  border-bottom : black solid 2px
+}

@@ -1,0 +1,12 @@
+/*----------------------------------------------------------------------------*\
+	$PAGE-STYLES
+  BEM
+\*----------------------------------------------------------------------------*/
+/* Mixins */
+/* RESPONSIVE STYLES */
+@media screen and (max-width: 1600px) {
+  .b-slider__item-title {
+    font-size: 48px;
+  }
+}
+/*# sourceMappingURL=responsive.css.map */

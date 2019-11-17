@@ -1,0 +1,420 @@
+/*----------------------------------------------------------------------------*\
+	$PAGE-STYLES
+  BEM
+\*----------------------------------------------------------------------------*/
+
+/* Mixins */
+@mixin prefix($property, $value, $prefixes: ()) {
+  @each $prefix in $prefixes {
+    #{'-' + $prefix + '-' + $property}: $value;
+  }
+  // Output standard non-prefixed declaration
+  #{$property}: $value;
+}
+// @mixin odd() {
+//   &:nth-child(odd) {
+//     @content;
+//   }
+// }
+
+/* IMPORTS */
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap&subset=latin-ext');
+/*@font-face {
+    font-family: 'Poppins';
+    src: local('Poppins Bold'), url('Poppins-Bold.ttf') format('truetype');
+}*/
+@font-face {
+    font-family: 'Gilroy';
+    src: local('Gilroy Regular'), url('../fonts/Gilroy-Regular.ttf') format('truetype');
+}
+//https://css-tricks.com/snippets/css/using-font-face/
+
+// html {
+// 	font: 1em/1.5 sans-serif;
+// }
+/*----------------------------------------------------------------------------*\
+	$DROPDOWN
+	Preview: rawgithub.com/Idered/snippets/master/MIXED/dropdown/index.html
+	<div class="dropdown">
+		<div class="dropdown__text">Your account</div>
+		<div class="dropdown__toggle"></div>
+		<ul class="dropdown__content">
+			<li><a href="">Profile</a></li>
+			<li><a href="">Settings</a></li>
+			<li><a href="">Friends</a></li>
+			<li><a href="">Go pro</a></li>
+			<li><a href="">Sign out</a></li>
+		</ul>
+	</div>
+\*----------------------------------------------------------------------------*/
+
+
+/* VARIABLES */
+//$fonts: Arial, "Hiragino Kaku Gothic Pro W3", Meiryo, sans-serif;
+$bg_color: #2d3042;
+$font_color: #efefef;
+$link_color: #efefef;
+$link_hover_color: #fff;
+
+$selected: '--selected';
+
+/* GENERAL STYLES */
+%elem-before { // class-placeholder (not for BEM classes)
+  position: absolute;
+  content: ''
+}
+* { // *:before, *:after
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #6C6C6C;
+}
+p, a, span, li {
+  font-size: 16px
+}
+p {
+  line-height: 24px
+}
+h1, h2, h3 {
+  color: #00A031;
+  font-weight: 600;
+}
+a, button {
+  font-family: 'Gilroy', sans-serif;
+}
+.link {
+  text-decoration: none;
+  text-transform: uppercase;
+  @include prefix(transition, color .5s, moz ms webkit);
+  &:hover {
+    color: rgba(255,255,255,.6);
+  }
+  // line-height: 24px
+}
+ul, li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* CONSTRUCTOR */
+.clearfix {
+  width: 100%;
+  overflow: auto;
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+.c--flex {
+  display: flex;
+}
+.c--flex-centered {
+  justify-content: center;
+  align-items: center;
+}
+.btn {
+  padding: 16px 23px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 15px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+.btn--filled {
+  color: #fff;
+  background-color: #00A031;
+}
+.btn--bordered {
+  background-color: transparent;
+  color: #00A031;
+  border: 2px solid #00A031;
+  // Alter elements based on a block-level modifier (acording to http://getbem.com/naming)
+  .btn__arrow {
+    width: 25px;
+    height: 6px
+  }
+  .btn__arrow path {
+    fill: none;
+    stroke-width: 2px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: #00A031;
+  }
+}
+.brand {
+  font-weight: 600;
+  line-height: 32px;
+  .brand-logo {
+    width: 31.5px;
+    height: 31.5px;
+    fill: none;
+    path {
+      fill-rule: evenodd;
+      clip-rule: evenodd;
+      fill: #fff
+    }
+  }
+}
+
+
+/* THEME STYLES */
+
+/* Header */
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  text-align: left;
+  z-index: 3;
+  * {
+    color: #fff
+  }
+  h1 {
+    display: inline-block;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 25px;
+  }
+  nav {
+    display: inline-block;
+    float: right;
+    margin-top: 27px;
+    ul {
+      li {
+        display: inline-block;
+        vertical-align: top;
+        a {
+          display: block;
+          padding: 5px 15px;
+          font-size: 14px;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+.brand--header {
+  margin-top: 27px;
+  display: inline-block;
+  font-size: 28px;
+}
+
+/* Banner */
+#banner {
+  width: 100%;
+  height: 100vh;
+  * {
+    color: #fff
+  }
+}
+
+/* Services */
+// %services-flex { // class-placeholder
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// CSS values
+$circle_radius: 15vw;
+$edge_expand: 110px;
+$decor_adjust: 26%;
+
+// Triggers
+.services {
+  &__chain {
+    position: absolute;
+    &-path {
+      width: 100%;
+      height: 100%;
+    }
+    &-point {
+      
+    }
+  }
+  &__item {
+    //@include odd() {}
+    justify-content: center;
+    align-items: center;
+  }
+  &__item-visual {
+    img {
+      margin-top: 90px;
+      max-width: 50%
+    }
+  }
+  &__item-title {
+    font-weight: 800;
+    font-size: 38px;
+    line-height: 51px;
+    letter-spacing: .4px;
+  }
+  &__item-description {
+    font-size: 16px;
+    letter-spacing: .2px;
+  }
+  &__item-particulars {
+    padding-left: 30px;
+    display: table;
+    font-weight: 800;
+    font-size: 38px;
+    line-height: 51px;
+    letter-spacing: 0.4px;
+    text-align: left;
+    li {
+      padding-left: 15px;
+      &::before {
+        @extend %elem-before;
+        content: url(../img/included.svg);
+        width: 30px;
+        height: 30px;
+        z-index: 3
+      }
+    }
+  }
+}
+.overlay-bg {
+  position: absolute;
+  height: 100%;
+  .overlay-bg--left {
+    left: $decor_adjust;
+  }
+  .overlay-bg--right {
+    right: $decor_adjust;
+  }
+  &__ring {
+    position: absolute;
+    border-radius: 50%;
+    top: 12%;
+    width: $circle_radius;
+    height: $circle_radius;
+    background-color: #EBF3ED;
+    z-index: -1;
+    &::before {
+      @extend %elem-before;
+      top: 17%;
+      left: 16%;
+      width: 47%;
+      height: 47%;
+      border-radius: 50%;
+      border: 30px solid #fff;
+      background-color: #fff;
+    }
+  }
+  &__edge { // svg
+    // stroke-width: 5%;
+    margin-top: -$edge_expand/2;
+    margin-left: -$edge_expand/2;
+    width: calc(#{$circle_radius} + #{$edge_expand});
+    height: calc(#{$circle_radius} + #{$edge_expand});
+    //border: 6px dashed #C8E6D1
+    circle {
+      fill: none;
+      stroke: yellow;
+      stroke-dasharray: 6
+    }
+  }
+}
+
+/* Socials */
+.team {
+  &__item {
+    &-title {
+      font-weight: 800;
+      font-size: 38px;
+      letter-spacing: .4px;
+    }
+    &-position {
+      font-family: 'Gilroy', sans-serif;
+    }
+    &-description {
+      margin: 40px 0;
+      letter-spacing: .2px;
+    }
+    &-social li {
+      float: left;
+      padding-right: 25px;
+      &::before {
+        content: '\2022';
+        color: #D8D8D8
+      }
+      a {
+        margin-left: 10px; 
+        letter-spacing: 3px
+      }
+    }
+  }
+  &__nav {
+    margin-top: 135px;
+    max-height: 490px;
+    &-next_photo, &-next_photo + & {
+      display: inline-block;
+      vertical-align: top;
+    }
+    &-next_photo {
+      padding-right: 10px;
+      width: 140px;
+      img {
+        width: auto;
+        max-height: 490px;
+      }
+    }
+    &-content {
+      display: inline-flex;
+      justify-content: space-between;
+      align-items: center;
+      width: calc(100% - 145px);
+      &--next {
+        padding-left: 10px
+      }
+      &--next {
+        padding-right: 10px
+      }
+    }
+  }
+  &--last {
+    opacity: .6;
+  }
+}
+
+/* Footer */
+.page__footer {
+  background-color: #222;
+  text-align: center;
+  &-brand {
+    padding-top: 62px;
+    color: #fff;
+    font-size: 48px;
+    text-align: center
+  }
+  &-nav {
+    display: table;
+    margin: 50px auto;
+    &_list li {
+      float: left;
+      padding-right: 25px;
+      color: #777;
+      a {
+        margin-left: 10px;
+        letter-spacing: 3px;
+      }
+    }
+  }
+  &-copyrights {
+    margin-bottom: 62px;
+    color: #777;
+    font-size: 14px;
+    letter-spacing: 0.2px
+  }
+}
+.brand--footer .brand-logo {
+  width: 45px;
+  height: 45px
+}
