@@ -14,21 +14,6 @@
   src: local("Gilroy Regular"), url("../fonts/Gilroy-Regular.ttf") format("truetype");
 }
 
-/*----------------------------------------------------------------------------*\
-	$DROPDOWN
-	Preview: rawgithub.com/Idered/snippets/master/MIXED/dropdown/index.html
-	<div class="dropdown">
-		<div class="dropdown__text">Your account</div>
-		<div class="dropdown__toggle"></div>
-		<ul class="dropdown__content">
-			<li><a href="">Profile</a></li>
-			<li><a href="">Settings</a></li>
-			<li><a href="">Friends</a></li>
-			<li><a href="">Go pro</a></li>
-			<li><a href="">Sign out</a></li>
-		</ul>
-	</div>
-\*----------------------------------------------------------------------------*/
 /* VARIABLES */
 /* GENERAL STYLES */
 .services__item-particulars li::before, .overlay-bg__ring::before {
@@ -114,6 +99,8 @@ ul, li {
   cursor: pointer;
   border: none;
   outline: none;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
 }
 
 .btn--filled {
@@ -217,6 +204,7 @@ header nav ul li a {
 /* Services */
 .services__chain {
   position: absolute;
+  z-index: -1;
 }
 
 .services__chain-path {
@@ -246,14 +234,15 @@ header nav ul li a {
 }
 
 .services__item-description {
+  margin: 25px 0 20px;
   font-size: 16px;
   letter-spacing: .2px;
 }
 
 .services__item-particulars {
+  margin-bottom: 30px;
   padding-left: 30px;
   display: table;
-  font-weight: 800;
   font-size: 38px;
   line-height: 51px;
   letter-spacing: 0.4px;
@@ -261,11 +250,13 @@ header nav ul li a {
 }
 
 .services__item-particulars li {
-  padding-left: 15px;
+  line-height: 24px;
 }
 
 .services__item-particulars li::before {
   content: url(../img/included.svg);
+  -webkit-transform: translateX(-30px);
+  transform: translateX(-30px);
   width: 30px;
   height: 30px;
   z-index: 3;
