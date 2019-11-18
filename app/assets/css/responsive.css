@@ -8,5 +8,9 @@
   .b-slider__item-title {
     font-size: 48px;
   }
+  .services__item-title {
+    font-size: 28px;
+    line-height: initial;
+  }
 }
 /*# sourceMappingURL=responsive.css.map */
