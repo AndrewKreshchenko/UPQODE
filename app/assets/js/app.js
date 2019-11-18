@@ -11,7 +11,7 @@ var mySlider = new TuinSlider("#b-slider",{
     nextHtml: '>',
     prevHtml: '<',
     paginationHtml: '',
-    arrows: false,
+    arrows: true,
     keyboard: true,
     //pagination: true,
 
@@ -25,8 +25,10 @@ var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/player_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-var slide_ind = 0;
-var b_player;
+
+// Banner slider vaiables
+const b_players = document.querySelectorAll('[data-videoid]');
+var b_videos = new Array, sl_curr_ind = 0, b_player;
 
 //https://www.youtube.com/watch?v=M7lc1UVf-VE
 
@@ -38,43 +40,71 @@ if(this._skiped){
 }
 this._skiped = true;*/
 
-function onYouTubeIframeAPIReady() {
-    // Banner slider
-    const b_pagination = document.querySelectorAll('.b-slider-navigation a');
-    for (const b_pagin of b_pagination) {
-        b_pagin.addEventListener('click', function(e) {
-            controlBSliderVideos(this, '.b-slider__item', '#sl-video-');
-        })
-    }
+/**
+ * Banner slider
+ */
+function controlBSliderVideos(ind) {
+    b_videos.forEach(video => {
+        video.pauseVideo();
+    });
+
+    b_videos[ind].setVolume(0);
+    b_videos[ind].playVideo();
 }
 
-function controlBSliderVideos(el, cl_slide, v_prefix) {
-    var slide = document.querySelectorAll(cl_slide), ind = parseInt(el.getAttribute('data-index'));
-    //startVideo();
+function onYouTubeIframeAPIReady() {
+    b_pagin = document.querySelectorAll('.b-slider-navigation a');
     
-    b_player.pauseVideo();
-    if (typeof slide[ind].querySelector(v_prefix+ind) === null) {
-        slide[ind].querySelector(v_prefix+ind).pauseVideo();
-        return;
+    // Navigation between slides
+    for (const pagin of b_pagin) {
+        pagin.addEventListener('click', function(e) {
+            moveToBSlide(this, '.b-slider__item', '#sl-video-');
+        })
     }
-    else {
-        var video = slide[ind].querySelector(v_prefix+ind), video_id = video.getAttribute('data-video-id');
-        console.log(video, video_id);
 
-        b_player = new YT.Player(video, {
+    // Initialize all videos of banner slider
+    Array.from(b_players).forEach(video => {
+        // Construct new player on banner slider
+        const player = new YT.Player(video.id, { // Targeting video by his random id attribute
             height: window.innerHeight,
             width: window.innerWidth,
-            videoId: video_id,
+            videoId: video.dataset.videoid,
+            loop: 1,
+            //showinfo: 0, // This parameter will be ignored (after September 25, 2018)
             playerVars: {
                 autoplay: 1,
                 modestbranding: 1,
                 rel: 0,
                 autohide: 1,
                 showinfo: 0,
-                controls: 0,
-                setVolume: 0
-            }
+                controls: 0
+            },
         });
+        // Save video id in custom property so we can easily find him later
+        player.id = video.id;
+        //player.setVolume(0);
+        
+        // Push YT video object to array for future use
+        b_videos.push(player);
+
+        // Play video only of first slide
+        controlBSliderVideos(0);
+    });
+    console.log(b_videos);
+}
+
+function moveToBSlide(el, cl_slide, v_prefix) {
+    var b_players = document.querySelectorAll(cl_slide), ind = parseInt(el.getAttribute('data-index'));
+    //startVideo();
+    
+    // If slide has no video
+    if (typeof b_players[ind] === null) //slide[ind].querySelector(v_prefix+ind).pauseVideo();
+        return;
+    else {
+        controlBSliderVideos(ind);
+        //var video = slide[ind].querySelector(v_prefix+ind), video_id = video.getAttribute('data-videoid');
+        //console.log(video, video_id);
+        //b_player.setVolume(0);
         /*function onYouTubePlayerAPIReady() {
             player = new YT.Player('player', {
                 height: '360',
@@ -84,6 +114,18 @@ function controlBSliderVideos(el, cl_slide, v_prefix) {
         }*/
     }
 }
+
+function connectServicesVisual(node1, node2, path) {
+    var n1_child = node1.firstElementChild;
+    path.style.top = node1.offsetTop+n1_child.offsetTop+n1_child.offsetHeight/4+'px';
+    path.style.left = node1.offsetLeft/2+'px';
+    debugger;
+}
+
+//(function() {
+    // Generate services visual connection
+    connectServicesVisual(document.getElementById('s-node-first'), document.getElementById('s-node-last'), document.getElementById('s-chain'));
+//})
  
 /*function createVideo(video) {
     var youtubeScriptId = 'youtube-api';
