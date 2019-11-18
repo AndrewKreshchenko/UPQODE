@@ -48,9 +48,9 @@
   background-size: cover !important;
   background: linear-gradient(180deg, rgba(5, 13, 29, .6) 11%, rgba(5, 13, 29, 0) 90.3%);
 }
-.b-slider__item:nth-child(1) .b-slider__item-bg {
+/*.b-slider__item:nth-child(1) .b-slider__item-bg {
   background-image: linear-gradient(180deg, rgba(5, 13, 29, .6) 11%, rgba(5, 13, 29, 0) 90.3%), url(../img/banner/banner-photo1.png);
-}
+}*/
 .b-slider__item-title {
   font-weight: 600;
   font-size: 90px;
@@ -69,6 +69,7 @@
   margin-top: -60px;
   width: 100%;
   height: calc(100% + 60px);
+  z-index: -1
 }
 
 /* TweenMax slider Controls */
@@ -156,43 +157,4 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
-
-/*.grid {
-  display: table;
-}
-
-.grid > .column {
-  width: 50%;
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.grid > .column:first-child {
-  text-align: right;
-}
-
-.slide-burger {
-  background: #CF624A;
-}
-
-.slide-astronaut {
-  background: #22231D;
-}
-
-.slide-coffee {
-  background: #836C54;
-}
-
-.title {
-  font-size: 60px;
-  font-weight: 100;
-  color: #FFF;
-  text-transform: uppercase;
-}
-
-@media only screen and (min-width: 768px) {
-  .title {
-    font-size: 7em;
-  }
-}*/
 /*# sourceMappingURL=application.css.map */
