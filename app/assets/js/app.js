@@ -1,4 +1,86 @@
-var mySlider = new TuinSlider("#b-slider",{
+/**
+ * Scroll handlers
+ */
+
+const players = document.querySelectorAll('[data-videoid]'), ww = window.innerWidth, wh = window.innerHeight;
+var sl_curr_ind = 0, player, videos = new Array, paused = true; // Init varuables to control videos
+    path = document.getElementById('s-chain-path'), dot = document.getElementById('s-chain-point'); // Init chain path and point globally to speed up browser calculation 
+
+function positionServicesPoint() {
+    let k = (document.documentElement.scrollTop+document.body.scrollTop)/(document.documentElement.scrollHeight-document.documentElement.clientHeight),
+        len = path.getTotalLength(), d = path.getPointAtLength(k*1.8*len);
+    console.log(k);
+    //dot.style.transform = 'translate('+ d.x + ',' + d.y + ')';
+    dot.setAttribute('transform', 'translate('+d.x+','+d.y+')')
+}
+
+const pauseVideos = callback => {
+    setTimeout(() => {
+        callback ({
+            pause: function () {
+                videos.forEach(video => {
+                    if (video.getPlayerState() == 1) {
+                        video.pauseVideo();
+                    }
+                });
+                paused = true;
+            }
+        }, 500)
+    })
+}
+
+var scroll_ = {
+    'onVideo': function(curr, next, cl) {
+        console.log('onVideo');
+        if (curr.classList.contains(cl))
+            curr.classList.remove('header-top--colored')
+    },
+    'onServicesVis': function(curr, prev, cl) {
+        if (!prev.classList.contains(cl))
+            prev.classList += ' header-top--colored'
+        
+        if (!paused) {
+            getTodo(todo => {
+                console.log(todo.text);
+            })
+        }
+        //positionServicesPoint();
+        // && scrolled ? curr.classList += ' header-top--colored': false;
+        //scrolled = false;
+        //document.querySelector('header').classList -= ' header-top--colored';
+        console.log('onServicesVis');
+    },
+    'onAfter': function(el) {
+        console.log('onAfter');
+    }
+}
+
+// Navigation
+function scrollTo(el) {
+    window.scroll({
+        behavior: 'smooth',
+        left: 0,
+        top: el.offsetTop
+    });
+}
+
+function handleScroll() {
+    const sc = window.scrollY || window.pageYOffset;
+    //console.log((sc > wh+wh/2));
+    //console.log(window.outerHeight);
+    if (sc > wh+wh/2) {//positionServicesPoint();}
+        document.querySelector('header').classList.contains += ' header-top--colored';
+    }
+    else {
+        document.querySelector('header').classList -= ' header-top--colored';
+    }
+}
+
+/**
+ * Banner slider
+ */
+// Initialize Banner slider
+var banner_slider = new TuinSlider('#b-slider', {
     // slider selector
     selector: '.b-slider',
 
@@ -20,16 +102,6 @@ var mySlider = new TuinSlider("#b-slider",{
     afterLoad: null
 });
 
-// Load the IFrame Player API code asynchronously.
-var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/player_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-// Banner slider vaiables
-const b_players = document.querySelectorAll('[data-videoid]');
-var b_videos = new Array, sl_curr_ind = 0, b_player;
-
 //https://www.youtube.com/watch?v=M7lc1UVf-VE
 
 // Replace the 'ytplayer' element with an <iframe> and
@@ -40,138 +112,263 @@ if(this._skiped){
 }
 this._skiped = true;*/
 
-/**
- * Banner slider
- */
-function controlBSliderVideos(ind) {
-    b_videos.forEach(video => {
-        video.pauseVideo();
+// On Ready Event
+// NOTE: Have to set controls (such as setVolume) after 'onReady' event
+function onYouTubePlayerReady(e) {
+    e.target.unMute();
+    e.target.setVolume(0);
+    if (e.target.getPlayerState() == 5) {
+        e.target.playVideo();
+        paused = false;
+    }
+}
+
+function onPlayerStateChange(e) {
+    switch (e.data) {
+        case YT.PlayerState.PLAYING:
+            break;
+        case YT.PlayerState.PAUSED:
+            break;
+        case YT.PlayerState.ENDED:
+            console.log('ended '+e.divid);
+            e.target.playVideo();
+            paused = false;
+            break;
+    };
+};
+
+function controlYTPlayer(i, f) {
+    // Take Control of all players
+    videos.forEach(video => {
+        if (video.getPlayerState() == 1) {
+            console.log('playing');
+            video.pauseVideo();
+        }
+        if (video.getPlayerState() == 2) {
+            console.log('paused');
+            video.playVideo();
+            paused = false;
+            return;
+        }
     });
 
-    b_videos[ind].setVolume(0);
-    b_videos[ind].playVideo();
-}
-
-function onYouTubeIframeAPIReady() {
-    b_pagin = document.querySelectorAll('.b-slider-navigation a');
-    
-    // Navigation between slides
-    for (const pagin of b_pagin) {
-        pagin.addEventListener('click', function(e) {
-            moveToBSlide(this, '.b-slider__item', '#sl-video-');
-        })
-    }
-
-    // Initialize all videos of banner slider
-    Array.from(b_players).forEach(video => {
-        // Construct new player on banner slider
-        const player = new YT.Player(video.id, { // Targeting video by his random id attribute
-            height: window.innerHeight,
-            width: window.innerWidth,
-            videoId: video.dataset.videoid,
-            loop: 1,
-            //showinfo: 0, // This parameter will be ignored (after September 25, 2018)
-            playerVars: {
-                autoplay: 1,
-                modestbranding: 1,
-                rel: 0,
-                autohide: 1,
-                showinfo: 0,
-                controls: 0
-            },
-        });
-        // Save video id in custom property so we can easily find him later
-        player.id = video.id;
-        //player.setVolume(0);
-        
-        // Push YT video object to array for future use
-        b_videos.push(player);
-
-        // Play video only of first slide
-        controlBSliderVideos(0);
-    });
-    console.log(b_videos);
-}
-
-function moveToBSlide(el, cl_slide, v_prefix) {
-    var b_players = document.querySelectorAll(cl_slide), ind = parseInt(el.getAttribute('data-index'));
-    //startVideo();
-    
-    // If slide has no video
-    if (typeof b_players[ind] === null) //slide[ind].querySelector(v_prefix+ind).pauseVideo();
-        return;
-    else {
-        controlBSliderVideos(ind);
-        //var video = slide[ind].querySelector(v_prefix+ind), video_id = video.getAttribute('data-videoid');
-        //console.log(video, video_id);
-        //b_player.setVolume(0);
-        /*function onYouTubePlayerAPIReady() {
-            player = new YT.Player('player', {
-                height: '360',
-                width: '640',
-                videoId: 'M7lc1UVf-VE'
-            });
-        }*/
-    }
-}
-
-function connectServicesVisual(node1, node2, path) {
-    var n1_child = node1.firstElementChild;
-    path.style.top = node1.offsetTop+n1_child.offsetTop+n1_child.offsetHeight/4+'px';
-    path.style.left = node1.offsetLeft/2+'px';
-    debugger;
-}
-
-//(function() {
-    // Generate services visual connection
-    connectServicesVisual(document.getElementById('s-node-first'), document.getElementById('s-node-last'), document.getElementById('s-chain'));
-//})
- 
-/*function createVideo(video) {
-    var youtubeScriptId = 'youtube-api';
-    var youtubeScript = document.getElementById(youtubeScriptId);
-    var videoId = video.getAttribute('data-video-id');
-
-    if (youtubeScript === null) {
-        var tag = document.createElement('script');
-        var firstScript = document.getElementsByTagName('script')[0];
-
-        tag.src = 'https://www.youtube.com/iframe_api';
-        tag.id = youtubeScriptId;
-        firstScript.parentNode.insertBefore(tag, firstScript);
-    }
-
-    window.onYouTubeIframeAPIReady = function() {
-        window.player = new window.YT.Player(video, {
-        videoId: videoId,
+    // If new video - initialize it
+    var dim = recalcDimensionYTPlayer();
+    const player = new YT.Player(players[i], {
+        //showinfo: 0, // This parameter will be ignored (after September 25, 2018)
+        height: dim.h,
+        width: dim.w,
+        videoId: players[i].dataset.videoid,
+        loop: 1,
+        events: {
+            'onReady': onYouTubePlayerReady,
+            'onStateChange': onPlayerStateChange,
+        },
         playerVars: {
             autoplay: 1,
             modestbranding: 1,
-            rel: 0
+            rel: 0,
+            autohide: 1,
+            showinfo: 0,
+            controls: 0
+        },
+    });
+
+    player.divid = players[i].getAttribute('id');
+    videos.push(player);
+}
+
+function onChangeBannerSlide(obj) {
+    // Set index for next slide
+    let ind;
+    if (typeof obj.dataset.index === 'undefined') {
+        let prev_ind = document.querySelector('.b-slider-navigation .is-active').dataset.index;
+        if (obj.classList == 'next')
+            ind = prev_ind++;
+        else if (obj.classList == 'previous')
+            ind = prev_ind--;
+        else {
+            console.warn('Faild to Navigate to another slide. Classes of navigation elements might cause problems.');
+            return;
         }
+    }
+    else 
+        ind = obj.dataset.index;
+
+    // Apply changes to slide
+    let cl = 'b-slider__item', slide = document.querySelectorAll('.'+cl)[ind];
+    if (slide.querySelector('[data-videoid]') === null)
+        slide.querySelector('.'+cl+'-bg').classList += ' '+cl+'-bg--static';
+    else {
+        let bg_el = slide.querySelector('.'+cl+'-bg');
+        //bg_el.classList.contains(cl+'-bg--static') ? sbg_el.classList.remove(cl+'-bg--static') : false;
+        controlYTPlayer(ind, false); // false - not after scroll event 
+    }
+}
+
+function recalcDimensionYTPlayer() {
+    var video_dim = {}; 
+    if (ww > wh) {
+        let expand = ww/wh*130;
+        video_dim.w = ww + expand;
+        video_dim.h = wh + 130;
+    }
+    else {
+        //let k = video_ww      
+    }
+    return video_dim;
+}
+
+// Initialize Banner videos (after has finished downloading the JavaScript for the player API)
+// NOTE: It would be better to keep track if onYouTubeIframeAPIReady() will be fired allways after banner slider initialisation
+function onYouTubeIframeAPIReady() {
+    // Init a video on the first slide
+    controlYTPlayer(0, false); // false - not after scroll event 
+
+    // Navigation between slides
+    for (const pagin of document.querySelectorAll('.b-slider-navigation a')) {
+        pagin.addEventListener('click', function() {
+            onChangeBannerSlide(this);
+        })
+    }
+    for (const pagin of document.querySelectorAll('.b-slider-controls > button')) {
+        pagin.addEventListener('click', function() {
+            onChangeBannerSlide(this);
+        })
+    }
+}
+
+/**
+ * Servies
+ */
+function buildServicesPath() {
+    // Position Service connection path
+    var services = document.getElementById('services'), path_ = document.getElementById('s-chain'),
+        nodes = services.querySelectorAll('[data-node]'), node1_ch = nodes[0].firstElementChild,
+        c_offset = services.querySelector('.container').offsetWidth;
+    path_.style.top = nodes[0].offsetTop+node1_ch.offsetTop+node1_ch.offsetHeight/1.5+'px';
+    //var w_offset = (window.outerWidth-c_offset)/2;//path.style.left = nodes[0].offsetLeft/2+'px';
+    path_.style.width = c_offset-node1_ch.offsetWidth*2+'px';
+}
+
+function moveToTeamSlide(el, is_next) {
+    // Get index of current slide
+    var form = document.getElementById('team-form'), fields = form.children, len = fields.length, // fields - fieldset tags
+        checked_el = document.querySelector('[name="team-slide"]:checked'), ind = checked_el.dataset.index;
+    is_next ? (ind < len-1 ? ind++ : ind = 1) : (ind > 1 ? ind-- : ind = len-1);
+    var ind_sl = ind;
+    is_next ? (ind_sl < len-2 ? ind_sl += 2 : ind_sl = 1) : (ind_sl > 2 ? ind_sl -= 2 : ind_sl = len-1);
+    console.log(ind+ ' ind');
+
+    // Get Data of next or prev slide (some data of prev and next slide for navigation container from fieldset tags)
+    var data = {};
+    data.name = fields[ind-1].querySelector('[name="name"]').value;
+    data.name_prev = fields[ind-2].querySelector('[name="name"]').value;
+    data.name_next = fields[ind].querySelector('[name="name"]').value;
+    data.photo_path = fields[ind-1].querySelector('[name="photo"]').value;
+    data.photo_path_prev = fields[ind-2].querySelector('[name="photo"]').value;
+    data.photo_path_next = fields[ind].querySelector('[name="photo"]').value;
+    //is_next ? data.photo_slide = fields[ind].querySelector('[name="photo"]').value : data.photo_slide = fields[ind].querySelector('[name="photo"]').value;
+    data.position = fields[ind-1].querySelector('[name="position"]').value;
+    data.desc = fields[ind-1].querySelector('[name="desc"]').innerHTML;
+
+    // let social = field.querySelector('[name="social"]').value;
+    // data.social = social.split(',').map(function(item) {
+    //     return item.trim();
+    // });
+    //var ind = el.parentNode('.team__nav');
+    console.log(ind, data);
+
+    // Change member content and slide
+    var container = document.getElementById('team-item'), dir = '../assets/img/team/';
+    
+    // Change info on navigation
+    
+    
+    container.classList.remove('c--showed');
+    container.classList += ' c--hidden';
+    container.querySelector('.team__item-title').innerText = data.name;
+    container.querySelector('.team__item-position').innerText = data.position;
+    container.querySelector('.team__item-description').innerText = data.desc;
+
+    //container.querySelector('.team__nav_photo')
+
+    //social.removeChild(social);
+    // var socials = document.querySelectorAll('.team__item-social .link');
+    // for (var soc of data.social) {
+    //     console.log(soc);
+    // }
+    container.classList.remove('c--hidden');
+    container.classList += ' c--showed'
+
+    // Load image on banner
+    checked_el.checked = false;
+    if (document.getElementById('team-sel-'+ind) != null)
+        document.getElementById('team-sel-'+ind).checked = true;
+    else {
+        is_next ? document.getElementById('team-sel-1').checked = true:
+            document.getElementById('team-sel-'+(len-1)).checked = true
+    }
+}
+
+/**
+ * DOMContentLoaded
+ */
+
+// Actions after Page DOM loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Load the iFrame Player API code asynchronously.
+    let tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/player_api';
+    let script_api = document.getElementsByTagName('script')[0];
+    script_api.parentNode.insertBefore(tag, script_api);
+
+    if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        buildServicesPath();
+        //window.addEventListener('scroll', handleScroll);
+
+        // const top_ = document.getElementById('b-slider');
+        var header = document.querySelector('header'), header_cl = 'header-top--colored', services = document.getElementById('services');
+        window.addEventListener('scroll', () => {
+            const sc = window.scrollY || window.pageYOffset;
+            //console.log((sc > wh+wh/2));
+            //console.log(window.outerHeight);
+            if (sc > wh+wh/1.5 && sc < wh*2) {//positionServicesPoint();}
+                scroll_.onServicesVis(services, header, header_cl);
+                //document.querySelector('header').classList.contains += ' header-top--colored';
+            }
+            else if (sc > wh*2) {
+                scroll_.onAfter(services);
+            }
+            else {
+                scroll_.onVideo(header, services, header_cl);
+                //document.querySelector('header').classList -= ' header-top--colored';
+            }
+        });
+
+        document.querySelectorAll('nav li > a').forEach(link => {
+            link.addEventListener('click', function() {
+                let id = this.getAttribute('href'); //window.removeEventListener('scroll');
+                id == '#' ? scrollTo(document.querySelector('body')) : scrollTo(document.querySelector(id));
+                
+                if (this.classList.contains('link--header')) {
+                    document.querySelector('.menu .active').classList.remove('active');
+                    this.classList += ' active'
+                }
+                
+                return false; // instead of prevetDefault
+            });
+        });
+
+        document.querySelectorAll('.team__nav--next').forEach(sl => {
+            sl.addEventListener('click', function() {
+                moveToTeamSlide(this, true);
+            });
+        });
+        document.querySelectorAll('.team__nav--prev').forEach(sl => {
+            sl.addEventListener('click', function() {
+                moveToTeamSlide(this, false);
+            });
         });
     }
-}*/
-
-// 4. The API will call this function when the video player is ready.
-function onPlayerReady(e) {
-    e.target.setVolume(0);
-  e.target.playVideo();
-  console.log('fired');
-}
-
-// 5. The API calls this function when the player's state changes.
-//    The function indicates that when playing a video (state=1),
-//    the player should play for six seconds and then stop.
-var done = false;
-function onPlayerStateChange(e) {
-    console.log('fired');
-  if (e.data == YT.PlayerState.PLAYING && !done) {
-    setTimeout(stopVideo, 6000);
-    done = true;
-  }
-}
-function stopVideo() {
-    console.log('fired');
-  player.stopVideo();
-}
+});
