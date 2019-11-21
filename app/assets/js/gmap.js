@@ -5,14 +5,14 @@ function getGoogleMapPins() {
     const pins = {
         markers: {
             loc: {
-                icon: '../assets/img/contacts/marker.svg'
+                icon: 'app/assets/img/contacts/marker.svg'
             },
             loc_state: {
-                icon: '../assets/img/contacts/marker-state.svg',
+                icon: 'app/assets/img/contacts/marker-state.svg',
             },
             loc_state_zoomed: {
                 icon: {
-                    url: '../assets/img/contacts/marker-state.svg'
+                    url: 'app/assets/img/contacts/marker-state.svg'
                 }
             }
         },
