@@ -1,8 +1,11 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en-US">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="UPQODE is a web design and SEO company, based in Nashville. We focus on designing, developing and promoting websites for both small &amp; large businesses.">
+    <meta name="author" content="Andrii Kreshchenko">
+    <meta name="keywords" content="HTML,CSS,XML,JavaScript">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mileage Made Simple | UPQODE</title>
     <!--<link rel="icon" type="image/png" href="img/fav.ico" sizes="32x32">-->
@@ -18,7 +21,7 @@
 </head>
 <body>
     <!-- HEADER start -->
-    <header>
+    <header class="header-top">
         <div class="container">
             <div class="brand brand--header">
                 <svg class="brand-logo" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -26,19 +29,19 @@
                 </svg>
                 UPQODE
             </div>
-            <nav>
+            <nav class="header-top__navbar">
                 <ul class="menu">
                     <li class="menu__item">
-                        <a class="link" href="#">Home</a>
+                        <a class="link link--header active" href="#">Home</a>
                     </li>
                     <li class="menu__item">
-                        <a class="link" href="#services">Serices</a>
+                        <a class="link link--header" href="#services">Serices</a>
                     </li>
                     <li class="menu__item">
-                        <a class="link" href="#team">Team</a>
+                        <a class="link link--header" href="#team">Team</a>
                     </li>
                     <li class="menu__item">
-                        <a class="link" href="#contacts">Contact us</a>
+                        <a class="link link--header" href="#contacts">Contact us</a>
                     </li>
                 </ul>
             </nav>
@@ -47,14 +50,26 @@
     <!-- HEADER end -->
 
     <main>
+        <!-- Banner start -->
         <section id="banner">
             <div class="b-slider" id="b-slider">
                 <div class="b-slider__container">
                     <div class="b-slider__item">
-                        <div class="b-slider__item-wrapper c--flex c--flex-centered" style="">
+                        <div class="b-slider__item-wrapper c--flex c--flex-centered">
                             <!--<img src="Bitmap.png" alt="">-->
                             <div class="b-slider__item-bg"></div>
-                            <div id="sl-video-1" class="b-slider__item-video" data-videoid="LmwwnU5-VxU"></div><!--wQcchdeS4QY-->
+                            <div data-videoid="bvWDfQsnx0s" id="sl-video-1" class="b-slider__item-video"></div>
+                            <div class="b-slider__item-content container c--showed">
+                                <h1 class="b-slider__item-title">Mileage Made Simple</h1>
+                                <p class="b-slider__item-description">Motivation And Your Personal Vision An Unbeatable Force</p>
+                                <button class="b-slider__item-btn btn btn--filled">Start Free Trial</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="b-slider__item">
+                        <div class="b-slider__item-wrapper c--flex c--flex-centered">
+                            <div class="b-slider__item-bg"></div>
+                            <div data-videoid="LmwwnU5-VxU" id="sl-video-2" class="b-slider__item-video"></div>
                             <div class="b-slider__item-content container">
                                 <h1 class="b-slider__item-title">Mileage Made Simple</h1>
                                 <p class="b-slider__item-description">Motivation And Your Personal Vision An Unbeatable Force</p>
@@ -65,7 +80,18 @@
                     <div class="b-slider__item">
                         <div class="b-slider__item-wrapper c--flex c--flex-centered">
                             <div class="b-slider__item-bg"></div>
-                            <div id="sl-video-2" class="b-slider__item-video" data-videoid="wQcchdeS4QY"></div><!--lei2L-3sYWI  b_players[ind]-->
+                            <div data-videoid="wQcchdeS4QY" id="sl-video-3" class="b-slider__item-video"></div>
+                            <div class="b-slider__item-content container">
+                                <h1 class="b-slider__item-title">Mileage Made Simple</h1>
+                                <p class="b-slider__item-description">Motivation And Your Personal Vision An Unbeatable Force</p>
+                                <button class="b-slider__item-btn btn btn--filled">Start Free Trial</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="b-slider__item">
+                        <div class="b-slider__item-wrapper c--flex c--flex-centered">
+                            <div class="b-slider__item-bg"></div>
+                            <div data-videoid="6NUKx82xojo" id="sl-video-4" class="b-slider__item-video"></div>
                             <div class="b-slider__item-content container">
                                 <h1 class="b-slider__item-title">Mileage Made Simple</h1>
                                 <p class="b-slider__item-description">Motivation And Your Personal Vision An Unbeatable Force</p>
@@ -84,33 +110,38 @@
             
             <!--<ul class="slider-navigation"><li><a data-index="0" href="#0" class="is-active"></a></li><li><a data-index="1" href="#1"></a></li><li><a data-index="2" href="#2"></a></li></ul>-->
         </section>
+        <!-- Banner end -->
 
         <!-- Services start -->
         <section id="services">
             <div class="container">
                 <div class="services__item c--flex row">
+                    
+                    <!-- Services item 1 -->
+
+                    <!-- Services chain -->
                     <div class="services__chain" id="s-chain">
-                        <!--width="664" height="1216" -->
-                        <svg class="services__chain-path" viewBox="0 0 664 1216" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M22.9998 1C22.9998 1 649.558 119 663 589.542C655.833 1135 1 1215 1 1215" stroke="#29A0EC"/>
+                        <svg id="s-chain-point" class="services__chain-point" width="167" height="167" viewBox="0 0 167 167" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M84 90C87.3137 90 90 87.3137 90 84C90 80.6863 87.3137 78 84 78C80.6863 78 78 80.6863 78 84C78 87.3137 80.6863 90 84 90Z" fill="#29A0EC"/>
+                            <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M83.5 96C90.4036 96 96 90.4036 96 83.5C96 76.5964 90.4036 71 83.5 71C76.5964 71 71 76.5964 71 83.5C71 90.4036 76.5964 96 83.5 96Z" fill="#29A0EC"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M83.5 101C93.165 101 101 93.165 101 83.5C101 73.835 93.165 66 83.5 66C73.835 66 66 73.835 66 83.5C66 93.165 73.835 101 83.5 101Z" stroke="#00A031" stroke-opacity="0.16"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M83.5 106C95.9264 106 106 95.9264 106 83.5C106 71.0736 95.9264 61 83.5 61C71.0736 61 61 71.0736 61 83.5C61 95.9264 71.0736 106 83.5 106Z" stroke="#00A031" stroke-opacity="0.13"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M83.5 111C98.6878 111 111 98.6878 111 83.5C111 68.3122 98.6878 56 83.5 56C68.3122 56 56 68.3122 56 83.5C56 98.6878 68.3122 111 83.5 111Z" stroke="#00A031" stroke-opacity="0.12"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M83.5 117C102.002 117 117 102.002 117 83.5C117 64.9985 102.002 50 83.5 50C64.9985 50 50 64.9985 50 83.5C50 102.002 64.9985 117 83.5 117Z" stroke="#00A031" stroke-opacity="0.11"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M83.5 123C105.315 123 123 105.315 123 83.5C123 61.6848 105.315 44 83.5 44C61.6848 44 44 61.6848 44 83.5C44 105.315 61.6848 123 83.5 123Z" stroke="#00A031" stroke-opacity="0.1"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M84 131C109.957 131 131 109.957 131 84C131 58.0426 109.957 37 84 37C58.0426 37 37 58.0426 37 84C37 109.957 58.0426 131 84 131Z" stroke="#00A031" stroke-opacity="0.08"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M83.5 139C114.152 139 139 114.152 139 83.5C139 52.8482 114.152 28 83.5 28C52.8482 28 28 52.8482 28 83.5C28 114.152 52.8482 139 83.5 139Z" stroke="#00A031" stroke-opacity="0.06"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M83.5 147C118.57 147 147 118.57 147 83.5C147 48.4299 118.57 20 83.5 20C48.4299 20 20 48.4299 20 83.5C20 118.57 48.4299 147 83.5 147Z" stroke="#00A031" stroke-opacity="0.04"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M83.5 156C123.541 156 156 123.541 156 83.5C156 43.4594 123.541 11 83.5 11C43.4594 11 11 43.4594 11 83.5C11 123.541 43.4594 156 83.5 156Z" stroke="#00A031" stroke-opacity="0.03"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M83.5 166C129.063 166 166 129.063 166 83.5C166 37.9365 129.063 1 83.5 1C37.9365 1 1 37.9365 1 83.5C1 129.063 37.9365 166 83.5 166Z" stroke="#00A031" stroke-opacity="0.03"/>
                         </svg>
-                        <!--<svg id="s-chain-point" class="services__chain-point" width="167" height="167" viewBox="0 0 167 167" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path id="Oval" fill-rule="evenodd" clip-rule="evenodd" d="M84 90C87.3137 90 90 87.3137 90 84C90 80.6863 87.3137 78 84 78C80.6863 78 78 80.6863 78 84C78 87.3137 80.6863 90 84 90Z" fill="#29A0EC"/>
-                            <path id="Oval_2" opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M83.5 96C90.4036 96 96 90.4036 96 83.5C96 76.5964 90.4036 71 83.5 71C76.5964 71 71 76.5964 71 83.5C71 90.4036 76.5964 96 83.5 96Z" fill="#29A0EC"/>
-                            <path id="Oval_3" fill-rule="evenodd" clip-rule="evenodd" d="M83.5 101C93.165 101 101 93.165 101 83.5C101 73.835 93.165 66 83.5 66C73.835 66 66 73.835 66 83.5C66 93.165 73.835 101 83.5 101Z" stroke="#00A031" stroke-opacity="0.16"/>
-                            <path id="Oval_4" fill-rule="evenodd" clip-rule="evenodd" d="M83.5 106C95.9264 106 106 95.9264 106 83.5C106 71.0736 95.9264 61 83.5 61C71.0736 61 61 71.0736 61 83.5C61 95.9264 71.0736 106 83.5 106Z" stroke="#00A031" stroke-opacity="0.13"/>
-                            <path id="Oval_5" fill-rule="evenodd" clip-rule="evenodd" d="M83.5 111C98.6878 111 111 98.6878 111 83.5C111 68.3122 98.6878 56 83.5 56C68.3122 56 56 68.3122 56 83.5C56 98.6878 68.3122 111 83.5 111Z" stroke="#00A031" stroke-opacity="0.12"/>
-                            <path id="Oval_6" fill-rule="evenodd" clip-rule="evenodd" d="M83.5 117C102.002 117 117 102.002 117 83.5C117 64.9985 102.002 50 83.5 50C64.9985 50 50 64.9985 50 83.5C50 102.002 64.9985 117 83.5 117Z" stroke="#00A031" stroke-opacity="0.11"/>
-                            <path id="Oval_7" fill-rule="evenodd" clip-rule="evenodd" d="M83.5 123C105.315 123 123 105.315 123 83.5C123 61.6848 105.315 44 83.5 44C61.6848 44 44 61.6848 44 83.5C44 105.315 61.6848 123 83.5 123Z" stroke="#00A031" stroke-opacity="0.1"/>
-                            <path id="Oval_8" fill-rule="evenodd" clip-rule="evenodd" d="M84 131C109.957 131 131 109.957 131 84C131 58.0426 109.957 37 84 37C58.0426 37 37 58.0426 37 84C37 109.957 58.0426 131 84 131Z" stroke="#00A031" stroke-opacity="0.08"/>
-                            <path id="Oval_9" fill-rule="evenodd" clip-rule="evenodd" d="M83.5 139C114.152 139 139 114.152 139 83.5C139 52.8482 114.152 28 83.5 28C52.8482 28 28 52.8482 28 83.5C28 114.152 52.8482 139 83.5 139Z" stroke="#00A031" stroke-opacity="0.06"/>
-                            <path id="Oval_10" fill-rule="evenodd" clip-rule="evenodd" d="M83.5 147C118.57 147 147 118.57 147 83.5C147 48.4299 118.57 20 83.5 20C48.4299 20 20 48.4299 20 83.5C20 118.57 48.4299 147 83.5 147Z" stroke="#00A031" stroke-opacity="0.04"/>
-                            <path id="Oval_11" fill-rule="evenodd" clip-rule="evenodd" d="M83.5 156C123.541 156 156 123.541 156 83.5C156 43.4594 123.541 11 83.5 11C43.4594 11 11 43.4594 11 83.5C11 123.541 43.4594 156 83.5 156Z" stroke="#00A031" stroke-opacity="0.03"/>
-                            <path id="Oval_12" fill-rule="evenodd" clip-rule="evenodd" d="M83.5 166C129.063 166 166 129.063 166 83.5C166 37.9365 129.063 1 83.5 1C37.9365 1 1 37.9365 1 83.5C1 129.063 37.9365 166 83.5 166Z" stroke="#00A031" stroke-opacity="0.03"/>
-                        </svg>-->
+                        <svg class="services__chain-path" width="664px" height="1216px" viewBox="0 0 664 1216" xmlns="http://www.w3.org/2000/svg">
+                            <path id="s-chain-path" d="M22.9998 1C22.9998 1 649.558 119 663 589.542C655.833 1135 1 1215 1 1215"/>
+                        </svg>
                     </div>
+
                     <div class="services__item-visual col col--6">
-                        <div id="s-node-first" class="overlay-bg overlay-bg--left">
+                        <div data-node="0" class="overlay-bg overlay-bg--left">
                             <div class="overlay-bg__ring">
                                 <svg class="overlay-bg__edge" viewBox="0 0 528 528" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M264 525C408.146 525 525 408.146 525 264C525 119.854 408.146 3 264 3C119.854 3 3 119.854 3 264C3 408.146 119.854 525 264 525Z" stroke="#C8E6D1" stroke-width="6" stroke-dasharray="1 6"/>
@@ -129,7 +160,6 @@
                         <ul class="services__item-particulars">
                             <li>No signal dropout</li>
                             <li>No missed trips</li>
-                            <li>No missed trips</li>
                         </ul>
                         <button class="btn btn--bordered">
                             learn more
@@ -142,14 +172,15 @@
                         </button>
                     </div>
                 </div>
+
+                <!-- Services item 2 -->
                 <div class="services__item c--flex row">
                     <div class="col col--6">
-                        <h3 class="services__item-title">Claim your money back with ease</h3>
-                        <p class="services__item-description">Claiming mileage has never been so easy, with all calculations done for you.</p>
+                        <h3 class="services__item-title">Classify with a single swipe</h3>
+                        <p class="services__item-description">Swipe right for business. Swipe left for personal. It’s as easy as that.</p>
                         <ul class="services__item-particulars">
-                            <li>100% HMRC compliance</li>
-                            <li>All logs in one place</li>
-                            <li>No missed trips</li>
+                            <li>Review trips on the go</li>
+                            <li>Classify journeys in seconds</li>
                         </ul>
                         <button class="btn btn--bordered">
                             learn more
@@ -162,7 +193,7 @@
                         </button>
                     </div>
                     <div class="services__item-visual col col--6">
-                        <div id="s-node-last" class="overlay-bg overlay-bg--right">
+                        <div data-node="1" class="overlay-bg overlay-bg--right">
                             <div class="overlay-bg__ring">
                                 <svg class="overlay-bg__edge" viewBox="0 0 528 528" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M264 525C408.146 525 525 408.146 525 264C525 119.854 408.146 3 264 3C119.854 3 3 119.854 3 264C3 408.146 119.854 525 264 525Z" stroke="#C8E6D1" stroke-width="6" stroke-dasharray="1 6"/>
@@ -172,13 +203,72 @@
                         <img src="../assets/img/services/device-trip-demo2.png" alt="Device trip demo 2">
                     </div>
                 </div>
+
+                <!-- Services item 3 -->
+                <div class="services__item c--flex row">
+                    <div class="services__item-visual col col--6">
+                        <div data-node="1" class="overlay-bg overlay-bg--left">
+                            <div class="overlay-bg__ring">
+                                <svg class="overlay-bg__edge" viewBox="0 0 528 528" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M264 525C408.146 525 525 408.146 525 264C525 119.854 408.146 3 264 3C119.854 3 3 119.854 3 264C3 408.146 119.854 525 264 525Z" stroke="#C8E6D1" stroke-width="6" stroke-dasharray="1 6"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <img src="../assets/img/services/device-trip-demo2.png" alt="Device trip demo 2">
+                    </div>
+                    <div class="col col--6">
+                        <h3 class="services__item-title">Claim your money back with ease</h3>
+                        <p class="services__item-description">Claiming mileage has never been so easy, with all calculations done for you.</p>
+                        <ul class="services__item-particulars">
+                            <li>100% HMRC compliance</li>
+                            <li>All logs in one place</li>
+                        </ul>
+                        <button class="btn btn--bordered">
+                            learn more
+                            <svg class="btn__arrow" viewBox="0 0 25 6" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 5L24 3.03571L22.0357 1"/>
+                                <path d="M23 3H13"/>
+                                <path d="M6 3H9"/>
+                                <path d="M1 3H2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
             </div>
         </section>
         <!-- Services end -->
 
-        <section id="team">
+        <!-- Team start -->
+        <section id="team" class="team">
+            <form id="team-form" class="team__members-form c--hidden">
+                <fieldset data-item="1" name="member">
+                    <input type="hidden" name="name" value="Jullia Harrington">
+                    <input type="hidden" name="photo" value="Jullia-Harrington.png">
+                    <input type="hidden" name="position" value="Art director">
+                    <textarea type="hidden" name="desc">Have you ever had a problem with a burned light? Thanks of the effort of th Thomas Edison we no longer need to invent a light bulb.</textarea>
+                    <!--<input type="hidden" name="social" value="Facebook,Linkedin,Twitter">-->
+                </fieldset>
+                <fieldset data-item="2" name="member">
+                    <input type="hidden" name="name" value="Minnie Bell">
+                    <input type="hidden" name="photo" value="Minnie-Bell.png">
+                    <input type="hidden" name="position" value="FrontEnd Developer">
+                    <textarea type="hidden" name="desc">Have you ever had a problem with a burned light? Thanks of the effort of th Thomas Edison.</textarea>
+                </fieldset>
+                <fieldset data-item="3" name="member">
+                    <input type="hidden" name="name" value="Harry-Kane">
+                    <input type="hidden" name="photo" value="Harry-Kane.png">
+                    <input type="hidden" name="position" value="UI/UX Designer">
+                    <textarea type="hidden" name="desc">Lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam. Tellus id interdum velit laoreet id donec. Leo duis ut diam quam nulla porttitor. In hendrerit gravida rutrum quisque. Iaculis at erat pellentesque adipiscing commodo elit at imperdiet dui.</textarea>
+                </fieldset>
+                <fieldset data-item="4" name="member">
+                    <input type="hidden" name="name" value="Emma-Walker">
+                    <input type="hidden" name="photo" value="Emma-Walker.png">
+                    <input type="hidden" name="position" value="QA">
+                    <textarea type="hidden" name="desc">Have you ever had a problem with a burned light? Tellus id interdum velit laoreet id donec. Leo duis ut diam quam nulla porttitor. In hendrerit gravida rutrum quisque. Iaculis at erat pellentesque adipiscing commodo elit at imperdiet dui.</textarea>
+                </fieldset>
+            </form>
             <div class="container">
-                <div class="col col--7"><!--team__item-->
+                <div id="team-item" class="team__item col col--7 c--showed"><!--team__item-->
                     <h2 class="team__item-title">Julia Harrington</h2>
                     <cite class="team__item-position">Art director</cite>
                     <p class="team__item-description">
@@ -191,48 +281,128 @@
                     </ul>
                     <div class="clearfix"></div>
 
-                    <div class="team__nav">
-                        <div class="team__nav-next_photo">
-                            <img src="../assets/img/team/Minnie-Bell_thumb.png" alt="Minnie Bell thumbnail">
+                    <div class="team__nav c--flex">
+                        <img id="team-next-photo" class="team__nav_photo team__nav--next" src="../assets/img/team/Minnie-Bell_thumb.png" alt="Next member photo thumbnail">
+                        <div class="team__nav-text">
+                            <p class="team__nav-text_content team__nav--next"><span class="team__nav-text_move">Next</span><span class="team__nav-text_name">Minnie Bell</span></p>
+                            <p class="team__nav-text_content team__nav--prev team__nav--endpoint"><span class="team__nav-text_move">Prev</span><span class="team__nav-text_name">Minnie Bell</span></p>
                         </div>
-                        <div class="team__nav-content">
-                            <div class="team__nav-content--next">
-                                <a class="team__nav-link" href="#" title="Next Team Member">
-                                    Next
-                                    <svg class="team__nav-arrow" width="28" height="8" viewBox="0 0 28 8" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M0 4.49123V3.50877H25.7357L22.4497 0.701754L23.2781 0L28 4L23.2781 8L22.4221 7.29825L25.7357 4.49123H0Z"/>
-                                    </svg>
-                                </a>
-                                <p class="team__nav-next_name">Minnie Bell</p><!-- use another tag -->
-                            </div>
-                            <div class="team__nav-content--prev">
-                                <a class="team__nav-link" href="#" title="Next Team Member">
-                                    <svg width="28" height="8" viewBox="0 0 28 8" xmlns="http://www.w3.org/2000/svg">
-                                        <path opacity="0.3" d="M28 4.49123V3.50877H2.2643L5.5503 0.701754L4.72189 0L0 4L4.72189 8L5.57791 7.29825L2.2643 4.49123H28Z"/>
-                                    </svg>
-                                    Prev
-                                </a>
-                            </div>
-                        </div>
+                        <img id="team-prev-photo" class="team__nav_photo team__nav--prev c--hidden" alt="Prev member photo thumbnail">
                     </div>
                 </div>
                 <div class="col col--5">
-                    
+                    <div class="team__slider">
+                        <input data-index="1" type="radio" name="team-slide" id="team-sel-1" class="team__slide-pick" checked>
+                        <input data-index="2" type="radio" name="team-slide" id="team-sel-2" class="team__slide-pick">
+                        <input data-index="3" type="radio" name="team-slide" id="team-sel-3" class="team__slide-pick">
+                        <label data-index="4" for="team-sel-1" id="team-sl-1" class="team__slide-item c--flex">
+                            <img src="../assets/img/team/Jullia-Harrington.png" alt="Member photo slide" class="team__slide-photo">
+                        </label>
+                        <label for="team-sel-2" id="team-sl-2" class="team__slide-item c--flex">
+                            <img src="../assets/img/team/Minnie-Bell.png" alt="Member photo slide" class="team__slide-photo">
+                        </label>
+                        <label for="team-sel-3" id="team-sl-3" class="team__slide-item c--flex">
+                            <img src="../assets/img/team/Harry-Kane.png" alt="Member photo slide" class="team__slide-photo">
+                        </label>
+                    </div>
                 </div>
             </div>
         </section>
+        <!-- Team end -->
 
-        <section id="contacts" class="container">
+        <!-- Contacts start -->
+        <section id="contacts" class="container contacts">
             <div class="row">
                 <div class="col col--4">
-                    
+                    <h2 class="contacts__title">Meet Us in Your City</h2>
+                    <p data-item-address class="contacts__address">2005 Stokes Isle Apt. 896,<br>Venaville, New York 10010</p>
+                    <!--<div class="contacts__item-icon contacts__item-icon--active">
+                                <svg viewBox="0 0 24 25" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M23.6719 24.3594C23.6094 24.4062 23.5391 24.4375 23.4609 24.4531C23.3984 24.4844 23.3281 24.5 23.25 24.5C23.2031 24.5 23.1562 24.4922 23.1094 24.4766C23.0625 24.4766 23.0156 24.4688 22.9688 24.4531L15.75 21.5469L8.55469 24.4297C8.53906 24.4297 8.53125 24.4297 8.53125 24.4297C8.53125 24.4297 8.53125 24.4375 8.53125 24.4531C8.53125 24.4531 8.52344 24.4531 8.50781 24.4531C8.46094 24.4688 8.41406 24.4766 8.36719 24.4766C8.33594 24.4922 8.29688 24.5 8.25 24.5C8.20312 24.5 8.15625 24.4922 8.10938 24.4766C8.07812 24.4766 8.03906 24.4688 7.99219 24.4531C7.99219 24.4531 7.98438 24.4531 7.96875 24.4531C7.96875 24.4375 7.96875 24.4297 7.96875 24.4297C7.96875 24.4297 7.96094 24.4297 7.94531 24.4297L0.46875 21.4531C0.328125 21.3906 0.210938 21.2969 0.117188 21.1719C0.0390625 21.0469 0 20.9062 0 20.75V2.75C0 2.64063 0.0234375 2.53125 0.0703125 2.42188C0.117188 2.3125 0.1875 2.22656 0.28125 2.16406C0.375 2.08594 0.476562 2.03906 0.585938 2.02344C0.710938 1.99219 0.828125 1.99219 0.9375 2.02344L3.9375 2.77344C4.14062 2.82031 4.28906 2.9375 4.38281 3.125C4.49219 3.29688 4.52344 3.48438 4.47656 3.6875C4.42969 3.89062 4.3125 4.04688 4.125 4.15625C3.95312 4.25 3.76562 4.27344 3.5625 4.22656L1.5 3.71094V20.2344L7.5 22.6484V17.75C7.5 17.5469 7.57031 17.375 7.71094 17.2344C7.86719 17.0781 8.04688 17 8.25 17C8.45312 17 8.625 17.0781 8.76562 17.2344C8.92188 17.375 9 17.5469 9 17.75V22.6484L15 20.2344V17.75C15 17.5469 15.0703 17.375 15.2109 17.2344C15.3672 17.0781 15.5469 17 15.75 17C15.9531 17 16.125 17.0781 16.2656 17.2344C16.4219 17.375 16.5 17.5469 16.5 17.75V20.2344L22.5 22.6484V6.33594L20.0625 5.72656C19.8594 5.67969 19.7031 5.57031 19.5938 5.39844C19.5 5.21094 19.4766 5.01562 19.5234 4.8125C19.5703 4.60938 19.6797 4.46094 19.8516 4.36719C20.0391 4.25781 20.2344 4.22656 20.4375 4.27344L23.4375 5.02344C23.5938 5.07031 23.7266 5.16406 23.8359 5.30469C23.9453 5.42969 24 5.57812 24 5.75V23.75C24 23.875 23.9688 23.9922 23.9062 24.1016C23.8594 24.2109 23.7812 24.2969 23.6719 24.3594ZM12.4922 18.3125C12.4141 18.375 12.3359 18.4219 12.2578 18.4531C12.1797 18.4844 12.0938 18.5 12 18.5C11.9062 18.5 11.8203 18.4844 11.7422 18.4531C11.6641 18.4219 11.5859 18.375 11.5078 18.3125C11.4453 18.2656 11.0859 17.9297 10.4297 17.3047C9.77344 16.6641 9.05469 15.8359 8.27344 14.8203C7.50781 13.8047 6.8125 12.6484 6.1875 11.3516C5.5625 10.0391 5.25 8.67969 5.25 7.27344C5.25 6.35156 5.42188 5.47656 5.76562 4.64844C6.125 3.82031 6.60938 3.10156 7.21875 2.49219C7.84375 1.88281 8.5625 1.39844 9.375 1.03906C10.1875 0.679687 11.0625 0.5 12 0.5C12.9375 0.5 13.8125 0.679687 14.625 1.03906C15.4375 1.39844 16.1484 1.88281 16.7578 2.49219C17.3828 3.10156 17.8672 3.82031 18.2109 4.64844C18.5703 5.47656 18.75 6.35156 18.75 7.27344C18.75 8.67969 18.4375 10.0391 17.8125 11.3516C17.1875 12.6484 16.4844 13.8047 15.7031 14.8203C14.9375 15.8359 14.2266 16.6641 13.5703 17.3047C12.9141 17.9297 12.5547 18.2656 12.4922 18.3125ZM12 2C11.2812 2 10.6016 2.14062 9.96094 2.42188C9.32031 2.6875 8.75781 3.0625 8.27344 3.54688C7.80469 4.03125 7.42969 4.59375 7.14844 5.23438C6.88281 5.875 6.75 6.55469 6.75 7.27344C6.75 8.28906 6.95312 9.28906 7.35938 10.2734C7.78125 11.2578 8.27344 12.1797 8.83594 13.0391C9.41406 13.8828 10 14.625 10.5938 15.2656C11.1875 15.9062 11.6562 16.3906 12 16.7188C12.3438 16.3906 12.8125 15.9062 13.4062 15.2656C14 14.6094 14.5781 13.8594 15.1406 13.0156C15.7188 12.1719 16.2109 11.2578 16.6172 10.2734C17.0391 9.28906 17.25 8.28906 17.25 7.27344C17.25 6.55469 17.1094 5.875 16.8281 5.23438C16.5625 4.59375 16.1875 4.03125 15.7031 3.54688C15.2344 3.0625 14.6797 2.6875 14.0391 2.42188C13.3984 2.14062 12.7188 2 12 2ZM9 7.29688C9 6.46875 9.28906 5.76562 9.86719 5.1875C10.4609 4.59375 11.1719 4.29688 12 4.29688C12.8281 4.29688 13.5312 4.59375 14.1094 5.1875C14.7031 5.76562 15 6.46875 15 7.29688C15 8.125 14.7031 8.83594 14.1094 9.42969C13.5312 10.0078 12.8281 10.2969 12 10.2969C11.1719 10.2969 10.4609 10.0078 9.86719 9.42969C9.28906 8.83594 9 8.125 9 7.29688ZM13.5 7.29688C13.5 6.89062 13.3516 6.53906 13.0547 6.24219C12.7578 5.94531 12.4062 5.79688 12 5.79688C11.5938 5.79688 11.2422 5.94531 10.9453 6.24219C10.6484 6.53906 10.5 6.89062 10.5 7.29688C10.5 7.71875 10.6484 8.07812 10.9453 8.375C11.2422 8.65625 11.5938 8.79688 12 8.79688C12.4062 8.79688 12.7578 8.65625 13.0547 8.375C13.3516 8.07812 13.5 7.71875 13.5 7.29688Z"/>
+                                </svg>
+                            </div>-->
+                    <ul class="contacts__items">
+                        <li class="contacts__item c--flex">
+                            <address class="contacts__item-address"><a class="link link--green" href="#" title="Los Angeles, USA">Los Angeles, USA</a></address>
+                            <p class="contacts__item-description">2005 Stokes Isle Apt. 896,<br>Venaville, New York 10010</p>
+                            <input type="hidden" name="schedule_weekdays" value="11:00-19:00">
+                            <input type="hidden" name="schedule_weekends" value="11:00-16:00">
+                        </li>
+                        <li class="contacts__item contacts__item--active c--flex">
+                            <address class="contacts__item-address"><a class="link link--green" href="#" title="New York, USA">New York, USA</a></address>
+                            <p class="contacts__item-description">2005 Stokes Isle Apt. 896,<br>Venaville, New York 10010</p>
+                            <input type="hidden" name="schedule_weekdays" value="11:00-19:00">
+                            <input type="hidden" name="schedule_weekends" value="11:00-16:00">
+                        </li>
+                        <li class="contacts__item c--flex">
+                            <address class="contacts__item-address"><a class="link link--green" href="#" title="Boston, USA">Boston, USA</a></address>
+                            <p class="contacts__item-description">2005 Stokes Isle Apt. 896,<br>Venaville, New York 10010</p>
+                            <input type="hidden" name="schedule_weekdays" value="11:00-19:00">
+                            <input type="hidden" name="schedule_weekends" value="Closed Sun">
+                        </li>
+                        <li class="contacts__item c--flex">
+                            <address class="contacts__item-address"><a class="link link--green" href="#" title="Detroit, USA">Detroit, USA</a></address>
+                            <p class="contacts__item-description">2005 Stokes Isle Apt. 896,<br>Venaville, New York 10010</p>
+                            <input type="hidden" name="schedule_weekdays" value="10:00-18:00">
+                            <input type="hidden" name="schedule_weekends" value="Closed Sun">
+                        </li>
+                        <!--<li class="contacts__item c--flex">
+                            <div class="contacts__item-info">
+                                <address class="contacts__item-address"><a class="link link--green" href="#" title="Detroit, USA">Detroit, USA</a></address>
+                                <p class="contacts__item-description">2005 Stokes Isle Apt. 896,<br>Venaville, New York 10010</p>
+                            </div>
+                        </li>-->
+                    </ul>
                 </div>
                 <div class="col col--8">
-                    <div id="map" style="width: 100%; height: 300px;"></div>
+                    <div class="contacts__info">
+                        <div class="contacts__info-content">
+                            <h3 data-item-address class="contacts__info-title">New York</h3>
+                            <p data-item-address class="contacts__info-address">2005 Stokes Isle Apt. 896,<br>New York 10010</p>
+                            <div class="contacts__info-details">
+                                <div class="contacts__info-detail_name">
+                                    <svg class="contacts__info-detail_icon" width="20" height="21" viewBox="0 0 20 21" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M15.0195 1.59766C13.4831 0.699219 11.8099 0.25 10 0.25C8.1901 0.25 6.51693 0.699219 4.98047 1.59766C3.44401 2.48307 2.22656 3.69401 1.32812 5.23047C0.442708 6.76693 0 8.4401 0 10.25C0 12.0599 0.442708 13.7331 1.32812 15.2695C2.22656 16.806 3.44401 18.0234 4.98047 18.9219C6.51693 19.8073 8.1901 20.25 10 20.25C11.8099 20.25 13.4831 19.8073 15.0195 18.9219C16.556 18.0234 17.7669 16.806 18.6523 15.2695C19.5508 13.7331 20 12.0599 20 10.25C20 8.4401 19.5508 6.76693 18.6523 5.23047C17.7669 3.69401 16.556 2.48307 15.0195 1.59766ZM10 19.0195C9.04948 19.0195 8.125 18.8763 7.22656 18.5898C6.34115 18.2904 5.54036 17.8672 4.82422 17.3203C4.10807 16.7734 3.47656 16.1419 2.92969 15.4258C2.39583 14.7096 1.97917 13.9089 1.67969 13.0234C1.39323 12.125 1.25 11.2005 1.25 10.25C1.25 9.0651 1.47786 7.93229 1.93359 6.85156C2.40234 5.77083 3.02734 4.83984 3.80859 4.05859C4.58984 3.27734 5.52083 2.65885 6.60156 2.20312C7.68229 1.73438 8.8151 1.5 10 1.5C11.1849 1.5 12.3177 1.73438 13.3984 2.20312C14.4792 2.65885 15.4102 3.27734 16.1914 4.05859C16.9727 4.83984 17.5911 5.77083 18.0469 6.85156C18.5156 7.93229 18.75 9.0651 18.75 10.25C18.75 11.4349 18.5156 12.5677 18.0469 13.6484C17.5911 14.7292 16.9727 15.6667 16.1914 16.4609C15.4102 17.2422 14.4792 17.8672 13.3984 18.3359C12.3177 18.7917 11.1849 19.0195 10 19.0195ZM10.625 9.99609V4C10.625 3.83073 10.5599 3.6875 10.4297 3.57031C10.3125 3.4401 10.1693 3.375 10 3.375C9.83073 3.375 9.68099 3.4401 9.55078 3.57031C9.43359 3.6875 9.375 3.83073 9.375 4V10.25C9.375 10.4323 9.4401 10.582 9.57031 10.6992C9.57031 10.6992 9.57031 10.7057 9.57031 10.7188C9.58333 10.7318 9.58984 10.7383 9.58984 10.7383L12.6953 13.8242C12.8125 13.9544 12.9557 14.0195 13.125 14.0195C13.3073 14.0195 13.457 13.9609 13.5742 13.8438C13.6914 13.7135 13.75 13.5638 13.75 13.3945C13.75 13.2122 13.6914 13.0625 13.5742 12.9453L10.625 9.99609Z"/>
+                                    </svg>
+                                    Work Schedule
+                                </div>
+                                <p class="contacts__info-detail_text">
+                                    <mark>Mon &ndash; Sat:</mark> <span id="c-schedule_weekdays">11:00-19:00</span>,<br><mark>Sun:</mark> <span id="c-schedule_weekends">11:00-16:00</span>
+                                </p>
+                            </div>
+                            <div class="contacts__info-details">
+                                <div class="contacts__info-detail_name">
+                                    <svg class="contacts__info-detail_icon" width="20" height="21" viewBox="0 0 20 21" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19.3164 14.2539C19.2513 14.4102 19.1341 14.5208 18.9648 14.5859C18.8086 14.651 18.6523 14.6445 18.4961 14.5664C18.3398 14.5013 18.2292 14.3906 18.1641 14.2344C18.099 14.0651 18.1055 13.9023 18.1836 13.7461C18.418 13.2253 18.5677 12.6914 18.6328 12.1445C18.7109 11.5977 18.75 10.9661 18.75 10.25C18.75 9.03906 18.5156 7.90625 18.0469 6.85156C17.5911 5.78385 16.9661 4.85938 16.1719 4.07812C15.3906 3.28385 14.4661 2.65885 13.3984 2.20312C12.3438 1.73438 11.2109 1.5 10 1.5C8.78906 1.5 7.64974 1.73438 6.58203 2.20312C5.52734 2.65885 4.60286 3.28385 3.80859 4.07812C3.02734 4.85938 2.40234 5.78385 1.93359 6.85156C1.47786 7.90625 1.25 9.03906 1.25 10.25C1.25 11.4609 1.47786 12.6003 1.93359 13.668C2.40234 14.7227 3.02734 15.6471 3.80859 16.4414C4.60286 17.2227 5.52734 17.8477 6.58203 18.3164C7.64974 18.7721 8.78906 19 10 19C10.8333 19 11.6471 18.8828 12.4414 18.6484C13.2487 18.4141 14.0039 18.0755 14.707 17.6328C14.7331 17.6198 14.8242 17.5482 14.9805 17.418C15.1497 17.2878 15.2539 17.1055 15.293 16.8711C15.319 16.7148 15.293 16.5456 15.2148 16.3633C15.1497 16.181 15.0391 15.9857 14.8828 15.7773L14.6094 16.0898C14.5052 16.194 14.3685 16.2917 14.1992 16.3828C14.043 16.4609 13.8346 16.5 13.5742 16.5C13.2357 16.5 12.8385 16.4089 12.3828 16.2266C11.9271 16.0443 11.4323 15.7904 10.8984 15.4648C10.3776 15.1263 9.82422 14.7227 9.23828 14.2539C8.66536 13.7852 8.09245 13.2643 7.51953 12.6914C7.03776 12.1966 6.52344 11.6237 5.97656 10.9727C5.42969 10.3216 4.95443 9.66406 4.55078 9C4.16016 8.32292 3.89974 7.69141 3.76953 7.10547C3.65234 6.50651 3.76953 6.03125 4.12109 5.67969L5.83984 4.15625C5.90495 4.10417 5.97656 4.0651 6.05469 4.03906C6.13281 4.01302 6.21094 4 6.28906 4C6.36719 4 6.44531 4.01953 6.52344 4.05859C6.60156 4.09766 6.66667 4.14974 6.71875 4.21484L8.94531 6.77344C9.02344 6.86458 9.06901 6.97526 9.08203 7.10547C9.09505 7.22266 9.07552 7.33984 9.02344 7.45703L8.20312 9.09766L11.1523 12.0469L12.793 11.2266C12.8971 11.1745 13.0143 11.1549 13.1445 11.168C13.2747 11.181 13.3854 11.2266 13.4766 11.3047L16.0352 13.5117C16.1003 13.5638 16.1458 13.6289 16.1719 13.707C16.2109 13.7852 16.237 13.8633 16.25 13.9414C16.25 14.0195 16.237 14.1042 16.2109 14.1953C16.1849 14.2734 16.1458 14.3385 16.0938 14.3906L15.7227 14.8203C16.0352 15.2109 16.2565 15.5951 16.3867 15.9727C16.5299 16.3372 16.5755 16.7018 16.5234 17.0664C16.4453 17.6003 16.237 18.0039 15.8984 18.2773C15.5729 18.5378 15.3841 18.681 15.332 18.707C14.5508 19.2018 13.7044 19.5794 12.793 19.8398C11.8945 20.1133 10.9635 20.25 10 20.25C8.61979 20.25 7.32422 19.9831 6.11328 19.4492C4.90234 18.9284 3.84115 18.2188 2.92969 17.3203C2.03125 16.4089 1.3151 15.3477 0.78125 14.1367C0.260417 12.9258 0 11.6302 0 10.25C0 8.86979 0.260417 7.57422 0.78125 6.36328C1.3151 5.15234 2.03125 4.09766 2.92969 3.19922C3.84115 2.28776 4.90234 1.57161 6.11328 1.05078C7.32422 0.516927 8.61979 0.25 10 0.25C11.3802 0.25 12.6758 0.516927 13.8867 1.05078C15.0977 1.57161 16.1523 2.28776 17.0508 3.19922C17.9622 4.09766 18.6784 5.15234 19.1992 6.36328C19.7331 7.57422 20 8.86979 20 10.25C20 11.0312 19.9544 11.7409 19.8633 12.3789C19.7852 13.0169 19.6029 13.6419 19.3164 14.2539ZM12.9688 12.5352L11.3086 13.3555C11.1784 13.4206 11.0482 13.4466 10.918 13.4336C10.7878 13.4076 10.6771 13.3424 10.5859 13.2383L6.99219 9.66406C6.90104 9.57292 6.84245 9.46224 6.81641 9.33203C6.80339 9.20182 6.82943 9.07161 6.89453 8.94141L7.71484 7.28125L6.19141 5.50391L5.03906 6.53906C4.98698 6.63021 5 6.82552 5.07812 7.125C5.16927 7.42448 5.34505 7.80859 5.60547 8.27734C5.86589 8.73307 6.22396 9.26042 6.67969 9.85938C7.13542 10.4583 7.70833 11.1029 8.39844 11.793C8.95833 12.3529 9.4987 12.8477 10.0195 13.2773C10.5534 13.707 11.0482 14.0716 11.5039 14.3711C11.9596 14.6576 12.3633 14.8789 12.7148 15.0352C13.0794 15.1784 13.3659 15.25 13.5742 15.25C13.6263 15.25 13.6589 15.25 13.6719 15.25C13.6979 15.237 13.7109 15.2305 13.7109 15.2305L14.7461 14.0391L12.9688 12.5352Z"/>
+                                    </svg>
+                                    Head Office
+                                </div>
+                                <p class="contacts__info-detail_text">
+                                    (0043) 568 456 902,<br>(0043) 568 456 902
+                                </p>
+                            </div>
+                            <div class="contacts__info-details">
+                                <div class="contacts__info-detail_name">
+                                    <svg class="contacts__info-detail_icon" width="20" height="15" viewBox="0 0 20 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M18.125 14.125H1.875C1.35417 14.125 0.911458 13.9427 0.546875 13.5781C0.182292 13.2135 0 12.7708 0 12.25V2.25C0 1.72917 0.182292 1.28646 0.546875 0.921875C0.911458 0.557292 1.35417 0.375 1.875 0.375H18.125C18.6458 0.375 19.0885 0.557292 19.4531 0.921875C19.8177 1.28646 20 1.72917 20 2.25V12.25C20 12.7708 19.8177 13.2135 19.4531 13.5781C19.0885 13.9427 18.6458 14.125 18.125 14.125ZM1.875 12.875H18.125C18.2943 12.875 18.4375 12.8164 18.5547 12.6992C18.6849 12.569 18.75 12.4193 18.75 12.25V2.44531L10.4102 9.59375C10.3451 9.64583 10.2799 9.6849 10.2148 9.71094C10.1497 9.73698 10.0781 9.75 10 9.75C9.92188 9.75 9.85026 9.73698 9.78516 9.71094C9.72005 9.6849 9.65495 9.64583 9.58984 9.59375L1.25 2.44531V12.25C1.25 12.4193 1.30859 12.569 1.42578 12.6992C1.55599 12.8164 1.70573 12.875 1.875 12.875ZM17.793 1.625H2.20703L10 8.30469L17.793 1.625Z"/>
+                                    </svg>
+                                    Head Office
+                                </div>
+                                <p class="contacts__info-detail_text">
+                                    hello@pad.architecture,<br>
+                                    support@pad.architecture<br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="contacts-map" class="contacts__map c--flex c--flex-centered"></div>
                 </div>
             </div>
         </section>
+        <!-- Contacts end -->
     </main>
+
+    <!-- FOOTER start -->
     <footer class="footer page__footer">
         <div class="container">
             <div class="page__footer-brand brand brand--footer">
@@ -241,19 +411,19 @@
                 </svg>
                 UPQODE
             </div>
-            <div class="page__footer-nav">
+            <nav class="page__footer-nav">
                 <ul class="page__footer-nav_list">
                     <li><a class="link" href="#" title="Home">Home</a></li>
-                    <li><a class="link" href="#serviecs" title="Services">Services</a></li>
+                    <li><a class="link" href="#services" title="Services">Services</a></li>
                     <li><a class="link" href="#team" title="Team">Team</a></li>
                     <li><a class="link" href="#contacts" title="Home">Contact us</a></li>
-                    <li class="clearfix"></li>
                 </ul>
                 <div class="clearfix"></div>
-            </div>
+            </nav>
             <div class="page__footer-copyrights">&copy; UpQode 2019. All Rights Reserved.</div>
         </div>
     </footer>
+    <!-- FOOTER end -->
 
     <!-- JS Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
@@ -262,140 +432,10 @@
     <!-- JS Core -->
     <script src="../assets/js/app.js"></script>
 
-    <script>
-        /*function initMap() {
-            // Create a new StyledMapType object, passing it an array of styles,
-            // and the name to be displayed on the map type control.
-            var styledMapType = new google.maps.StyledMapType(
-                [
-                {elementType: 'geometry', stylers: [{color: '#ebe3cd'}]},
-                {elementType: 'labels.text.fill', stylers: [{color: '#523735'}]},
-                {elementType: 'labels.text.stroke', stylers: [{color: '#f5f1e6'}]},
-                {
-                    featureType: 'administrative',
-                    elementType: 'geometry.stroke',
-                    stylers: [{color: '#c9b2a6'}]
-                },
-                {
-                    featureType: 'administrative.land_parcel',
-                    elementType: 'geometry.stroke',
-                    stylers: [{color: '#dcd2be'}]
-                },
-                {
-                    featureType: 'administrative.land_parcel',
-                    elementType: 'labels.text.fill',
-                    stylers: [{color: '#ae9e90'}]
-                },
-                {
-                    featureType: 'landscape.natural',
-                    elementType: 'geometry',
-                    stylers: [{color: '#dfd2ae'}]
-                },
-                {
-                    featureType: 'poi',
-                    elementType: 'geometry',
-                    stylers: [{color: '#dfd2ae'}]
-                },
-                {
-                    featureType: 'poi',
-                    elementType: 'labels.text.fill',
-                    stylers: [{color: '#93817c'}]
-                },
-                {
-                    featureType: 'poi.park',
-                    elementType: 'geometry.fill',
-                    stylers: [{color: '#a5b076'}]
-                },
-                {
-                    featureType: 'poi.park',
-                    elementType: 'labels.text.fill',
-                    stylers: [{color: '#447530'}]
-                },
-                {
-                    featureType: 'road',
-                    elementType: 'geometry',
-                    stylers: [{color: '#f5f1e6'}]
-                },
-                {
-                    featureType: 'road.arterial',
-                    elementType: 'geometry',
-                    stylers: [{color: '#fdfcf8'}]
-                },
-                {
-                    featureType: 'road.highway',
-                    elementType: 'geometry',
-                    stylers: [{color: '#f8c967'}]
-                },
-                {
-                    featureType: 'road.highway',
-                    elementType: 'geometry.stroke',
-                    stylers: [{color: '#e9bc62'}]
-                },
-                {
-                    featureType: 'road.highway.controlled_access',
-                    elementType: 'geometry',
-                    stylers: [{color: '#e98d58'}]
-                },
-                {
-                    featureType: 'road.highway.controlled_access',
-                    elementType: 'geometry.stroke',
-                    stylers: [{color: '#db8555'}]
-                },
-                {
-                    featureType: 'road.local',
-                    elementType: 'labels.text.fill',
-                    stylers: [{color: '#806b63'}]
-                },
-                {
-                    featureType: 'transit.line',
-                    elementType: 'geometry',
-                    stylers: [{color: '#dfd2ae'}]
-                },
-                {
-                    featureType: 'transit.line',
-                    elementType: 'labels.text.fill',
-                    stylers: [{color: '#8f7d77'}]
-                },
-                {
-                    featureType: 'transit.line',
-                    elementType: 'labels.text.stroke',
-                    stylers: [{color: '#ebe3cd'}]
-                },
-                {
-                    featureType: 'transit.station',
-                    elementType: 'geometry',
-                    stylers: [{color: '#dfd2ae'}]
-                },
-                {
-                    featureType: 'water',
-                    elementType: 'geometry.fill',
-                    stylers: [{color: '#b9d3c2'}]
-                },
-                {
-                    featureType: 'water',
-                    elementType: 'labels.text.fill',
-                    stylers: [{color: '#92998d'}]
-                }
-                ],
-                {name: 'Styled Map'});
+    <!-- Google Map and control user interaction with the map -->
+    <script src="../assets/js/gmap.js"></script>
 
-            // Create a map object, and include the MapTypeId to add
-            // to the map type control.
-            var map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 40.7182402, lng: -74.0183679},
-            zoom: 11,
-            mapTypeControlOptions: {
-                mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
-                        'styled_map']
-            }
-            });
-
-            //Associate the styled map with the MapTypeId and set it to display.
-            map.mapTypes.set('styled_map', styledMapType);
-            map.setMapTypeId('styled_map');
-        }*/
-    </script>
     <!-- APIs -->
-    <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDE4IxDOEsmiFlpADoD3Bwj3zf_3JWPqqM&callback=initMap"></script>-->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDE4IxDOEsmiFlpADoD3Bwj3zf_3JWPqqM&callback=initMap"></script>
 </body>
 </html>
