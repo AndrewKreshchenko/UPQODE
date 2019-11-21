@@ -33,11 +33,23 @@
   width: 100%;
   height: 100%;
   font-size: 16px;
+  overflow: hidden;
   /*visibility: hidden;*/
 }
 .b-slider__item-content {
   text-align: center;
   z-index: 1
+}
+@keyframes showed {
+  0% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.b-slider__item-content.c--showed {
+  animation: showed .3s;
 }
 .b-slider__item-bg {
   position: absolute;
@@ -48,9 +60,9 @@
   background-size: cover !important;
   background: linear-gradient(180deg, rgba(5, 13, 29, .6) 11%, rgba(5, 13, 29, 0) 90.3%);
 }
-/*.b-slider__item:nth-child(1) .b-slider__item-bg {
+.b-slider__item .b-slider__item-bg.b-slider__item-bg--static {
   background-image: linear-gradient(180deg, rgba(5, 13, 29, .6) 11%, rgba(5, 13, 29, 0) 90.3%), url(../img/banner/banner-photo1.png);
-}*/
+}
 .b-slider__item-title {
   font-weight: 600;
   font-size: 90px;
@@ -66,17 +78,18 @@
 }
 .b-slider__item-video {
   position: absolute;
-  margin-top: -60px;
+  z-index: -1;
+  /*margin-top: -60px;
   width: 100%;
   height: calc(100% + 60px);
-  z-index: -1
+  z-index: -1*/
 }
 
 /* TweenMax slider Controls */
 .b-slider-controls {
   width: 100%;
   position: absolute;
-  top: 50%;
+  top: calc(50% - 25px);/* us sass variable/2 */
   -webkit-transform: translate3d(0px, -50%, 0px);
           transform: translate3d(0px, -50%, 0px);
   z-index: 10;
@@ -85,8 +98,8 @@
 .b-slider-controls > .previous,
 .b-slider-controls > .next {
   position: absolute;
-  width: 64px;
-  height: 64px;
+  width: 30px;
+  height: 50px;
   display: block;
   cursor: pointer;
   border: none;
@@ -95,19 +108,19 @@
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  background-size: 64px;
+  background-size: 24px;
   background-color: transparent;
   background-repeat: no-repeat;
 }
 
 .b-slider-controls > .next {
   right: 20px;
-  background-image: '→';
+  background-image: url(../img/banner/b-slider-next.svg);
 }
 
 .b-slider-controls > .previous {
   left: 20px;
-  background-image: '←';
+  background-image: url(../img/banner/b-slider-prev.svg);
 }
 
 .b-slider-navigation {
