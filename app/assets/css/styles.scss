@@ -1,96 +1,34 @@
-/*----------------------------------------------------------------------------*\
-	$PAGE-STYLES
-  BEM
-\*----------------------------------------------------------------------------*/
+// STYLES
+// --------------------------------------------------
 
-/* Mixins */
-@mixin prefix($property, $value, $prefixes: ()) {
-  @each $prefix in $prefixes {
-    #{'-' + $prefix + '-' + $property}: $value;
-  }
-  // Output standard non-prefixed declaration
-  #{$property}: $value;
-}
-// @mixin odd() {
-//   &:nth-child(odd) {
-//     @content;
-//   }
-// }
+// IMPORTS
+@import 'config/variables';
+@import 'config/mixins';
 
-/* IMPORTS */
+// Import fonts
 @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap&subset=latin-ext');
-/*@font-face {
-    font-family: 'Poppins';
-    src: local('Poppins Bold'), url('Poppins-Bold.ttf') format('truetype');
-}*/
 @font-face {
     font-family: 'Gilroy';
     src: local('Gilroy Regular'), url('../fonts/Gilroy-Regular.ttf') format('truetype');
 }
-//https://css-tricks.com/snippets/css/using-font-face/
-
-// html {
-// 	font: 1em/1.5 sans-serif;
-// }
-/*----------------------------------------------------------------------------*\
-	$DROPDOWN
-	Preview: rawgithub.com/Idered/snippets/master/MIXED/dropdown/index.html
-	<div class="dropdown">
-		<div class="dropdown__text">Your account</div>
-		<div class="dropdown__toggle"></div>
-		<ul class="dropdown__content">
-			<li><a href="">Profile</a></li>
-			<li><a href="">Settings</a></li>
-			<li><a href="">Friends</a></li>
-			<li><a href="">Go pro</a></li>
-			<li><a href="">Sign out</a></li>
-		</ul>
-	</div>
-\*----------------------------------------------------------------------------*/
-
-
-/* ANIMATIONS */
-// Add vendor prefixes to keyframes
-@mixin keyframe ($animation-name) {
-  @-webkit-keyframes #{$animation-name} {
-    @content;
-  }
-  @keyframes #{$animation-name} {
-    @content;
-  }
-}
-
-// Mixin for animation
-@mixin animation($animation, $duration, $transition) {
-  -webkit-animation-name: $animation;
-  -webkit-animation-duration: $duration;
-  -webkit-animation-timing-function: $transition;
-  animation-name: $animation;
-  animation-duration: $duration;
-  animation-timing-function: $transition
-}
 
 /* VARIABLES */
 //$fonts: Arial, "Hiragino Kaku Gothic Pro W3", Meiryo, sans-serif;
-$bg_color: #2d3042;
-$font_color: #efefef;
-$link_color: #efefef;
-$link_hover_color: #fff;
-
-$selected: '--selected';
+// Colors
 
 /* GENERAL STYLES */
-%elem-before { // class-placeholder (not for BEM classes)
+// class-placeholder (not for BEM classes but for pseudo-elemnts ::before and ::after)
+%elem-before {
   position: absolute;
   content: ''
 }
 
-* { // *:before, *:after
+* {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  color: #6C6C6C;
+  color: $medium_grey;
 }
 
 p, a, span, li {
@@ -103,7 +41,7 @@ p {
 }
 
 h1, h2, h3, address {
-  color: #00A031;
+  color: $green;
   font-weight: 700; /*600*/
 }
 
@@ -158,9 +96,9 @@ ul, li {
     color: rgba(255,255,255,.6);
   }
   &--green {
-    color: #00A031;
+    color: $green;
     &:hover {
-      color: rgba(0, 160, 49, .6);
+      color: $green_alpha;
     }
   }
   &--header {
@@ -173,11 +111,11 @@ ul, li {
       display: block;
       width: 0;
       height: 1px;
-      background: #fff;
+      background: $white;
       @include prefix(transition, width .3s, webkit)
     }
     &:hover, &.active {
-      color: #fff;
+      color: $white;
       &::after {
         width: 100%
       }
@@ -186,8 +124,14 @@ ul, li {
 }
 
 .btn {
-  padding: 16px 23px;
-  font-size: 18px;
+  @include sm {
+    padding: 12px 15px;
+    font-size: 17px;
+  }
+  @include md {
+    padding: 16px 23px;
+    font-size: 18px;
+  }
   font-weight: 600;
   border-radius: 15px;
   text-align: center;
@@ -196,21 +140,21 @@ ul, li {
   outline: none;
   @include prefix(transition, all .3s, webkit);
   &--filled {
-    color: #fff;
-    background-color: #00A031;
+    color: $white;
+    background-color: $green;
     :hover {
       opacity: .6;
     }
   }
   &--bordered {
-    background-color: #fff;
-    color: #00A031;
-    border: 2px solid #00A031;
+    background-color: $white;
+    color: $green;
+    border: 2px solid $green;
     &:hover {
-      background-color: #00A031;
-      color: #fff;
+      background-color: $green;
+      color: $white;
       .btn__arrow path {
-        stroke: #fff;
+        stroke: $white;
       }
     }
     // Alter elements based on a block-level modifier (acording to http://getbem.com/naming)
@@ -225,7 +169,7 @@ ul, li {
       stroke-width: 2px;
       stroke-linecap: round;
       stroke-linejoin: round;
-      stroke: #00A031;
+      stroke: $green;
     }
   }
 }
@@ -233,6 +177,7 @@ ul, li {
 .brand {
   font-weight: 600;
   line-height: 32px;
+  @include prefix(transition, all .3s, webkit);
   .brand-logo {
     width: 31.5px;
     height: 31.5px;
@@ -240,7 +185,36 @@ ul, li {
     path {
       fill-rule: evenodd;
       clip-rule: evenodd;
-      fill: #fff
+      fill: $white
+    }
+  }
+}
+
+.menu {
+  @include sm {
+    display: none;
+  }
+  &__item {
+    vertical-align: top;
+    @include sm {
+      display: block;
+      line-height: 2
+    }
+    @include md {
+      display: inline-block;
+      line-height: inherit
+    }
+    a {
+      @include sm {
+        display: table;
+        padding: 5px 0
+      }
+      @include md {
+        display: block;
+        padding: 5px 15px
+      }
+      font-size: 14px;
+      font-weight: normal;
     }
   }
 }
@@ -255,43 +229,86 @@ ul, li {
   left: 0;
   right: 0;
   width: 100%;
+  @include sm {
+    max-height: fit-content
+  }
+  @include md {
+    max-height: 48px
+  }
   text-align: left;
-  z-index: 3;
+  z-index: 4;
+  $this: &;
   * {
-    color: #fff
+    color: $white
   }
-  h1 {
-    display: inline-block;
-    font-size: 22px;
-    font-weight: bold;
-    margin-top: 25px;
-  }
+  // h1 {
+  //   display: inline-block;
+  //   font-size: 22px;
+  //   font-weight: bold;
+  //   margin-top: 25px;
+  // }
+
   &--colored {
-    background-color: rgba(34, 34, 34, .6);
-    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.08);
+    background-color: $dark_grey_alpha;
+    //box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.08);
+    @include prefix(transition, .3s, webkit)
   }
   &__navbar {
-    float: right;
-    margin-top: 30px;
-    ul {
-      li {
-        display: inline-block;
-        vertical-align: top;
-        a {
-          display: block;
-          padding: 5px 15px;
-          font-size: 14px;
-          font-weight: 600;
-        }
+    @include sm {
+      margin-top: 27px;
+      float: left;
+    }
+    @include md {
+      margin-top: 30px;
+      float: right
+    }
+    @include prefix(transition, all .3s, webkit);
+    &-toggler {
+      visibility: hidden
+    }
+    &-icon {
+      width: 25px
+    }
+    &-toggler:checked ~ .menu {
+      display: block
+    }
+    &-btn {
+      @include md {
+        display: none
+      }
+    }
+    &--opened > .menu {
+      @include sm {
+        display: block;
+      }
+    }
+  }
+  &--colored {
+    #{$this}__navbar {
+      margin: 10px 0;
+      @include prefix(transition, all .3s, webkit)
+    }
+    .brand {
+      margin-top: 8px;
+      @include prefix(transition, all .3s, webkit);
+      &-logo {
+        width: 25px;
+        vertical-align: sub;
       }
     }
   }
 }
 
 .brand--header {
-  margin-top: 27px;
+  margin-top: 24px;
   display: inline-block;
   font-size: 28px;
+  @include sm {
+    float: right
+  }
+  @include md {
+    float: none
+  }
 }
 
 /* Banner */
@@ -299,7 +316,7 @@ ul, li {
   width: 100%;
   height: 100vh;
   * {
-    color: #fff
+    color: $white
   }
 }
 
@@ -343,9 +360,15 @@ $decor_adjust: 26%;
   }
   &__item-title {
     font-weight: 800;
-    font-size: 38px;
-    line-height: 51px;
     letter-spacing: .4px;
+    @include sm {
+      font-size: 28px;
+      line-height: initial;
+    }
+    @include lg {
+      font-size: 38px;
+      line-height: 51px;
+    }
   }
   &__item-description {
     margin: 25px 0 20px;
@@ -389,7 +412,7 @@ $decor_adjust: 26%;
     top: 12%;
     width: $circle_radius;
     height: $circle_radius;
-    background-color: #EBF3ED;
+    background-color: $blind;
     z-index: -1;
     &::before {
       @extend %elem-before;
@@ -398,8 +421,8 @@ $decor_adjust: 26%;
       width: 47%;
       height: 47%;
       border-radius: 50%;
-      border: 30px solid #fff;
-      background-color: #fff;
+      border: 30px solid $white;
+      background-color: $white;
     }
   }
   &__edge { // svg
@@ -435,7 +458,7 @@ $decor_adjust: 26%;
       padding-right: 25px;
       &::before {
         content: '\2022';
-        color: #D8D8D8
+        color: $grey_list_item
       }
       a {
         margin-left: 10px; 
@@ -448,7 +471,7 @@ $decor_adjust: 26%;
     &--last {
       opacity: .6;
       &:hover {
-        color: #00A031
+        color: $green
       }
     }
   }
@@ -470,7 +493,7 @@ $decor_adjust: 26%;
     }
     &-next_name {
       margin-top: 10px;
-      color: #00A031;
+      color: $green;
       font-weight: 600;
       font-size: 18px;
       line-height: 1
@@ -481,7 +504,7 @@ $decor_adjust: 26%;
       justify-content: space-between;
       padding: 0 20px;
       & * {
-        color: #00A031;
+        color: $green;
       }
       & &_content#{$this}--next &_move::after {
         @extend %elem-before;
@@ -609,7 +632,7 @@ $decor_adjust: 26%;
         fill: #bbb
       }
       &--active path {
-        fill: #00A031
+        fill: $green
       }
     }
     &-address {
@@ -632,7 +655,7 @@ $decor_adjust: 26%;
     width: 320px;
     float: right;
     $this: &;
-    $title_color: #1C201E;
+    $title_color: $black;
     &-content {
       @extend #{$this};
       margin-top: 135px;
@@ -641,7 +664,7 @@ $decor_adjust: 26%;
       z-index: 1;
 
       padding: 25px 58px 45px;
-      background-color: #fff;
+      background-color: $white;
       box-shadow: 0px 40px 40px rgba(0, 0, 0, 0.08);
     }
     &-title {
@@ -664,7 +687,7 @@ $decor_adjust: 26%;
         margin-right: 15px;
         fill: none;
         path {
-          fill: #00A031
+          fill: $green
         }
       }
       &_name {
@@ -675,12 +698,12 @@ $decor_adjust: 26%;
         line-height: 28px;
       }
       &_text {
-        color: #999;
+        color: $lighter_grey;
         font-size: 14px;
       }
     }
     mark {
-      color: #222;
+      color: $dark_grey;
       background-color: transparent
     }
   }
@@ -688,11 +711,11 @@ $decor_adjust: 26%;
 
 /* Footer */
 .page__footer {
-  background-color: #222;
+  background-color: $dark_grey;
   text-align: center;
   &-brand {
     padding-top: 62px;
-    color: #fff;
+    color: $white;
     font-size: 48px;
     text-align: center
   }
@@ -702,7 +725,7 @@ $decor_adjust: 26%;
     &_list li {
       float: left;
       padding-right: 25px;
-      color: #777;
+      color: $grey;
       a {
         margin-left: 10px;
         letter-spacing: 3px;
@@ -711,7 +734,7 @@ $decor_adjust: 26%;
   }
   &-copyrights {
     margin-bottom: 62px;
-    color: #777;
+    color: $grey;
     font-size: 14px;
     letter-spacing: 0.2px
   }
