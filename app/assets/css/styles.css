@@ -1,35 +1,17 @@
-/*----------------------------------------------------------------------------*\
-	$PAGE-STYLES
-  BEM
-\*----------------------------------------------------------------------------*/
-/* Mixins */
-/* IMPORTS */
 @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap&subset=latin-ext");
-/*@font-face {
-    font-family: 'Poppins';
-    src: local('Poppins Bold'), url('Poppins-Bold.ttf') format('truetype');
-}*/
+@media (min-width: 320px) {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  display: block;
+}
+
 @font-face {
   font-family: 'Gilroy';
   src: local("Gilroy Regular"), url("../fonts/Gilroy-Regular.ttf") format("truetype");
 }
 
-/*----------------------------------------------------------------------------*\
-	$DROPDOWN
-	Preview: rawgithub.com/Idered/snippets/master/MIXED/dropdown/index.html
-	<div class="dropdown">
-		<div class="dropdown__text">Your account</div>
-		<div class="dropdown__toggle"></div>
-		<ul class="dropdown__content">
-			<li><a href="">Profile</a></li>
-			<li><a href="">Settings</a></li>
-			<li><a href="">Friends</a></li>
-			<li><a href="">Go pro</a></li>
-			<li><a href="">Sign out</a></li>
-		</ul>
-	</div>
-\*----------------------------------------------------------------------------*/
-/* ANIMATIONS */
 /* VARIABLES */
 /* GENERAL STYLES */
 .services__item-particulars li::before, .overlay-bg__ring::before, .team__nav-text .team__nav-text_content.team__nav--next .team__nav-text_move::after, .team__nav-text .team__nav-text_content.team__nav--prev .team__nav-text_move::before, .contacts__item::before {
@@ -42,7 +24,7 @@
           box-sizing: border-box;
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  color: #6C6C6C;
+  color: #6c6c6c;
 }
 
 p, a, span, li {
@@ -55,7 +37,7 @@ p {
 }
 
 h1, h2, h3, address {
-  color: #00A031;
+  color: #00a031;
   font-weight: 700;
   /*600*/
 }
@@ -140,7 +122,7 @@ ul, li {
 }
 
 .link--green {
-  color: #00A031;
+  color: #00a031;
 }
 
 .link--green:hover {
@@ -174,8 +156,6 @@ ul, li {
 }
 
 .btn {
-  padding: 16px 23px;
-  font-size: 18px;
   font-weight: 600;
   border-radius: 15px;
   text-align: center;
@@ -186,9 +166,23 @@ ul, li {
   transition: all 0.3s;
 }
 
+@media (min-width: 320px) {
+  .btn {
+    padding: 12px 15px;
+    font-size: 17px;
+  }
+}
+
+@media (min-width: 768px) {
+  .btn {
+    padding: 16px 23px;
+    font-size: 18px;
+  }
+}
+
 .btn--filled {
   color: #fff;
-  background-color: #00A031;
+  background-color: #00a031;
 }
 
 .btn--filled :hover {
@@ -197,12 +191,12 @@ ul, li {
 
 .btn--bordered {
   background-color: #fff;
-  color: #00A031;
-  border: 2px solid #00A031;
+  color: #00a031;
+  border: 2px solid #00a031;
 }
 
 .btn--bordered:hover {
-  background-color: #00A031;
+  background-color: #00a031;
   color: #fff;
 }
 
@@ -222,12 +216,14 @@ ul, li {
   stroke-width: 2px;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke: #00A031;
+  stroke: #00a031;
 }
 
 .brand {
   font-weight: 600;
   line-height: 32px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
 }
 
 .brand .brand-logo {
@@ -242,6 +238,49 @@ ul, li {
   fill: #fff;
 }
 
+@media (min-width: 320px) {
+  .menu {
+    display: none;
+  }
+}
+
+.menu__item {
+  vertical-align: top;
+}
+
+@media (min-width: 320px) {
+  .menu__item {
+    display: block;
+    line-height: 2;
+  }
+}
+
+@media (min-width: 768px) {
+  .menu__item {
+    display: inline-block;
+    line-height: inherit;
+  }
+}
+
+.menu__item a {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+@media (min-width: 320px) {
+  .menu__item a {
+    display: table;
+    padding: 5px 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .menu__item a {
+    display: block;
+    padding: 5px 15px;
+  }
+}
+
 /* THEME STYLES */
 /* Header */
 .header-top {
@@ -251,47 +290,109 @@ ul, li {
   right: 0;
   width: 100%;
   text-align: left;
-  z-index: 3;
+  z-index: 4;
+}
+
+@media (min-width: 320px) {
+  .header-top {
+    max-height: -webkit-fit-content;
+    max-height: -moz-fit-content;
+    max-height: fit-content;
+  }
+}
+
+@media (min-width: 768px) {
+  .header-top {
+    max-height: 48px;
+  }
 }
 
 .header-top * {
   color: #fff;
 }
 
-.header-top h1 {
-  display: inline-block;
-  font-size: 22px;
-  font-weight: bold;
-  margin-top: 25px;
-}
-
 .header-top--colored {
-  background-color: rgba(34, 34, 34, 0.6);
-  -webkit-box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.08);
-          box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.08);
+  background-color: rgba(34, 34, 34, 0.95);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 
 .header-top__navbar {
-  float: right;
-  margin-top: 30px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
 }
 
-.header-top__navbar ul li {
-  display: inline-block;
-  vertical-align: top;
+@media (min-width: 320px) {
+  .header-top__navbar {
+    margin-top: 27px;
+    float: left;
+  }
 }
 
-.header-top__navbar ul li a {
+@media (min-width: 768px) {
+  .header-top__navbar {
+    margin-top: 30px;
+    float: right;
+  }
+}
+
+.header-top__navbar-toggler {
+  visibility: hidden;
+}
+
+.header-top__navbar-icon {
+  width: 25px;
+}
+
+.header-top__navbar-toggler:checked ~ .menu {
   display: block;
-  padding: 5px 15px;
-  font-size: 14px;
-  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .header-top__navbar-btn {
+    display: none;
+  }
+}
+
+@media (min-width: 320px) {
+  .header-top__navbar--opened > .menu {
+    display: block;
+  }
+}
+
+.header-top--colored .header-top__navbar {
+  margin: 10px 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.header-top--colored .brand {
+  margin-top: 8px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.header-top--colored .brand-logo {
+  width: 25px;
+  vertical-align: sub;
 }
 
 .brand--header {
-  margin-top: 27px;
+  margin-top: 24px;
   display: inline-block;
   font-size: 28px;
+}
+
+@media (min-width: 320px) {
+  .brand--header {
+    float: right;
+  }
+}
+
+@media (min-width: 768px) {
+  .brand--header {
+    float: none;
+  }
 }
 
 /* Banner */
@@ -339,9 +440,21 @@ ul, li {
 
 .services__item-title {
   font-weight: 800;
-  font-size: 38px;
-  line-height: 51px;
   letter-spacing: .4px;
+}
+
+@media (min-width: 320px) {
+  .services__item-title {
+    font-size: 28px;
+    line-height: initial;
+  }
+}
+
+@media (min-width: 1280px) {
+  .services__item-title {
+    font-size: 38px;
+    line-height: 51px;
+  }
 }
 
 .services__item-description {
@@ -392,7 +505,7 @@ ul, li {
   top: 12%;
   width: 15vw;
   height: 15vw;
-  background-color: #EBF3ED;
+  background-color: #ebf3ed;
   z-index: -1;
 }
 
@@ -443,7 +556,7 @@ ul, li {
 
 .team__item-social li::before {
   content: '\2022';
-  color: #D8D8D8;
+  color: #d8d8d8;
 }
 
 .team__item-social li a {
@@ -460,7 +573,7 @@ ul, li {
 }
 
 .team__item--last:hover {
-  color: #00A031;
+  color: #00a031;
 }
 
 .team__nav {
@@ -487,7 +600,7 @@ ul, li {
 
 .team__nav-next_name {
   margin-top: 10px;
-  color: #00A031;
+  color: #00a031;
   font-weight: 600;
   font-size: 18px;
   line-height: 1;
@@ -507,7 +620,7 @@ ul, li {
 }
 
 .team__nav-text * {
-  color: #00A031;
+  color: #00a031;
 }
 
 .team__nav-text .team__nav-text_content.team__nav--next .team__nav-text_move::after {
@@ -669,7 +782,7 @@ ul, li {
 }
 
 .contacts__item-icon--active path {
-  fill: #00A031;
+  fill: #00a031;
 }
 
 .contacts__item-address {
@@ -706,7 +819,7 @@ ul, li {
 }
 
 .contacts__info-title {
-  color: #1C201E;
+  color: #1c201e;
   font-weight: 800;
   font-size: 38px;
   line-height: 51px;
@@ -729,12 +842,12 @@ ul, li {
 }
 
 .contacts__info-detail_icon path {
-  fill: #00A031;
+  fill: #00a031;
 }
 
 .contacts__info-detail_name {
   margin-bottom: 10px;
-  color: #1C201E;
+  color: #1c201e;
   font-weight: 600;
   font-size: 18px;
   line-height: 28px;
