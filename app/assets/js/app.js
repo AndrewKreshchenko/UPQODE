@@ -40,7 +40,7 @@ var scroll_ = {
             prev.classList += ' header-top--colored'
         
         if (!paused) {
-            getTodo(todo => {
+            pauseVideos(todo => {
                 console.log(todo.text);
             })
         }
@@ -144,7 +144,7 @@ function controlYTPlayer(i, f) {
             console.log('playing');
             video.pauseVideo();
         }
-        if (video.getPlayerState() == 2) {
+        else if (video.getPlayerState() == 2) {
             console.log('paused');
             video.playVideo();
             paused = false;
@@ -179,14 +179,18 @@ function controlYTPlayer(i, f) {
 }
 
 function onChangeBannerSlide(obj) {
+    if (obj.classList.contains('is-active'))
+        return
+    
     // Set index for next slide
-    let ind;
+    let ind, len = document.querySelectorAll('.b-slider-navigation li').length;
     if (typeof obj.dataset.index === 'undefined') {
         let prev_ind = document.querySelector('.b-slider-navigation .is-active').dataset.index;
+
         if (obj.classList == 'next')
-            ind = prev_ind++;
+            ind = prev_ind++ //prev_ind < len-1 ? ind = prev_ind++ : ind = 1;
         else if (obj.classList == 'previous')
-            ind = prev_ind--;
+            ind = prev_ind-- //prev_ind > 0 ? ind = prev_ind-- : ind = len-1;
         else {
             console.warn('Faild to Navigate to another slide. Classes of navigation elements might cause problems.');
             return;
@@ -194,6 +198,18 @@ function onChangeBannerSlide(obj) {
     }
     else 
         ind = obj.dataset.index;
+    
+    let arrows = document.querySelector('.b-slider-controls');
+    ind == len-1 ? arrows.querySelector('.next').classList.add('endpoint')
+        : (ind == 0 ? arrows.querySelector('.previous').classList.add('endpoint')
+            : (arrows.querySelector('.endpoint') !== null ? arrows.querySelector('.endpoint').classList.remove('endpoint') : false))
+
+    // if (arrows.querySelector('.endpoint') !== null )
+    //     arrows.querySelector('.endpoint').classList.remove('endpoint');
+    // if (ind == len-1)
+    //     document.querySelector('.b-slider-controls .next').classList.add('endpoint');
+    // else if (ind == 0)
+    //     document.querySelector('.b-slider-controls .prev').classList.add('endpoint');
 
     // Apply changes to slide
     let cl = 'b-slider__item', slide = document.querySelectorAll('.'+cl)[ind];
@@ -222,20 +238,20 @@ function recalcDimensionYTPlayer() {
 // Initialize Banner videos (after has finished downloading the JavaScript for the player API)
 // NOTE: It would be better to keep track if onYouTubeIframeAPIReady() will be fired allways after banner slider initialisation
 function onYouTubeIframeAPIReady() {
-    // Init a video on the first slide
-    controlYTPlayer(0, false); // false - not after scroll event 
+    // // Init a video on the first slide
+    // controlYTPlayer(0, false); // false - not after scroll event 
 
-    // Navigation between slides
-    for (const pagin of document.querySelectorAll('.b-slider-navigation a')) {
-        pagin.addEventListener('click', function() {
-            onChangeBannerSlide(this);
-        })
-    }
-    for (const pagin of document.querySelectorAll('.b-slider-controls > button')) {
-        pagin.addEventListener('click', function() {
-            onChangeBannerSlide(this);
-        })
-    }
+    // // Navigation between slides
+    // for (const pagin of document.querySelectorAll('.b-slider-navigation a')) {
+    //     pagin.addEventListener('click', function() {
+    //         onChangeBannerSlide(this);
+    //     })
+    // }
+    // for (const pagin of document.querySelectorAll('.b-slider-controls > button')) {
+    //     pagin.addEventListener('click', function() {
+    //         onChangeBannerSlide(this);
+    //     })
+    // }
 }
 
 /**
@@ -333,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const sc = window.scrollY || window.pageYOffset;
             //console.log((sc > wh+wh/2));
             //console.log(window.outerHeight);
-            if (sc > wh+wh/1.5 && sc < wh*2) {//positionServicesPoint();}
+            if (sc > wh-wh/4 && sc < wh*2) {//positionServicesPoint();}
                 scroll_.onServicesVis(services, header, header_cl);
                 //document.querySelector('header').classList.contains += ' header-top--colored';
             }
