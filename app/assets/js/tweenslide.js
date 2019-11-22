@@ -307,7 +307,7 @@
 
     var prev = document.createElement('button');
     prev.setAttribute('type', 'button');
-    prev.setAttribute('class', 'previous');
+    prev.setAttribute('class', 'previous endpoint');
 
     this.el.appendChild(arrows);
 
