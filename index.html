@@ -8,16 +8,15 @@
     <meta name="keywords" content="HTML,CSS,XML,JavaScript">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mileage Made Simple | UPQODE</title>
-    <!--<link rel="icon" type="image/png" href="img/fav.ico" sizes="32x32">-->
+    <link rel="icon" type="image/ico" href="app/assets/img/favicon.ico" sizes="32x32">
 
     <!-- INCLUDE STYLES -->
     <!-- Libraries -->
-    <link rel="stylesheet" media="all" href="app/assets/css/slider.css"/>
+    <!--<link rel="stylesheet" media="all" href="app/assets/css/slider.css"/>-->
     
     <!-- Theme styles -->
-    <link rel="stylesheet" media="all" href="app/assets/css/constructor.css"/>
+    <!--<link rel="stylesheet" media="all" href="app/assets/css/constructor.css"/>-->
     <link rel="stylesheet" media="all" href="app/assets/css/styles.css"/>
-    <link rel="stylesheet" media="all" href="app/assets/css/responsive.css"/>
 </head>
 <body>
     <!-- HEADER start -->
@@ -148,26 +147,20 @@
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M83.5 156C123.541 156 156 123.541 156 83.5C156 43.4594 123.541 11 83.5 11C43.4594 11 11 43.4594 11 83.5C11 123.541 43.4594 156 83.5 156Z" stroke="#00A031" stroke-opacity="0.03"/>
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M83.5 166C129.063 166 166 129.063 166 83.5C166 37.9365 129.063 1 83.5 1C37.9365 1 1 37.9365 1 83.5C1 129.063 37.9365 166 83.5 166Z" stroke="#00A031" stroke-opacity="0.03"/>
                         </svg>
-                        <svg class="services__chain-path" width="664px" height="1216px" viewBox="0 0 664 1216" xmlns="http://www.w3.org/2000/svg">
+                        <svg id="services__chain-path" class="services__chain-path" width="664px" height="1216px" viewBox="0 0 664 1216" xmlns="http://www.w3.org/2000/svg">
                             <path id="s-chain-path" d="M22.9998 1C22.9998 1 649.558 119 663 589.542C655.833 1135 1 1215 1 1215"/>
                         </svg>
                     </div>
 
-                    <div class="services__item-visual col col--6">
-                        <div data-node="0" class="overlay-bg overlay-bg--left">
+                    <div class="services__item-visual col col--md-6">
+                        <div data-node="0" class="overlay-bg">
                             <div class="overlay-bg__ring">
-                                <svg class="overlay-bg__edge" viewBox="0 0 528 528" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M264 525C408.146 525 525 408.146 525 264C525 119.854 408.146 3 264 3C119.854 3 3 119.854 3 264C3 408.146 119.854 525 264 525Z" stroke="#C8E6D1" stroke-width="6" stroke-dasharray="1 6"/>
-                                </svg>
+                                <img class="overlay-bg__bullet" src="app/assets/img/services/service_vis_bg.svg">
                             </div>
-                            <!--<svg class="services__item-visual__overlay__decor" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                                <line stroke="white" class="circle" />
-                                <circle class="stroke-2" cx="6vw" cy="6vw" r="6vw"></circle>
-                            </svg>-->
+                            <img class="services__item-image" src="app/assets/img/services/device-trip-demo1.png" alt="Device trip demo 1">
                         </div>
-                        <img src="app/assets/img/services/device-trip-demo1.png" alt="Device trip demo 1">
                     </div>
-                    <div class="col col--6">
+                    <div class="col col--md-6">
                         <h3 class="services__item-title">Track every trip you make</h3>
                         <p class="services__item-description">Every one of your trip is captured immediately and is never forgotten.</p>
                         <ul class="services__item-particulars">
@@ -188,7 +181,7 @@
 
                 <!-- Services item 2 -->
                 <div class="services__item c--flex row">
-                    <div class="col col--6">
+                    <div class="col col--md-6">
                         <h3 class="services__item-title">Classify with a single swipe</h3>
                         <p class="services__item-description">Swipe right for business. Swipe left for personal. It’s as easy as that.</p>
                         <ul class="services__item-particulars">
@@ -205,31 +198,27 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="services__item-visual col col--6">
-                        <div data-node="1" class="overlay-bg overlay-bg--right">
+                    <div class="services__item-visual col col--md-6">
+                        <div data-node="1" class="overlay-bg">
                             <div class="overlay-bg__ring">
-                                <svg class="overlay-bg__edge" viewBox="0 0 528 528" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M264 525C408.146 525 525 408.146 525 264C525 119.854 408.146 3 264 3C119.854 3 3 119.854 3 264C3 408.146 119.854 525 264 525Z" stroke="#C8E6D1" stroke-width="6" stroke-dasharray="1 6"/>
-                                </svg>
+                                <img class="overlay-bg__bullet" src="app/assets/img/services/service_vis_bg.svg">
                             </div>
+                            <img class="services__item-image services__item--right" src="app/assets/img/services/device-trip-demo2.png" alt="Device trip demo 2">
                         </div>
-                        <img src="app/assets/img/services/device-trip-demo2.png" alt="Device trip demo 2">
                     </div>
                 </div>
 
                 <!-- Services item 3 -->
                 <div class="services__item c--flex row">
-                    <div class="services__item-visual col col--6">
-                        <div data-node="1" class="overlay-bg overlay-bg--left">
+                    <div class="services__item-visual col col--md-6">
+                        <div data-node="2" class="overlay-bg">
                             <div class="overlay-bg__ring">
-                                <svg class="overlay-bg__edge" viewBox="0 0 528 528" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M264 525C408.146 525 525 408.146 525 264C525 119.854 408.146 3 264 3C119.854 3 3 119.854 3 264C3 408.146 119.854 525 264 525Z" stroke="#C8E6D1" stroke-width="6" stroke-dasharray="1 6"/>
-                                </svg>
+                                <img class="overlay-bg__bullet" src="app/assets/img/services/service_vis_bg.svg">
                             </div>
+                            <img class="services__item-image" src="app/assets/img/services/device-trip-demo3.png" alt="Device trip demo 3">
                         </div>
-                        <img src="app/assets/img/services/device-trip-demo2.png" alt="Device trip demo 2">
                     </div>
-                    <div class="col col--6">
+                    <div class="col col--md-6">
                         <h3 class="services__item-title">Claim your money back with ease</h3>
                         <p class="services__item-description">Claiming mileage has never been so easy, with all calculations done for you.</p>
                         <ul class="services__item-particulars">
@@ -269,19 +258,19 @@
                 </fieldset>
                 <fieldset data-item="3" name="member">
                     <input type="hidden" name="name" value="Harry-Kane">
-                    <input type="hidden" name="photo" value="Harry-Kane.png">
+                    <input type="hidden" name="photo" value="Harry-Kane.jpg">
                     <input type="hidden" name="position" value="UI/UX Designer">
                     <textarea type="hidden" name="desc">Lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam. Tellus id interdum velit laoreet id donec. Leo duis ut diam quam nulla porttitor. In hendrerit gravida rutrum quisque. Iaculis at erat pellentesque adipiscing commodo elit at imperdiet dui.</textarea>
                 </fieldset>
                 <fieldset data-item="4" name="member">
                     <input type="hidden" name="name" value="Emma-Walker">
-                    <input type="hidden" name="photo" value="Emma-Walker.png">
+                    <input type="hidden" name="photo" value="Emma-Walker.jpg">
                     <input type="hidden" name="position" value="QA">
                     <textarea type="hidden" name="desc">Have you ever had a problem with a burned light? Tellus id interdum velit laoreet id donec. Leo duis ut diam quam nulla porttitor. In hendrerit gravida rutrum quisque. Iaculis at erat pellentesque adipiscing commodo elit at imperdiet dui.</textarea>
                 </fieldset>
             </form>
             <div class="container">
-                <div id="team-item" class="team__item col col--7 c--showed"><!--team__item-->
+                <div id="team-item" class="team__item col col--12 col--md-7 c--showed"><!--team__item-->
                     <h2 class="team__item-title">Julia Harrington</h2>
                     <cite class="team__item-position">Art director</cite>
                     <p class="team__item-description">
@@ -295,20 +284,20 @@
                     <div class="clearfix"></div>
 
                     <div class="team__nav c--flex">
-                        <img id="team-next-photo" class="team__nav_photo team__nav--next" src="app/assets/img/team/Minnie-Bell.png" alt="Next member photo thumbnail">
-                        <div class="team__nav-text">
-                            <p class="team__nav-text_content team__nav--next"><span class="team__nav-text_move">Next</span><span class="team__nav-text_name">Minnie Bell</span></p>
-                            <p class="team__nav-text_content team__nav--prev team__nav--endpoint"><span class="team__nav-text_move">Prev</span><span class="team__nav-text_name">Minnie Bell</span></p>
+                        <img id="team-next-photo" class="team__nav_photo team__nav--next" src="app/assets/img/team/Emma-Walker.jpg" alt="Next member photo thumbnail">
+                        <div data-teamslide="1" class="team__nav-text">
+                            <p id="team-txt-next" class="team__nav-text_content team__nav--next"><span class="team__nav-text_move">Next</span><span id="team-nav-name" class="team__nav-text_name">Minnie Bell</span></p>
+                            <p id="team-txt-prev" class="team__nav-text_content team__nav--prev team__nav--endpoint"><span class="team__nav-text_move">Prev</span><span class="team__nav-text_name">Minnie Bell</span></p>
                         </div>
                         <img id="team-prev-photo" class="team__nav_photo team__nav--prev c--hidden" alt="Prev member photo thumbnail">
                     </div>
                 </div>
-                <div class="col col--5">
+                <div class="col col--12 col--md-5">
                     <div class="team__slider">
-                        <input data-index="1" type="radio" name="team-slide" id="team-sel-1" class="team__slide-pick" checked>
-                        <input data-index="2" type="radio" name="team-slide" id="team-sel-2" class="team__slide-pick">
-                        <input data-index="3" type="radio" name="team-slide" id="team-sel-3" class="team__slide-pick">
-                        <label data-index="4" for="team-sel-1" id="team-sl-1" class="team__slide-item c--flex">
+                        <input type="radio" name="team-slide" id="team-sel-1" class="team__slide-pick" checked>
+                        <input type="radio" name="team-slide" id="team-sel-2" class="team__slide-pick">
+                        <input type="radio" name="team-slide" id="team-sel-3" class="team__slide-pick">
+                        <label for="team-sel-1" id="team-sl-1" class="team__slide-item c--flex">
                             <img src="app/assets/img/team/Jullia-Harrington.png" alt="Member photo slide" class="team__slide-photo">
                         </label>
                         <label for="team-sel-2" id="team-sl-2" class="team__slide-item c--flex">
@@ -326,7 +315,7 @@
         <!-- Contacts start -->
         <section id="contacts" class="container contacts">
             <div class="row">
-                <div class="col col--4">
+                <div class="col col--12 col--md-4">
                     <h2 class="contacts__title">Meet Us in Your City</h2>
                     <p data-item-address class="contacts__address">2005 Stokes Isle Apt. 896,<br>Venaville, New York 10010</p>
                     <!--<div class="contacts__item-icon contacts__item-icon--active">
@@ -367,12 +356,24 @@
                         </li>-->
                     </ul>
                 </div>
-                <div class="col col--8">
+                <div class="col col--12 col--md-8">
                     <div class="contacts__info">
                         <div class="contacts__info-content">
                             <h3 data-item-address class="contacts__info-title">New York</h3>
                             <p data-item-address class="contacts__info-address">2005 Stokes Isle Apt. 896,<br>New York 10010</p>
-                            <div class="contacts__info-details">
+                            <button id="c-info-more" class="contacts__info-more btn btn--bordered">
+                                see more
+                                <svg width="50" height="44" viewBox="0 0 24 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M23.2917 19.921L4.10222 0.70841C3.15777 -0.237139 1.62701 -0.237139 0.708337 0.70841C-0.236112 1.62776 -0.236112 3.16088 0.708337 4.10635L18.2139 21.6331L0.708337 39.1597C-0.236112 40.1052 -0.236112 41.6122 0.708337 42.5577C1.62701 43.5031 3.15777 43.5031 4.10222 42.5577L23.2918 23.3189C24.2361 22.3996 24.2361 20.8665 23.2917 19.921Z" fill="#00a031"/>
+                                </svg>
+                            </button>
+                            <button id="c-info-less" class="contacts__info-less btn btn--bordered c--hidden">
+                                <svg width="50" height="44" viewBox="0 0 24 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M23.2917 19.921L4.10222 0.70841C3.15777 -0.237139 1.62701 -0.237139 0.708337 0.70841C-0.236112 1.62776 -0.236112 3.16088 0.708337 4.10635L18.2139 21.6331L0.708337 39.1597C-0.236112 40.1052 -0.236112 41.6122 0.708337 42.5577C1.62701 43.5031 3.15777 43.5031 4.10222 42.5577L23.2918 23.3189C24.2361 22.3996 24.2361 20.8665 23.2917 19.921Z" fill="#00a031"/>
+                                </svg>
+                                see less
+                            </button>
+                            <div id="c-info-details" class="contacts__info-details">
                                 <div class="contacts__info-detail_name">
                                     <svg class="contacts__info-detail_icon" width="20" height="21" viewBox="0 0 20 21" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M15.0195 1.59766C13.4831 0.699219 11.8099 0.25 10 0.25C8.1901 0.25 6.51693 0.699219 4.98047 1.59766C3.44401 2.48307 2.22656 3.69401 1.32812 5.23047C0.442708 6.76693 0 8.4401 0 10.25C0 12.0599 0.442708 13.7331 1.32812 15.2695C2.22656 16.806 3.44401 18.0234 4.98047 18.9219C6.51693 19.8073 8.1901 20.25 10 20.25C11.8099 20.25 13.4831 19.8073 15.0195 18.9219C16.556 18.0234 17.7669 16.806 18.6523 15.2695C19.5508 13.7331 20 12.0599 20 10.25C20 8.4401 19.5508 6.76693 18.6523 5.23047C17.7669 3.69401 16.556 2.48307 15.0195 1.59766ZM10 19.0195C9.04948 19.0195 8.125 18.8763 7.22656 18.5898C6.34115 18.2904 5.54036 17.8672 4.82422 17.3203C4.10807 16.7734 3.47656 16.1419 2.92969 15.4258C2.39583 14.7096 1.97917 13.9089 1.67969 13.0234C1.39323 12.125 1.25 11.2005 1.25 10.25C1.25 9.0651 1.47786 7.93229 1.93359 6.85156C2.40234 5.77083 3.02734 4.83984 3.80859 4.05859C4.58984 3.27734 5.52083 2.65885 6.60156 2.20312C7.68229 1.73438 8.8151 1.5 10 1.5C11.1849 1.5 12.3177 1.73438 13.3984 2.20312C14.4792 2.65885 15.4102 3.27734 16.1914 4.05859C16.9727 4.83984 17.5911 5.77083 18.0469 6.85156C18.5156 7.93229 18.75 9.0651 18.75 10.25C18.75 11.4349 18.5156 12.5677 18.0469 13.6484C17.5911 14.7292 16.9727 15.6667 16.1914 16.4609C15.4102 17.2422 14.4792 17.8672 13.3984 18.3359C12.3177 18.7917 11.1849 19.0195 10 19.0195ZM10.625 9.99609V4C10.625 3.83073 10.5599 3.6875 10.4297 3.57031C10.3125 3.4401 10.1693 3.375 10 3.375C9.83073 3.375 9.68099 3.4401 9.55078 3.57031C9.43359 3.6875 9.375 3.83073 9.375 4V10.25C9.375 10.4323 9.4401 10.582 9.57031 10.6992C9.57031 10.6992 9.57031 10.7057 9.57031 10.7188C9.58333 10.7318 9.58984 10.7383 9.58984 10.7383L12.6953 13.8242C12.8125 13.9544 12.9557 14.0195 13.125 14.0195C13.3073 14.0195 13.457 13.9609 13.5742 13.8438C13.6914 13.7135 13.75 13.5638 13.75 13.3945C13.75 13.2122 13.6914 13.0625 13.5742 12.9453L10.625 9.99609Z"/>
@@ -446,9 +447,9 @@
     <script src="app/assets/js/app.js"></script>
 
     <!-- Google Map and control user interaction with the map -->
-    <script src="app/assets/js/gmap.js"></script>
+    <!--<script src="app/assets/js/gmap.js"></script>-->
 
     <!-- APIs -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDE4IxDOEsmiFlpADoD3Bwj3zf_3JWPqqM&callback=initMap"></script>
+    <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDE4IxDOEsmiFlpADoD3Bwj3zf_3JWPqqM&callback=initMap"></script>-->
 </body>
 </html>
