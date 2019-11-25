@@ -1,11 +1,12 @@
+// Cache some variables
+const path = document.getElementById('s-chain-path'), dot = document.getElementById('s-chain-point'), // Init chain path and point globally to speed up browser calculation
+    players = document.querySelectorAll('[data-videoid]'),
+    header = document.querySelector('header'), header_cl = 'header-top--colored';
+var sl_curr_ind = 0, player, videos = new Array, paused = true; // Init varuables to control videos
+    
 /**
  * Scroll handlers
  */
-
-const players = document.querySelectorAll('[data-videoid]'), ww = window.innerWidth, wh = window.innerHeight;
-var sl_curr_ind = 0, player, videos = new Array, paused = true; // Init varuables to control videos
-    path = document.getElementById('s-chain-path'), dot = document.getElementById('s-chain-point'); // Init chain path and point globally to speed up browser calculation 
-
 function positionServicesPoint() {
     let k = (document.documentElement.scrollTop+document.body.scrollTop)/(document.documentElement.scrollHeight-document.documentElement.clientHeight),
         len = path.getTotalLength(), d = path.getPointAtLength(k*1.8*len);
@@ -24,34 +25,35 @@ const pauseVideos = callback => {
                     }
                 });
                 paused = true;
+                console.log('28: '+paused);
             }
         }, 500)
     })
 }
 
-var scroll_ = {
-    'onVideo': function(curr, next, cl) {
-        console.log('onVideo');
-        if (curr.classList.contains(cl))
-            curr.classList.remove('header-top--colored')
-    },
-    'onServicesVis': function(curr, prev, cl) {
-        if (!prev.classList.contains(cl))
-            prev.classList += ' header-top--colored'
+var _scroll = function() {
+    const sc = window.scrollY || window.pageYOffset, ww = window.innerWidth, wh = window.innerHeight;
+    if (sc > wh-wh/4 && sc < wh*2) {
+        //positionServicesPoint();
+        //console.log('sc');
+        if (!header.classList.contains(header_cl))
+            header.classList.add(header_cl);
         
         if (!paused) {
             pauseVideos(todo => {
-                console.log(todo.text);
+                console.log('44: '+todo.text);
             })
         }
-        //positionServicesPoint();
-        // && scrolled ? curr.classList += ' header-top--colored': false;
-        //scrolled = false;
+        //document.querySelector('header').classList.contains += ' header-top--colored';
+    }
+    else if (sc > wh*2) {
+        //console.log('onAfter');
+    }
+    else {
+        //console.log('onVideo');
+        if (header.classList.contains(header_cl))
+            header.classList.remove(header_cl)
         //document.querySelector('header').classList -= ' header-top--colored';
-        console.log('onServicesVis');
-    },
-    'onAfter': function(el) {
-        console.log('onAfter');
     }
 }
 
@@ -62,18 +64,6 @@ function scrollTo(el) {
         left: 0,
         top: el.offsetTop
     });
-}
-
-function handleScroll() {
-    const sc = window.scrollY || window.pageYOffset;
-    //console.log((sc > wh+wh/2));
-    //console.log(window.outerHeight);
-    if (sc > wh+wh/2) {//positionServicesPoint();}
-        document.querySelector('header').classList.contains += ' header-top--colored';
-    }
-    else {
-        document.querySelector('header').classList -= ' header-top--colored';
-    }
 }
 
 /**
@@ -223,7 +213,7 @@ function onChangeBannerSlide(obj) {
 }
 
 function recalcDimensionYTPlayer() {
-    var video_dim = {}; 
+    var ww = window.innerWidth, wh = window.innerHeight, video_dim = {};
     if (ww > wh) {
         let expand = ww/wh*130;
         video_dim.w = ww + expand;
@@ -261,76 +251,153 @@ function buildServicesPath() {
     // Position Service connection path
     var services = document.getElementById('services'), path_ = document.getElementById('s-chain'),
         nodes = services.querySelectorAll('[data-node]'), node1_ch = nodes[0].firstElementChild,
-        c_offset = services.querySelector('.container').offsetWidth;
-    path_.style.top = nodes[0].offsetTop+node1_ch.offsetTop+node1_ch.offsetHeight/1.5+'px';
+        c_offset = services.querySelector('.container'), data = {};
+
+    /*for (let i = 0; i < nodes.length; i++) {
+        data[i].mtop = nodes[i].offsetTop;
+    }*/
+    data.C_shift = path_.parentElement.offsetHeight/1.5;
+    data.inner_shift = node1_ch.offsetWidth;
+    data.svg_width = c_offset.offsetWidth;
+    data.svg_height = c_offset.offsetHeight;
+    data.left_offset = path_.offsetLeft+data.inner_shift/4;
+
+    path_.style.top = nodes[0].offsetTop;//+node1_ch.offsetTop+node1_ch.offsetHeight/1.5+'px';
+    
+    var svg_path = 'M'+data.left_offset+','+(data.inner_shift/2)+' C'+(data.svg_width-10)+','+(data.svg_height/2-data.C_shift)+' '+(data.svg_width-10)+','+(data.svg_height/2+data.C_shift)+' '+data.left_offset+','+(data.svg_height-data.inner_shift);
+    
+    var path_el = document.getElementById('s-chain-path');
+    document.getElementById('s-chain').setAttribute('style', 'top: '+nodes[0].offsetTop+'px');
+    path_el.setAttribute('d', svg_path);
+    
     //var w_offset = (window.outerWidth-c_offset)/2;//path.style.left = nodes[0].offsetLeft/2+'px';
-    path_.style.width = c_offset-node1_ch.offsetWidth*2+'px';
+    //path_.style.width = c_offset.offsetWidth-node1_ch.offsetWidth*2+'px';
+
+    // Draw SVG bezier curve based two bezier controls (C)
+    //var svg_opened_tag = '<svg style="position: absolute;z-index: 12;left: -100px;" width="'+data.svg_width+'" height="'+data.svg_height+'" viewBox="0 0 '+data.svg_width+' '+data.svg_height+'">';
+    // data.viewBox = '0 0 '+data.svg_width+' '+data.svg_height;
+    // data.style='position: absolute;z-index: 12;left: -100px;width:'+data.svg_width+'px; height:'+data.svg_height+'px;';
+    
+    /*<svg viewBox="0 0 10 10" class="svg-6">
+        <path d="M2,5 A 5 25 0 0 1 5 5" />
+        <path d="M1,2 C8,2 8,8 1,9" />
+    </svg>*/
+    //var svg = document.createElement('svg');
+    //svg.setAttribute('viewBox', data.viewBox);
+    //svg.setAttribute('style', data.style);
+    //var svg = svg_opened_tag+svg_path+'</svg>'
+    //svg.setAttribute('class', 'b-slider-navigation');
+    //svg.innerHTML = svg_path;
+    //path_.appendChild(svg);
 }
 
 function moveToTeamSlide(el, is_next) {
+    // if (is_next && document.getElementById('team-txt-next').className.contains('team__nav--endpoint'))
+    //     return;
+    // if (!is_next && document.getElementById('team-txt-prev').className.contains('team__nav--endpoint'))
+    //     return;
+
     // Get index of current slide
     var form = document.getElementById('team-form'), fields = form.children, len = fields.length, // fields - fieldset tags
-        checked_el = document.querySelector('[name="team-slide"]:checked'), ind = checked_el.dataset.index;
-    is_next ? (ind < len-1 ? ind++ : ind = 1) : (ind > 1 ? ind-- : ind = len-1);
-    var ind_sl = ind;
-    is_next ? (ind_sl < len-2 ? ind_sl += 2 : ind_sl = 1) : (ind_sl > 2 ? ind_sl -= 2 : ind_sl = len-1);
-    console.log(ind+ ' ind');
+        checked_el = document.querySelector('[data-teamslide]'), ind = checked_el.dataset.teamslide;
+    
+    // No actions if clicked on endpoints
+    if ((is_next && ind == len) || (!is_next && ind == 1))
+        return;
+
+    // Get indexes of next and prev and current slides
+    is_next ? (ind < len ? ind++: ind = 1) : (ind > 1 ? ind--: ind = len);
+    
+    var ind_prev = ind-1, ind_next = ind+1; 
+    ind_prev = ind_prev < 1 ? ind_prev = len: ind_prev--;
+    ind_next = ind_next > len ? ind_next = 1: ind_next++;
 
     // Get Data of next or prev slide (some data of prev and next slide for navigation container from fieldset tags)
-    var data = {};
+    var data = {}, dir = 'app/assets/img/team/';
     data.name = fields[ind-1].querySelector('[name="name"]').value;
-    data.name_prev = fields[ind-2].querySelector('[name="name"]').value;
-    data.name_next = fields[ind].querySelector('[name="name"]').value;
-    data.photo_path = fields[ind-1].querySelector('[name="photo"]').value;
-    data.photo_path_prev = fields[ind-2].querySelector('[name="photo"]').value;
-    data.photo_path_next = fields[ind].querySelector('[name="photo"]').value;
+    data.name_prev = fields[ind_prev-1].querySelector('[name="name"]').value;
+    data.name_next = fields[ind_next-1].querySelector('[name="name"]').value;
+    data.photo_path = dir+fields[ind-1].querySelector('[name="photo"]').value;
+    data.photo_path_prev = dir+fields[ind_prev-1].querySelector('[name="photo"]').value;
+    data.photo_path_next = dir+fields[ind_next-1].querySelector('[name="photo"]').value;
     //is_next ? data.photo_slide = fields[ind].querySelector('[name="photo"]').value : data.photo_slide = fields[ind].querySelector('[name="photo"]').value;
     data.position = fields[ind-1].querySelector('[name="position"]').value;
     data.desc = fields[ind-1].querySelector('[name="desc"]').innerHTML;
-
-    // let social = field.querySelector('[name="social"]').value;
-    // data.social = social.split(',').map(function(item) {
-    //     return item.trim();
-    // });
-    //var ind = el.parentNode('.team__nav');
-    console.log(ind, data);
-
-    // Change member content and slide
-    var container = document.getElementById('team-item'), dir = '../assets/img/team/';
     
-    // Change info on navigation
-    
-    
+    // Change info on description
+    var container = document.getElementById('team-item');
     container.classList.remove('c--showed');
-    container.classList += ' c--hidden';
+    container.classList.add('c--hidden');
     container.querySelector('.team__item-title').innerText = data.name;
     container.querySelector('.team__item-position').innerText = data.position;
     container.querySelector('.team__item-description').innerText = data.desc;
 
-    //container.querySelector('.team__nav_photo')
-
-    //social.removeChild(social);
-    // var socials = document.querySelectorAll('.team__item-social .link');
-    // for (var soc of data.social) {
-    //     console.log(soc);
-    // }
-    container.classList.remove('c--hidden');
-    container.classList += ' c--showed'
-
-    // Load image on banner
-    checked_el.checked = false;
-    if (document.getElementById('team-sel-'+ind) != null)
-        document.getElementById('team-sel-'+ind).checked = true;
-    else {
-        is_next ? document.getElementById('team-sel-1').checked = true:
-            document.getElementById('team-sel-'+(len-1)).checked = true
+    // Change info on navigation
+    if (!isNaN(ind)) {
+        let ph_nav_next = container.querySelector('#team-next-photo'), ph_nav_prev = container.querySelector('#team-prev-photo'),
+            txt_nav_next = container.querySelector('#team-txt-next'), txt_nav_prev = container.querySelector('#team-txt-prev'),
+            cl_end = 'team__nav--endpoint', cl_hide = 'c--hidden';
+        if (ind == 1) {
+            ph_nav_next.src = data.photo_path_next;
+            ph_nav_prev.classList.add(cl_hide);
+            txt_nav_prev.classList.add(cl_end);
+        }
+        else if (ind == len) {
+            ph_nav_prev.src = data.photo_path_prev;
+            ph_nav_next.classList.add(cl_hide);
+            txt_nav_next.classList.add(cl_end);
+        }
+        else {
+            ph_nav_next.src = data.photo_path_next;
+            ph_nav_prev.src = data.photo_path_prev;
+            if (txt_nav_next.classList.contains(cl_end))
+                txt_nav_next.classList.remove(cl_end)
+            if (txt_nav_prev.classList.contains(cl_end))
+                txt_nav_prev.classList.remove(cl_end)
+            if (ph_nav_next.classList.contains(cl_hide))
+                ph_nav_next.classList.remove(cl_hide)
+            if (ph_nav_prev.classList.contains(cl_hide))
+                ph_nav_prev.classList.remove(cl_hide)
+        }
     }
+    container.classList.remove('c--hidden');
+    container.classList.add('c--showed');
+
+    // Change member content and slide
+    let images = document.querySelectorAll('.team__slide-item img'),
+        active_sl = document.querySelector('[name="team-slide"]:checked'),
+        ind_sl = Array.prototype.indexOf.call(document.querySelectorAll('[name="team-slide"]'), active_sl);
+    active_sl.checked = false;
+    if (is_next) {
+        if (ind_sl < images.length-1) {
+            ind_sl = ind_sl+2;
+            images[ind_sl-1].src = data.photo_path;
+            document.getElementById('team-sel-'+ind_sl).checked = true;
+        }
+        else {
+            ind_sl = 1;
+            images[0].src = data.photo_path;
+            document.getElementById('team-sel-1').checked = true;
+        }
+    }
+    else {
+        if (ind_sl > 0) {
+            images[ind_sl-1].src = data.photo_path;
+            document.getElementById('team-sel-'+ind_sl).checked = true;
+        }
+        else {
+            ind_sl = images.length;
+            images[ind_sl-1].src = data.photo_path;
+            document.getElementById('team-sel-'+ind_sl).checked = true;
+        }
+    }
+    // Change index
+    checked_el.setAttribute('data-teamslide', ind);
 }
 
 /**
  * DOMContentLoaded
  */
-
 // Actions after Page DOM loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Load the iFrame Player API code asynchronously.
@@ -340,30 +407,13 @@ document.addEventListener('DOMContentLoaded', () => {
     script_api.parentNode.insertBefore(tag, script_api);
 
     if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        window.addEventListener('scroll', _scroll); // First listener of all after DOMContentLoaded completed
         buildServicesPath();
-        //window.addEventListener('scroll', handleScroll);
-
-        // const top_ = document.getElementById('b-slider');
-        var header = document.querySelector('header'), header_cl = 'header-top--colored', services = document.getElementById('services');
-        window.addEventListener('scroll', () => {
-            const sc = window.scrollY || window.pageYOffset;
-            //console.log((sc > wh+wh/2));
-            //console.log(window.outerHeight);
-            if (sc > wh-wh/4 && sc < wh*2) {//positionServicesPoint();}
-                scroll_.onServicesVis(services, header, header_cl);
-                //document.querySelector('header').classList.contains += ' header-top--colored';
-            }
-            else if (sc > wh*2) {
-                scroll_.onAfter(services);
-            }
-            else {
-                scroll_.onVideo(header, services, header_cl);
-                //document.querySelector('header').classList -= ' header-top--colored';
-            }
-        });
 
         document.querySelectorAll('nav li > a').forEach(link => {
             link.addEventListener('click', function() {
+                //window.removeEventListener('scroll', _scroll, false);
+
                 let id = this.getAttribute('href'); //window.removeEventListener('scroll');
                 id == '#' ? scrollTo(document.querySelector('body')) : scrollTo(document.querySelector(id));
                 
@@ -386,5 +436,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 moveToTeamSlide(this, false);
             });
         });
+
+        if (window.innerWidth < 768) {
+            document.getElementById('c-info-more').addEventListener('click', function() {
+                var el = document.getElementById('c-info-more').parentElement;
+                if (!el.classList.contains('opened'))
+                    el.classList.add('opened');
+                this.classList.add('c--hidden');
+                document.getElementById('c-info-less').classList.remove('c--hidden');
+            });
+            document.getElementById('c-info-less').addEventListener('click', function() {
+                var el = document.getElementById('c-info-less').parentElement;
+                if (el.classList.contains('opened'))
+                    el.classList.remove('opened');
+                this.classList.add('c--hidden');
+                document.getElementById('c-info-more').classList.remove('c--hidden');
+            });
+        }
     }
 });
