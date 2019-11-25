@@ -140,7 +140,7 @@ function changeLocation(el) {
     // var features = getGoogleMapPins();
     // marker = new google.maps.Marker({
     //     position: myLatlng,
-    //     icon: {url: '../assets/img/contacts/marker-state.svg'},
+    //     icon: {url: 'app/assets/img/contacts/marker-state.svg'},
     //     map: map
     // })
     //marker.setPosition(myLatlng);
