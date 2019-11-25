@@ -144,7 +144,6 @@
         width: 19px;
         height: 19px;
         border-radius: 50%;
-        background-color: $white;
         @include prefix(transition, all 0.4s ease, webkit);
         &.is-active {
           border: 1px solid $green;
