@@ -228,20 +228,20 @@ function recalcDimensionYTPlayer() {
 // Initialize Banner videos (after has finished downloading the JavaScript for the player API)
 // NOTE: It would be better to keep track if onYouTubeIframeAPIReady() will be fired allways after banner slider initialisation
 function onYouTubeIframeAPIReady() {
-    // // Init a video on the first slide
-    // controlYTPlayer(0, false); // false - not after scroll event 
+    // Init a video on the first slide
+    controlYTPlayer(0, false); // false - not after scroll event 
 
-    // // Navigation between slides
-    // for (const pagin of document.querySelectorAll('.b-slider-navigation a')) {
-    //     pagin.addEventListener('click', function() {
-    //         onChangeBannerSlide(this);
-    //     })
-    // }
-    // for (const pagin of document.querySelectorAll('.b-slider-controls > button')) {
-    //     pagin.addEventListener('click', function() {
-    //         onChangeBannerSlide(this);
-    //     })
-    // }
+    // Navigation between slides
+    for (const pagin of document.querySelectorAll('.b-slider-navigation a')) {
+        pagin.addEventListener('click', function() {
+            onChangeBannerSlide(this);
+        })
+    }
+    for (const pagin of document.querySelectorAll('.b-slider-controls > button')) {
+        pagin.addEventListener('click', function() {
+            onChangeBannerSlide(this);
+        })
+    }
 }
 
 /**
