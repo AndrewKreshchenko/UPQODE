@@ -765,9 +765,23 @@ ul, li {
   stroke: #29A0EC;
 }
 
+@media (min-width: 320px) {
+  .services__chain-path {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .services__chain-path {
+    display: block;
+  }
+}
+
 .services__chain-point {
+  display: none;
   position: absolute;
   margin: -83px 0 0 -63px;
+  z-index: -1;
 }
 
 .services__item {

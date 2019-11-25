@@ -10,11 +10,19 @@
     fill: none;
     z-index: -1;
     &-path {
+      @include sm {
+        display: none
+      }
+      @include md {
+        display: block
+      }
       stroke: #29A0EC
     }
     &-point {
+      display: none;
       position: absolute;
       margin: -83px 0 0 -63px;
+      z-index: -1
     }
   }
   &__item {
