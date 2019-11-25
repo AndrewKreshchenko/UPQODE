@@ -122,9 +122,6 @@ function changeLocation(el) {
         lng: lng
     })
     map.setZoom(7);
-
-    //var myLatlng = new google.maps.LatLng(lat-2, lng-2);
-    //marker = [];
     
     marker = new google.maps.Marker({
         position: feature.position,
@@ -135,15 +132,6 @@ function changeLocation(el) {
     console.log(feature.center, feature.position.lat(), feature.position.lng());
     if (typeof feature.center != 'undefined')
         map.setCenter(feature.center);
-
-    // var myLatlng = new google.maps.LatLng(34.6687794, -120.645437);
-    // var features = getGoogleMapPins();
-    // marker = new google.maps.Marker({
-    //     position: myLatlng,
-    //     icon: {url: 'app/assets/img/contacts/marker-state.svg'},
-    //     map: map
-    // })
-    //marker.setPosition(myLatlng);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
