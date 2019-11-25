@@ -9,10 +9,10 @@ var sl_curr_ind = 0, player, videos = new Array, paused = true; // Init varuable
  */
 function positionServicesPoint() {
     let k = (document.documentElement.scrollTop+document.body.scrollTop)/(document.documentElement.scrollHeight-document.documentElement.clientHeight),
-        len = path.getTotalLength(), d = path.getPointAtLength(k*1.8*len);
-    console.log(k);
+        len = path.getTotalLength(), d = path.getPointAtLength(k*1.5*len);
+    console.log(k, len, d);
     //dot.style.transform = 'translate('+ d.x + ',' + d.y + ')';
-    dot.setAttribute('transform', 'translate('+d.x+','+d.y+')')
+    dot.setAttribute('transform', 'translate('+(d.x-300)+','+(d.y-300)+')')
 }
 
 const pauseVideos = callback => {
@@ -228,20 +228,20 @@ function recalcDimensionYTPlayer() {
 // Initialize Banner videos (after has finished downloading the JavaScript for the player API)
 // NOTE: It would be better to keep track if onYouTubeIframeAPIReady() will be fired allways after banner slider initialisation
 function onYouTubeIframeAPIReady() {
-    // Init a video on the first slide
-    controlYTPlayer(0, false); // false - not after scroll event 
+    // // Init a video on the first slide
+    // controlYTPlayer(0, false); // false - not after scroll event 
 
-    // Navigation between slides
-    for (const pagin of document.querySelectorAll('.b-slider-navigation a')) {
-        pagin.addEventListener('click', function() {
-            onChangeBannerSlide(this);
-        })
-    }
-    for (const pagin of document.querySelectorAll('.b-slider-controls > button')) {
-        pagin.addEventListener('click', function() {
-            onChangeBannerSlide(this);
-        })
-    }
+    // // Navigation between slides
+    // for (const pagin of document.querySelectorAll('.b-slider-navigation a')) {
+    //     pagin.addEventListener('click', function() {
+    //         onChangeBannerSlide(this);
+    //     })
+    // }
+    // for (const pagin of document.querySelectorAll('.b-slider-controls > button')) {
+    //     pagin.addEventListener('click', function() {
+    //         onChangeBannerSlide(this);
+    //     })
+    // }
 }
 
 /**
@@ -251,24 +251,29 @@ function buildServicesPath() {
     // Position Service connection path
     var services = document.getElementById('services'), path_ = document.getElementById('s-chain'),
         nodes = services.querySelectorAll('[data-node]'), node1_ch = nodes[0].firstElementChild,
-        c_offset = services.querySelector('.container'), data = {};
+        c_offset = services.querySelector('.container'), data = {},
+        path_el = document.getElementById('s-chain-path'), point = document.getElementById('s-chain-point');
 
-    /*for (let i = 0; i < nodes.length; i++) {
-        data[i].mtop = nodes[i].offsetTop;
-    }*/
     data.C_shift = path_.parentElement.offsetHeight/1.5;
     data.inner_shift = node1_ch.offsetWidth;
     data.svg_width = c_offset.offsetWidth;
     data.svg_height = c_offset.offsetHeight;
-    data.left_offset = path_.offsetLeft+data.inner_shift/4;
+    if (window.innerWidth > 1600)
+        data.left_offset = data.inner_shift/4;
+    else
+        data.left_offset = path_.offsetLeft+data.inner_shift/4;
 
-    path_.style.top = nodes[0].offsetTop;//+node1_ch.offsetTop+node1_ch.offsetHeight/1.5+'px';
+    path_el.parentElement.parentElement.setAttribute('style', 'top: '+nodes[0].offsetTop+'px');
     
-    var svg_path = 'M'+data.left_offset+','+(data.inner_shift/2)+' C'+(data.svg_width-10)+','+(data.svg_height/2-data.C_shift)+' '+(data.svg_width-10)+','+(data.svg_height/2+data.C_shift)+' '+data.left_offset+','+(data.svg_height-data.inner_shift);
+    var svg_path = 'M'+(data.left_offset+data.inner_shift/4)+','+data.inner_shift/2+' C'+(data.svg_width-10)+','+(data.svg_height/2-data.C_shift)+' '+(data.svg_width-10)+','+(data.svg_height/2+data.C_shift)+' '+(data.left_offset+data.inner_shift/4)+','+(data.svg_height-data.inner_shift/2);
     
-    var path_el = document.getElementById('s-chain-path');
-    document.getElementById('s-chain').setAttribute('style', 'top: '+nodes[0].offsetTop+'px');
+    path_el.parentElement.setAttribute('viewBox', '0 0 '+(data.svg_width+data.inner_shift/2)+' '+data.svg_height);
+    path_el.parentElement.setAttribute('width', (data.svg_width+data.inner_shift/2)+'px');
+    path_el.parentElement.setAttribute('height', data.svg_height+'px');
     path_el.setAttribute('d', svg_path);
+
+    point.style.top = (data.left_offset+data.inner_shift/2)+'px';
+    point.style.left = data.inner_shift/2+'px';
     
     //var w_offset = (window.outerWidth-c_offset)/2;//path.style.left = nodes[0].offsetLeft/2+'px';
     //path_.style.width = c_offset.offsetWidth-node1_ch.offsetWidth*2+'px';
