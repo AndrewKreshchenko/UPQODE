@@ -1,0 +1,46 @@
+// STYLES
+// 
+// BEM
+// --------------------------------------------------
+
+// IMPORTS
+@import 'config/variables';
+@import 'config/mixins';
+
+@import 'base/_site';
+
+@import 'components/tuinslider';
+
+@import 'layout/constructor';
+@import 'layout/sections/header';
+@import 'layout/sections/services';
+@import 'layout/sections/team';
+@import 'layout/sections/contacts';
+@import 'layout/sections/footer';
+
+//@import 'layout/constructor';
+
+// base
+// @import "base/_site";
+
+// // components
+// @import "components/_slide";
+
+// //layout
+// @import "layout/section/_section";
+
+// Import fonts
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap&subset=latin-ext');
+@font-face {
+    font-family: 'Gilroy';
+    src: local('Gilroy Regular'), url('../fonts/Gilroy-Regular.ttf') format('truetype');
+}
+
+// /* Banner */
+// #banner {
+//   width: 100%;
+//   height: 100vh;
+//   * {
+//     color: $white
+//   }
+// }

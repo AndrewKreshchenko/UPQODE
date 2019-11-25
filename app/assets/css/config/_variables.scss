@@ -1,0 +1,41 @@
+// VARIABLES
+// --------------------------------------------------
+
+// Colors
+$white: #fff;
+$green: #00a031;
+$green_alpha: rgba(0, 160, 49, .6);
+$blind: #ebf3ed;
+$grey: #777;
+$medium_grey: #6c6c6c;
+$lighter_grey: #999;
+$dark_grey: #222;
+$dark_grey_alpha: rgba(34, 34, 34, 0.95);
+$grey_list_item: #d8d8d8;
+$black: #1c201e;
+
+// Typography
+// $font-family-sans-serif:  "Baloo Bhai", sans-serif !default;
+// $font-family-base:        $font-family-sans-serif !default;
+// $font-size-base:          16px !default;
+
+// Breakpoints
+// Small tablets and large smartphones (landscape view)
+$screen-mobile: 320px;
+
+// Small tablets (portrait view)
+$screen-tablet: 768px;
+
+// Tablets and small desktops
+$screen-lg_device: 992px;
+
+// Large tablets and desktops
+$screen-desktop: 1280px;
+
+// Large-screen desktops
+$screen-fullhd: 1600px;
+
+// Values
+$circle_radius: 15vw;
+$edge_expand: 110px;
+$decor_adjust: 26%;

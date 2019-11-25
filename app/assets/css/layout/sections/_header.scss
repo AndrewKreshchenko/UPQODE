@@ -1,0 +1,133 @@
+// HEADER
+//
+// BEM
+// --------------------------------------------------
+
+/* Header */
+.header-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  @include sm {
+    max-height: fit-content
+  }
+  @include md {
+    max-height: 48px
+  }
+  text-align: left;
+  z-index: 4;
+  $this: &;
+  * {
+    color: $white
+  }
+  // h1 {
+  //   display: inline-block;
+  //   font-size: 22px;
+  //   font-weight: bold;
+  //   margin-top: 25px;
+  // }
+
+  &--colored {
+    background-color: $dark_grey_alpha;
+    //box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.08);
+    @include prefix(transition, .3s, webkit)
+  }
+  &__navbar {
+    @include sm {
+      margin-top: 27px;
+      float: left;
+    }
+    @include md {
+      margin-top: 30px;
+      float: right
+    }
+    @include prefix(transition, all .3s, webkit);
+    &-toggler {
+      @extend %mob-visible;
+      visibility: hidden
+    }
+    &-icon {
+      @extend %mob-visible;
+      width: 25px
+    }
+    &-toggler:checked ~ .menu {
+      display: block
+    }
+    &-btn {
+      @include md {
+        display: none
+      }
+    }
+    &--opened > .menu {
+      @include sm {
+        display: block;
+      }
+    }
+  }
+  &--colored {
+    #{$this}__navbar {
+      @include sm {
+        margin: 15px 0 5px;
+      }
+      @include md {
+        margin: 8px 0;
+      }
+      @include prefix(transition, all .3s, webkit)
+    }
+    .brand {
+      @include sm {
+        margin-top: 12px;
+      }
+      @include md {
+        margin-top: 6px;
+      }
+      @include prefix(transition, all .3s, webkit);
+      &-logo {
+        width: 25px;
+        vertical-align: sub;
+      }
+    }
+  }
+}
+
+.brand--header {
+  margin-top: 24px;
+  display: inline-block;
+  font-size: 28px;
+  @include sm {
+    float: right
+  }
+  @include md {
+    float: none
+  }
+}
+
+/* Header menu */
+.menu {
+  @extend %mob-hidden;
+  &__item {
+    vertical-align: top;
+    @include sm {
+      display: block;
+      line-height: 2
+    }
+    @include md {
+      display: inline-block;
+      line-height: inherit
+    }
+    a {
+      @include sm {
+        display: table;
+        padding: 5px 0
+      }
+      @include md {
+        display: block;
+        padding: 5px 15px
+      }
+      font-size: 14px;
+      font-weight: normal;
+    }
+  }
+}

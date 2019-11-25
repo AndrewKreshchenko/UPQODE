@@ -1,0 +1,106 @@
+// VARIABLES
+// --------------------------------------------------
+
+@mixin prefix($property, $value, $prefixes: ()) {
+  @each $prefix in $prefixes {
+    #{'-' + $prefix + '-' + $property}: $value;
+  }
+  // Output standard non-prefixed declaration
+  #{$property}: $value;
+}
+
+// Animations
+// Add vendor prefixes to keyframes
+@mixin keyframe ($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+@mixin animation($animation, $duration, $transition) {
+  -webkit-animation-name: $animation;
+  -webkit-animation-duration: $duration;
+  -webkit-animation-timing-function: $transition;
+  animation-name: $animation;
+  animation-duration: $duration;
+  animation-timing-function: $transition
+}
+
+// Breakpoints
+// Small devices
+@mixin sm {
+   @media (min-width: #{$screen-mobile}) {
+       @content;
+   }
+}
+
+// Medium devices
+@mixin md {
+   @media (min-width: #{$screen-tablet}) {
+       @content;
+   }
+}
+
+// Large devices
+@mixin lg {
+   @media (min-width: #{$screen-lg_device}) {
+       @content;
+   }
+}
+
+// Extra large devices
+@mixin xl {
+   @media (min-width: #{$screen-desktop}) {
+       @content;
+   }
+}
+
+// Extra large devices
+@mixin xll {
+   @media (min-width: #{$screen-fullhd}) {
+       @content;
+   }
+}
+
+// Custom screen with max/min-width/height parametres
+@mixin rwd($break1, $break2, $screen1, $screen2) {
+  @if ($break1 and $break2) {
+    $break2: $break1 !default;
+    @media (#{$break1}: #{$screen1+'px'}) and (#{$break2}: #{$screen2+'px'}) {
+      @content;
+    }
+  }
+  @else if ($break2 == null) {
+    @media (#{$break1}: #{$screen1+'px'}) {
+      @content;
+    }
+  }
+}
+
+@include sm {
+  display: block;
+}
+@include md {
+  display: block;
+}
+
+/// Block Element
+/// @access public
+/// @param {String} $element - Element's name
+// @mixin el($element) {
+//     &__#{$element} {
+//         @content;
+//     }
+// }
+
+// /// Block Modifier
+// /// @access public
+// /// @param {String} $modifier - Modifier's name
+// @mixin mod($modifier) {
+//     &--#{$modifier} {
+//         @content;
+//     }
+// }

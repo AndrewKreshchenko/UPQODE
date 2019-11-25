@@ -1,0 +1,238 @@
+// CONSTRUCTOR
+//
+// BEM
+// --------------------------------------------------
+
+// IMPORTS
+@import '../config/variables';
+@import '../config/mixins';
+
+// Placeholders
+%elem-before {
+  position: absolute;
+  content: ''
+}
+
+%mob-visible {
+  @include sm {
+    display: block
+  }
+  @include md {
+    display: none
+  }
+}
+
+%mob-hidden {
+  @include sm {
+    display: none
+  }
+  @include md {
+    display: block
+  }
+}
+
+// Theme Constructor is similar to lightweight responsive framework BEMSkel
+.container {
+  margin: 0 auto;
+  max-width: 1200px;/*1000px*/
+  width: 100%;
+}
+
+.col {
+  width: 100%;
+  float: left;
+  box-sizing: border-box
+}
+
+@media (min-width: 320px) {
+  .container {
+    width: 90%;
+  }
+  .col-sm--12 {
+    width: 100%;
+    float: none
+  }
+}
+
+@media (min-width: 320px) {
+  .container {
+    width: 80%
+  }
+  .col {
+    margin-left: 2%
+  }
+  .col:first-child {margin-left: 0}
+  .col--1 {width: 6.5%;}
+  .col--2 {width: 15%;}
+  .col--3 {width: 23.5%;}
+  .col--4 {width: 32%;}
+  .col--5 {width: 40.5%;}
+  .col--6 {width: 49%;}
+  .col--7 {width: 57.5%;}
+  .col--8 {width: 66%;}
+  .col--9 {width: 74.5%;}
+  .col--10 {width: 83%;}
+  .col--11 {width: 91.5%;}
+  .col--12 {
+    width: 100%;
+    margin-left: 0; }
+}
+@media (min-width: 768px) {
+  .col--md-1 {width: 6.5%;}
+  .col--md-2 {width: 15%;}
+  .col--md-3 {width: 23.5%;}
+  .col--md-4 {width: 32%;}
+  .col--md-5 {width: 40.5%;}
+  .col--md-6 {width: 49%;}
+  .col--md-7 {width: 57.5%;}
+  .col--md-8 {width: 66%;}
+  .col--md-9 {width: 74.5%;}
+  .col--md-10 {width: 83%;}
+  .col--md-11 {width: 91.5%;}
+  .col--md-12 {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+// Self Clearing Goodness
+.container:after,
+.row:after {
+  clear: both;
+  content: "";
+  display: table
+}
+
+.clearfix {
+  width: 100%;
+  overflow: auto;
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+
+// Theme sugar
+.c--flex {
+  display: flex;
+  &-centered {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@include keyframe(showed) {
+  0% {opacity: 0}
+  to {opacity: 1}
+}
+
+.c--showed {
+  @include animation(showed, .3s, linear)
+}
+
+.c--hidden {
+  display: none
+}
+
+.link {
+  text-decoration: none;
+  text-transform: uppercase;
+  @include prefix(transition, color .3s, webkit);
+  &:hover {
+    color: rgba(255,255,255,.6);
+  }
+  &--green {
+    color: $green;
+    &:hover {
+      color: $green_alpha;
+    }
+  }
+  &--header {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 500; /*600*/
+    letter-spacing: .2px;
+    &::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 1px;
+      background: $white;
+      @include prefix(transition, width .3s, webkit)
+    }
+    &:hover, &.active {
+      color: $white;
+      &::after {
+        width: 100%
+      }
+    }
+  }
+}
+
+.btn {
+  @include sm {
+    padding: 12px 15px;
+    font-size: 17px;
+  }
+  @include md {
+    padding: 16px 23px;
+    font-size: 18px;
+  }
+  font-weight: 600;
+  border-radius: 15px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  @include prefix(transition, all .3s, webkit);
+  &--filled {
+    color: $white;
+    background-color: $green;
+    :hover {
+      opacity: .6;
+    }
+  }
+  &--bordered {
+    background-color: $white;
+    color: $green;
+    border: 2px solid $green;
+    &:hover {
+      background-color: $green;
+      color: $white;
+      .btn__arrow path {
+        stroke: $white;
+      }
+    }
+    // Alter elements based on a block-level modifier (acording to http://getbem.com/naming)
+    .btn__arrow {
+      margin-left: 10px;
+      width: 25px;
+      height: 6px;
+      vertical-align: middle;
+    }
+    .btn__arrow path {
+      fill: none;
+      stroke-width: 2px;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke: $green;
+    }
+  }
+}
+
+.brand {
+  font-weight: 600;
+  line-height: 32px;
+  @include prefix(transition, all .3s, webkit);
+  .brand-logo {
+    width: 31.5px;
+    height: 31.5px;
+    fill: none;
+    path {
+      fill-rule: evenodd;
+      clip-rule: evenodd;
+      fill: $white
+    }
+  }
+}

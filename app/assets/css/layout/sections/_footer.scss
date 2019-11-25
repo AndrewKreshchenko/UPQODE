@@ -1,0 +1,59 @@
+.page__footer {
+  background-color: $dark_grey;
+  text-align: center;
+  &-brand {
+    color: $white;
+    text-align: center;
+    @include sm {
+      padding-top: 35px;
+      font-size: 38px;
+    }
+    @include md {
+      padding-top: 60px;
+      font-size: 48px;
+    }
+  }
+  &-nav {
+    display: table;
+    @include sm {
+      margin: 20px auto;
+    }
+    @include md {
+      margin: 50px auto;
+    }
+    &_list li {
+      @include sm {
+        float: none
+      }
+      @include md {
+        float: left
+      }
+      padding-right: 25px;
+      color: $grey;
+      a {
+        margin-left: 10px;
+        letter-spacing: 3px;
+      }
+    }
+  }
+  &-copyrights {
+    @include sm {
+      margin-bottom: 30px;
+    }
+    @include md {
+      margin-bottom: 60px;
+    }
+    color: $grey;
+    font-size: 14px;
+    letter-spacing: 0.2px
+  }
+}
+
+.brand--footer .brand-logo {
+  @include sm {
+    width: 40px
+  }
+  @include md {
+    width: 45px
+  }
+}

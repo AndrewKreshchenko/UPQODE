@@ -1,0 +1,163 @@
+// COMPONENT SLIDER FOR BANNER
+// --------------------------------------------------
+
+// @import 'config/variables';
+// @import 'config/mixins';
+
+/* TweenMax - Tuinslider slider */
+// Layout
+.b-slider {
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  overflow: hidden;
+  * {
+    color: white
+  }
+  &__container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+    list-style: none;
+    white-space: nowrap;
+  }
+  &__item {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+    $bg_shadow: linear-gradient(180deg, rgba(5, 13, 29, .6) 11%, rgba(5, 13, 29, 0) 90.3%);
+    &-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      font-size: 16px;
+      overflow: hidden;
+      /*visibility: hidden;*/
+    }
+    &-content {
+      white-space: normal;
+      text-align: center;
+      z-index: 1;
+    }
+    &-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100%;
+      background-size: cover !important;
+      background: $bg_shadow;
+      & &--static {
+        background-image: #{$bg_shadow}, url(../img/banner/banner-photo1.png)
+      }
+    }
+    &-title {
+      font-weight: 600;
+      font-size: 90px;
+      line-height: 100px;
+      @include sm {
+        font-size: 3rem;
+        line-height: 1.5;
+        margin-bottom: 30px;
+      }
+      @include md {
+        font-size: 4rem;
+      }
+      @include xll {
+        font-size: 5.65rem; /*90px*/
+        line-height: 1.1
+      }
+    }
+    &-description {
+      font-weight: 600;
+      font-size: 18px;
+      @include md {
+        margin-top: 35px
+      }
+    }
+    &-btn {
+      margin-top: 70px
+    }
+    &-video {
+      position: absolute;
+      z-index: -1
+    }
+  }
+
+  // Arrows navigation styles
+  &-controls {
+    $k: 100%;
+    $arrow_offset: 20px;
+    $arrow_path: '../img/banner/b-slider-';
+    width: $k;
+    position: absolute;
+    top: calc(#{$k/2} - 25px);
+    z-index: 3;
+    @include prefix(transform, translate3d(0px, -50%, 0px), webkit);
+    & > .previous, & > .next {
+      position: absolute;
+      width: 30px;
+      height: 50px;
+      display: block;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      background-size: 24px;
+      background-color: transparent;
+      background-repeat: no-repeat;
+      @include prefix(user-select, none, webkit moz ms);
+      &.endpoint {
+        visibility: hidden
+      }
+    }
+    & > .next {
+      right: $arrow_offset;
+      background-image: url(#{$arrow_path}next.svg);
+    }
+    & > .previous {
+      left: $arrow_offset;
+      background-image: url(#{$arrow_path}prev.svg);
+    }
+  }
+
+  // Bottom circle navigation
+  &-navigation {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 105px;
+    text-align: center;
+    z-index: 3;
+    li {
+      position: relative;
+      display: inline-block;
+      margin-right: 12px;
+      a {
+        display: inline-block;
+        width: 19px;
+        height: 19px;
+        border-radius: 50%;
+        background-color: $white;
+        @include prefix(transition, all 0.4s ease, webkit);
+        &.is-active {
+          border: 1px solid $green;
+          background: transparent;
+          > div {
+            margin: 2px auto;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background-color: green;
+          }
+        }
+      }
+    }
+  }
+}

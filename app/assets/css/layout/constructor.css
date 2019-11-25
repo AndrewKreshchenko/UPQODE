@@ -1,0 +1,313 @@
+@media (min-width: 320px) {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  display: block;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+  /*1000px*/
+  width: 100%;
+}
+
+.col {
+  width: 100%;
+  float: left;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+@media (min-width: 320px) {
+  .container {
+    width: 90%;
+  }
+  .col-sm--12 {
+    width: 100%;
+    float: none;
+  }
+}
+
+@media (min-width: 320px) {
+  .container {
+    width: 80%;
+  }
+  .col {
+    margin-left: 2%;
+  }
+  .col:first-child {
+    margin-left: 0;
+  }
+  .col--1 {
+    width: 6.5%;
+  }
+  .col--2 {
+    width: 15%;
+  }
+  .col--3 {
+    width: 23.5%;
+  }
+  .col--4 {
+    width: 32%;
+  }
+  .col--5 {
+    width: 40.5%;
+  }
+  .col--6 {
+    width: 49%;
+  }
+  .col--7 {
+    width: 57.5%;
+  }
+  .col--8 {
+    width: 66%;
+  }
+  .col--9 {
+    width: 74.5%;
+  }
+  .col--10 {
+    width: 83%;
+  }
+  .col--11 {
+    width: 91.5%;
+  }
+  .col--12 {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .col--md-1 {
+    width: 6.5%;
+  }
+  .col--md-2 {
+    width: 15%;
+  }
+  .col--md-3 {
+    width: 23.5%;
+  }
+  .col--md-4 {
+    width: 32%;
+  }
+  .col--md-5 {
+    width: 40.5%;
+  }
+  .col--md-6 {
+    width: 49%;
+  }
+  .col--md-7 {
+    width: 57.5%;
+  }
+  .col--md-8 {
+    width: 66%;
+  }
+  .col--md-9 {
+    width: 74.5%;
+  }
+  .col--md-10 {
+    width: 83%;
+  }
+  .col--md-11 {
+    width: 91.5%;
+  }
+  .col--md-12 {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+.container:after,
+.row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.clearfix {
+  width: 100%;
+  overflow: auto;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.c--flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c--flex-centered {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@-webkit-keyframes showed {
+  0% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes showed {
+  0% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.c--showed {
+  -webkit-animation-name: showed;
+  -webkit-animation-duration: 0.3s;
+  -webkit-animation-timing-function: linear;
+  animation-name: showed;
+  animation-duration: 0.3s;
+  animation-timing-function: linear;
+}
+
+.c--hidden {
+  display: none;
+}
+
+.link {
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+}
+
+.link:hover {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.link--green {
+  color: #00a031;
+}
+
+.link--green:hover {
+  color: rgba(0, 160, 49, 0.6);
+}
+
+.link--header {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 500;
+  /*600*/
+  letter-spacing: .2px;
+}
+
+.link--header::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 1px;
+  background: #fff;
+  -webkit-transition: width 0.3s;
+  transition: width 0.3s;
+}
+
+.link--header:hover, .link--header.active {
+  color: #fff;
+}
+
+.link--header:hover::after, .link--header.active::after {
+  width: 100%;
+}
+
+.btn {
+  font-weight: 600;
+  border-radius: 15px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+@media (min-width: 320px) {
+  .btn {
+    padding: 12px 15px;
+    font-size: 17px;
+  }
+}
+
+@media (min-width: 768px) {
+  .btn {
+    padding: 16px 23px;
+    font-size: 18px;
+  }
+}
+
+.btn--filled {
+  color: #fff;
+  background-color: #00a031;
+}
+
+.btn--filled :hover {
+  opacity: .6;
+}
+
+.btn--bordered {
+  background-color: #fff;
+  color: #00a031;
+  border: 2px solid #00a031;
+}
+
+.btn--bordered:hover {
+  background-color: #00a031;
+  color: #fff;
+}
+
+.btn--bordered:hover .btn__arrow path {
+  stroke: #fff;
+}
+
+.btn--bordered .btn__arrow {
+  margin-left: 10px;
+  width: 25px;
+  height: 6px;
+  vertical-align: middle;
+}
+
+.btn--bordered .btn__arrow path {
+  fill: none;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #00a031;
+}
+
+.brand {
+  font-weight: 600;
+  line-height: 32px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.brand .brand-logo {
+  width: 31.5px;
+  height: 31.5px;
+  fill: none;
+}
+
+.brand .brand-logo path {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #fff;
+}
+/*# sourceMappingURL=constructor.css.map */

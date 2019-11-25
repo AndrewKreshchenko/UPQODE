@@ -1,0 +1,190 @@
+// TEAM
+//
+// BEM
+// --------------------------------------------------
+
+/* Team */
+.team {
+  overflow: hidden;
+  @include sm {
+    margin-top: 80px
+  }
+  @include xll {
+    margin-top: 245px
+  }
+  &__item {
+    &-title {
+      font-weight: 800;
+      font-size: 38px;
+      @include sm {
+        font-size: 32px;
+      }
+      letter-spacing: .4px;
+    }
+    &-position {
+      font-family: 'Gilroy', sans-serif;
+      text-transform: uppercase;
+      font-style: normal;
+      letter-spacing: 3px;
+    }
+    &-description {
+      margin: 40px 0;
+      letter-spacing: .2px;
+    }
+    &-social li {
+      float: left;
+      padding-right: 25px;
+      &::before {
+        content: '\2022';
+        color: $grey_list_item
+      }
+      a {
+        margin-left: 10px; 
+        letter-spacing: 3px;
+        &:hover {
+          color: inherit;
+        }
+      }
+    }
+    &--last {
+      opacity: .6;
+      &:hover {
+        color: $green
+      }
+    }
+  }
+  &__nav {
+    align-items: center;
+    margin-top: 70px;
+    max-height: 490px;
+    $this: &;
+    &--prev, &--next {
+      cursor: pointer
+    }
+    &_photo {
+      max-width: 100px;
+      text-align: right;
+      img {
+        width: auto;
+        max-height: 490px;
+      }
+    }
+    &-next_name {
+      margin-top: 10px;
+      color: $green;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 1
+    }
+    &-text {
+      flex: auto;
+      display: inline-flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      & * {
+        color: $green;
+      }
+      & &_content#{$this}--next &_move::after {
+        @extend %elem-before;
+        content: url(../img/team/arrow-next.svg);
+        width: 40px;
+        text-align: right;
+      }
+      // & &_content#{$this}--next_end &_move::after {
+      //   content: url(../img/team/arrow-next-end.svg);
+      // }
+      & &_content#{$this}--prev &_move::before {
+        @extend %elem-before;
+        content: url(../img/team/arrow-prev.svg);
+        @include prefix(transform, translateX(-40px), webkit)
+      }
+      & &_content#{$this}--endpoint {
+        opacity: .6;
+        ::before {
+          opacity: .5
+        }
+        #{$this}-text_name {
+          display: none
+        }
+      }
+      &_content#{$this}--prev {
+        text-align: right
+      }
+      &_move {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      &_name {
+        display: block;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 2.5;
+      }
+    }
+  }
+  &__slider {
+    @include rwd(max-width, max-height, 767, 600) {
+      height: 30vh;
+    }
+    @include rwd(max-width, min-height, 767, 601) {
+      height: 35vh;
+    }
+    @include sm {
+      margin-top: 40px 
+    }
+    @include md {
+      margin-top: 0;
+      height: 35vh;
+    }
+    @include lg {
+      height: 55vh;
+      margin-top: 15px;
+      margin-left: 30px;
+    }
+		position: relative;
+		perspective: 1000px;
+		transform-style: preserve-3d;
+  }
+  &__slide {
+    &-pick {
+      display: none;
+    }
+    &-item {
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 100%;
+      @include md {
+        width: 350px;
+      }
+      max-height: 100%;
+      @include prefix(transition, transform .5s ease, webkit)
+    }
+    &-photo {
+      @include sm {
+        object-fit: contain
+      }
+      @include md {
+        max-height: 448px;
+        object-fit: cover
+      }
+			overflow: hidden;
+    }
+  }
+}
+
+/* Rank 1 */
+#team-sel-1:checked ~ #team-sl-1, #team-sel-2:checked ~ #team-sl-2, #team-sel-3:checked ~ #team-sl-3 {
+	transform: translate3d(0,0,0);
+}
+/* Rank 2 */
+#team-sel-1:checked ~ #team-sl-2, #team-sel-2:checked ~ #team-sl-3, #team-sel-3:checked ~ #team-sl-1 {
+	transform: translate3d(50px,0,-100px);
+	opacity: .5;
+}
+/* Rank 3 */
+#team-sel-1:checked ~ #team-sl-3, #team-sel-2:checked ~ #team-sl-1, #team-sel-3:checked ~ #team-sl-2 {
+	transform: translate3d(93px,0,-200px);
+	opacity: .2;
+}

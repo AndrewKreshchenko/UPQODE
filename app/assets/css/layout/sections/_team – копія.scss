@@ -1,0 +1,68 @@
+// Team slider
+
+// @mixin createNumbered($num, $className){
+//     $foo : '';
+//     @for $i from 1 through $num {
+//         $foo : $foo + '.' + $className + '-' + $i + ', ';
+//     }
+//     #{$foo} {
+//         @content;
+//     }
+// }
+
+// #team {
+//   $sl_count: 3;
+//   $distance_first: 50;
+//   $distance_x: 100;
+//   $distance_z: 100;
+//   @for $i from 1 through $sl_count {
+//     &-sel-#{$i}:
+//   }
+//   &-sel-1:checked ~ #team-sl-1 {
+    
+//   }
+// }
+#team-sel-1:checked ~ #team-sl-1, #team-sel-2:checked ~ #team-sl-2, #team-sel-3:checked ~ #team-sl-3 {
+	transform: translate3d(0,0,0);
+}
+/* Rank 2 */
+#team-sel-1:checked ~ #team-sl-2, #team-sel-2:checked ~ #team-sl-3, #team-sel-3:checked ~ #team-sl-1 {
+	transform: translate3d(50px,0,-100px);
+	opacity: .5;
+}
+/* Rank 3 */
+#team-sel-1:checked ~ #team-sl-3, #team-sel-2:checked ~ #team-sl-1, #team-sel-3:checked ~ #team-sl-2 {
+	transform: translate3d(93px,0,-200px);
+	opacity: .2;
+}
+
+// %foo {
+//   foo: bar;
+// }
+
+$distance_x: 50px;
+$distance_x_k: 43px;
+$distance_z: -100px;
+$opacity_k: 2.5%2;
+@mixin teamSlider($num, $id, $opacity: ()) {
+    $foo : '';
+    @for $i from 1 through $num {
+        $foo : $foo + '.' + $id + '-' + $i + ', ';
+    }
+    #{$foo} {
+        @content;
+    }
+}
+
+@include teamSlider(3, '#team-sel', 1 .5 .2) {
+  @include prefix(transform, translate3d(#{$distance_x},0,$distance_z), moz ms webkit);
+  $distance_x: $distance_x + $distance_x_k;
+  $distance_z: $distance_z + $distance_z;
+  //margin-left: 50px * $i;
+}
+
+// @for $i from 1 through 3 {
+//   #team-sel-#{$i} ~ #team-sl-#{$i} {
+    
+//   }
+// }

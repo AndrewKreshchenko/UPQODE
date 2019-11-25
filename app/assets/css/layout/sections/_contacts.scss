@@ -1,0 +1,230 @@
+// CONTACTS
+//
+// BEM
+// --------------------------------------------------
+
+/* Contacts */
+.contacts {
+  @include sm {
+    margin-top: 80px;
+    margin-bottom: 20px;
+  }
+  @include lg {
+    margin-top: 200px;
+    margin-bottom: 200px;
+  }
+  &__title {
+    @include sm {
+      font-size: 3rem
+    }
+    @include lg {
+      font-size: 52px
+    }
+    line-height: 60px;
+  }
+  &__address {
+    margin-top: 15px;
+    @include sm {
+      margin-bottom: 30px
+    }
+    @include md {
+      margin-bottom: 0
+    }
+  }
+  &__items {
+    max-width: 285px;
+    @include sm {
+      margin-top: 0
+    }
+    @include md {
+      margin-top: 55px
+    }
+  }
+  &__item {
+    @include sm {
+      margin-bottom: 15px;
+      padding: 10px 5px 10px 50px
+    }
+    @include lg {
+      margin-bottom: 30px;
+      padding: 20px 5px 20px 50px
+    }
+    line-height: 24px;
+    flex-direction: column;
+    cursor: pointer;
+    &::before {
+      @extend %elem-before;
+      content: url(../img/contacts/map.svg);
+      @include prefix(transform, translateX(-40px), webkit);
+      width: 30px;
+      height: 30px;
+      z-index: 3;
+    }
+    &--active {
+      box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.08);
+      &::before {
+        content: url(../img/contacts/map-active.svg);
+      }
+    }
+    &-icon {
+      min-width: 40px;
+      svg {
+        width: 24px;
+        height: 25px;
+        fill: none;
+      }
+      path {
+        fill: #bbb
+      }
+      &--active path {
+        fill: $green
+      }
+    }
+    &-address {
+      font-size: 18px;
+      font-style: normal;
+      line-height: 28px;
+      letter-spacing: .2px;
+      .link {
+        text-transform: none;
+      }
+    }
+  }
+  &__map {
+    $right: 10vw;
+    @include sm {
+      width: 100%;
+      height: 75vh
+    }
+    @include md {
+      margin-left: 30px;
+      margin-right: $right;
+      width: calc(100% - #{$right});
+      height: 755px;
+    }
+    @include xl {
+      $right: 100px;
+      margin-left: 0;
+      margin-right: $right;
+      width: calc(100% - #{$right});
+    }
+  }
+  &__info {
+    @include sm {
+      float: none;
+      width: 100%
+    }
+    @include md {
+      float: right;
+      width: 320px
+    }
+    $this: &;
+    $title_color: $black;
+    &-content {
+      @extend #{$this};
+      z-index: 1;
+      padding: 25px 58px 45px;
+      background-color: $white;
+      box-shadow: 0px 40px 40px rgba(0, 0, 0, 0.08);
+      @include sm {
+        padding: 10px 30px 30px;
+        width: auto;
+        height: 230px;
+      }
+      @include md {
+        margin-top: 135px;
+        margin-left: 5vw;
+        width: 260px;
+        height: auto;
+        position: absolute;
+      }
+      @include xl {
+        padding: 25px 58px 45px;
+        margin-top: 135px;
+        margin-left: 0;
+        width: 320px;
+        height: auto;
+        position: absolute;
+      }
+      @include prefix(transition, height .3s ease, webkit);
+      &.opened {
+        height: auto
+      }
+    }
+    &-title {
+      color: $title_color;
+      font-weight: 800;
+      font-size: 38px;
+      line-height: 51px;
+      letter-spacing: 0.4px;
+    }
+    &-address {
+      margin: 8px 0 10px;
+    }
+    &-details {
+      @include sm {
+        margin-top: 50px
+      }
+      @include md {
+        margin-top: 20px
+      }
+    }
+    &-more, &-less {
+      margin: 0 auto;
+      padding: 0;
+      height: 60px !important;
+      white-space: pre-line;
+      line-height: .7;
+      @include sm {
+        display: block
+      }
+      @include md {
+        display: none
+      }
+      &:hover {
+        background-color: inherit;
+        color: $green;
+      }
+      &.c--hidden {
+        display: none
+      }
+      svg {
+        width: 11px;
+      }
+    }
+    &-more svg {
+      margin-top: -5px;
+      @include prefix(transform, rotate(90deg), webkit);
+    }
+    &-less svg {
+      margin-top: -30px;
+      @include prefix(transform, rotate(-90deg), webkit);
+    }
+    &-detail {
+      &_icon {
+        display: inline;
+        vertical-align: middle;
+        margin-right: 15px;
+        fill: none;
+        path {
+          fill: $green
+        }
+      }
+      &_name {
+        margin-bottom: 10px;
+        color: $title_color;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 28px;
+      }
+      &_text {
+        color: $lighter_grey;
+        font-size: 14px;
+      }
+    }
+    mark {
+      color: $dark_grey;
+      background-color: transparent
+    }
+  }
+}
