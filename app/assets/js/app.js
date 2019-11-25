@@ -10,8 +10,6 @@ var sl_curr_ind = 0, player, videos = new Array, paused = true; // Init varuable
 function positionServicesPoint() {
     let k = (document.documentElement.scrollTop+document.body.scrollTop)/(document.documentElement.scrollHeight-document.documentElement.clientHeight),
         len = path.getTotalLength(), d = path.getPointAtLength(k*1.5*len);
-    console.log(k, len, d);
-    //dot.style.transform = 'translate('+ d.x + ',' + d.y + ')';
     dot.setAttribute('transform', 'translate('+(d.x-300)+','+(d.y-300)+')')
 }
 
@@ -25,7 +23,6 @@ const pauseVideos = callback => {
                     }
                 });
                 paused = true;
-                console.log('28: '+paused);
             }
         }, 500)
     })
@@ -34,26 +31,12 @@ const pauseVideos = callback => {
 var _scroll = function() {
     const sc = window.scrollY || window.pageYOffset, ww = window.innerWidth, wh = window.innerHeight;
     if (sc > wh-wh/4 && sc < wh*2) {
-        //positionServicesPoint();
-        //console.log('sc');
         if (!header.classList.contains(header_cl))
             header.classList.add(header_cl);
-        
-        if (!paused) {
-            pauseVideos(todo => {
-                console.log('44: '+todo.text);
-            })
-        }
-        //document.querySelector('header').classList.contains += ' header-top--colored';
     }
-    else if (sc > wh*2) {
-        //console.log('onAfter');
-    }
-    else {
-        //console.log('onVideo');
+    else if (sc < wh-wh/4) {
         if (header.classList.contains(header_cl))
             header.classList.remove(header_cl)
-        //document.querySelector('header').classList -= ' header-top--colored';
     }
 }
 
@@ -91,16 +74,6 @@ var banner_slider = new TuinSlider('#b-slider', {
     onLeave: null,
     afterLoad: null
 });
-
-//https://www.youtube.com/watch?v=M7lc1UVf-VE
-
-// Replace the 'ytplayer' element with an <iframe> and
-// YouTube player after the API code downloads.
-/*if(!window.YT)var YT={loading:0,loaded:0};if(!window.YTConfig)var YTConfig={host:"https://www.youtube.com"};YT.loading||(YT.loading=1,function(){var o=[];YT.ready=function(n){YT.loaded?n():o.push(n)},window.onYTReady=function(){YT.loaded=1;for(var n=0;n<o.length;n++)try{o[n]()}catch(i){}},YT.setConfig=function(o){for(var n in o)o.hasOwnProperty(n)&&(YTConfig[n]=o[n])}}());
-if(this._skiped){
-    this.a.contentWindow.postMessage(a,b[c]); 
-}
-this._skiped = true;*/
 
 // On Ready Event
 // NOTE: Have to set controls (such as setVolume) after 'onReady' event
@@ -178,9 +151,9 @@ function onChangeBannerSlide(obj) {
         let prev_ind = document.querySelector('.b-slider-navigation .is-active').dataset.index;
 
         if (obj.classList == 'next')
-            ind = prev_ind++ //prev_ind < len-1 ? ind = prev_ind++ : ind = 1;
+            ind = prev_ind++
         else if (obj.classList == 'previous')
-            ind = prev_ind-- //prev_ind > 0 ? ind = prev_ind-- : ind = len-1;
+            ind = prev_ind--
         else {
             console.warn('Faild to Navigate to another slide. Classes of navigation elements might cause problems.');
             return;
@@ -194,20 +167,12 @@ function onChangeBannerSlide(obj) {
         : (ind == 0 ? arrows.querySelector('.previous').classList.add('endpoint')
             : (arrows.querySelector('.endpoint') !== null ? arrows.querySelector('.endpoint').classList.remove('endpoint') : false))
 
-    // if (arrows.querySelector('.endpoint') !== null )
-    //     arrows.querySelector('.endpoint').classList.remove('endpoint');
-    // if (ind == len-1)
-    //     document.querySelector('.b-slider-controls .next').classList.add('endpoint');
-    // else if (ind == 0)
-    //     document.querySelector('.b-slider-controls .prev').classList.add('endpoint');
-
     // Apply changes to slide
     let cl = 'b-slider__item', slide = document.querySelectorAll('.'+cl)[ind];
     if (slide.querySelector('[data-videoid]') === null)
         slide.querySelector('.'+cl+'-bg').classList += ' '+cl+'-bg--static';
     else {
         let bg_el = slide.querySelector('.'+cl+'-bg');
-        //bg_el.classList.contains(cl+'-bg--static') ? sbg_el.classList.remove(cl+'-bg--static') : false;
         controlYTPlayer(ind, false); // false - not after scroll event 
     }
 }
@@ -219,29 +184,26 @@ function recalcDimensionYTPlayer() {
         video_dim.w = ww + expand;
         video_dim.h = wh + 130;
     }
-    else {
-        //let k = video_ww      
-    }
     return video_dim;
 }
 
 // Initialize Banner videos (after has finished downloading the JavaScript for the player API)
 // NOTE: It would be better to keep track if onYouTubeIframeAPIReady() will be fired allways after banner slider initialisation
 function onYouTubeIframeAPIReady() {
-    // // Init a video on the first slide
-    // controlYTPlayer(0, false); // false - not after scroll event 
+    // Init a video on the first slide
+    controlYTPlayer(0, false); // false - not after scroll event 
 
-    // // Navigation between slides
-    // for (const pagin of document.querySelectorAll('.b-slider-navigation a')) {
-    //     pagin.addEventListener('click', function() {
-    //         onChangeBannerSlide(this);
-    //     })
-    // }
-    // for (const pagin of document.querySelectorAll('.b-slider-controls > button')) {
-    //     pagin.addEventListener('click', function() {
-    //         onChangeBannerSlide(this);
-    //     })
-    // }
+    // Navigation between slides
+    for (const pagin of document.querySelectorAll('.b-slider-navigation a')) {
+        pagin.addEventListener('click', function() {
+            onChangeBannerSlide(this);
+        })
+    }
+    for (const pagin of document.querySelectorAll('.b-slider-controls > button')) {
+        pagin.addEventListener('click', function() {
+            onChangeBannerSlide(this);
+        })
+    }
 }
 
 /**
@@ -274,34 +236,9 @@ function buildServicesPath() {
 
     point.style.top = (data.left_offset+data.inner_shift/2)+'px';
     point.style.left = data.inner_shift/2+'px';
-    
-    //var w_offset = (window.outerWidth-c_offset)/2;//path.style.left = nodes[0].offsetLeft/2+'px';
-    //path_.style.width = c_offset.offsetWidth-node1_ch.offsetWidth*2+'px';
-
-    // Draw SVG bezier curve based two bezier controls (C)
-    //var svg_opened_tag = '<svg style="position: absolute;z-index: 12;left: -100px;" width="'+data.svg_width+'" height="'+data.svg_height+'" viewBox="0 0 '+data.svg_width+' '+data.svg_height+'">';
-    // data.viewBox = '0 0 '+data.svg_width+' '+data.svg_height;
-    // data.style='position: absolute;z-index: 12;left: -100px;width:'+data.svg_width+'px; height:'+data.svg_height+'px;';
-    
-    /*<svg viewBox="0 0 10 10" class="svg-6">
-        <path d="M2,5 A 5 25 0 0 1 5 5" />
-        <path d="M1,2 C8,2 8,8 1,9" />
-    </svg>*/
-    //var svg = document.createElement('svg');
-    //svg.setAttribute('viewBox', data.viewBox);
-    //svg.setAttribute('style', data.style);
-    //var svg = svg_opened_tag+svg_path+'</svg>'
-    //svg.setAttribute('class', 'b-slider-navigation');
-    //svg.innerHTML = svg_path;
-    //path_.appendChild(svg);
 }
 
 function moveToTeamSlide(el, is_next) {
-    // if (is_next && document.getElementById('team-txt-next').className.contains('team__nav--endpoint'))
-    //     return;
-    // if (!is_next && document.getElementById('team-txt-prev').className.contains('team__nav--endpoint'))
-    //     return;
-
     // Get index of current slide
     var form = document.getElementById('team-form'), fields = form.children, len = fields.length, // fields - fieldset tags
         checked_el = document.querySelector('[data-teamslide]'), ind = checked_el.dataset.teamslide;
