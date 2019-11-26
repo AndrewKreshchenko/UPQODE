@@ -51,9 +51,11 @@
 
 .brand--footer .brand-logo {
   @include sm {
-    width: 40px
+    width: 40px;
+    height: 40px
   }
   @include md {
-    width: 45px
+    width: 45px;
+    height: 45px
   }
 }

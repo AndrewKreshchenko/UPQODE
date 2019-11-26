@@ -54,8 +54,9 @@
       height: 100%;
       background-size: cover !important;
       background: $bg_shadow;
-      & &--static {
-        background-image: #{$bg_shadow}, url(../img/banner/banner-photo1.png)
+      &--static {
+        background-image: #{$bg_shadow}, url(../img/banner/banner-photo1.png);
+        background-size: cover;
       }
     }
     &-title {
@@ -102,10 +103,15 @@
     z-index: 3;
     @include prefix(transform, translate3d(0px, -50%, 0px), webkit);
     & > .previous, & > .next {
+      @include sm {
+        display: none
+      }
+      @include md {
+        display: block
+      }
       position: absolute;
       width: 30px;
       height: 50px;
-      display: block;
       cursor: pointer;
       border: none;
       outline: none;
@@ -144,16 +150,16 @@
         width: 19px;
         height: 19px;
         border-radius: 50%;
+        border: 1px solid $green;
+        background-color: transparent;
         @include prefix(transition, all 0.4s ease, webkit);
         &.is-active {
-          border: 1px solid $green;
-          background: transparent;
           > div {
             margin: 2px auto;
             width: 13px;
             height: 13px;
             border-radius: 50%;
-            background-color: green;
+            background-color: $green;
           }
         }
       }

@@ -7,9 +7,12 @@
 .services {
   &__chain {
     position: absolute;
+    left: 0;
+    width: 100%;
     fill: none;
     z-index: -1;
     &-path {
+      width: 100%;
       @include sm {
         display: none
       }
@@ -19,10 +22,10 @@
       stroke: #29A0EC
     }
     &-point {
-      display: none;
       position: absolute;
-      margin: -83px 0 0 -63px;
-      z-index: -1
+      transform-origin: 50% 50%;
+      opacity: .2
+      //z-index: -1
     }
   }
   &__item {

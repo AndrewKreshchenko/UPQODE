@@ -108,9 +108,10 @@ ul, li {
   background: linear-gradient(180deg, rgba(5, 13, 29, 0.6) 11%, rgba(5, 13, 29, 0) 90.3%);
 }
 
-.b-slider__item-bg .b-slider__item-bg--static {
+.b-slider__item-bg--static {
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(11%, rgba(5, 13, 29, 0.6)), color-stop(90.3%, rgba(5, 13, 29, 0))), url(../img/banner/banner-photo1.png);
   background-image: linear-gradient(180deg, rgba(5, 13, 29, 0.6) 11%, rgba(5, 13, 29, 0) 90.3%), url(../img/banner/banner-photo1.png);
+  background-size: cover;
 }
 
 .b-slider__item-title {
@@ -174,7 +175,6 @@ ul, li {
   position: absolute;
   width: 30px;
   height: 50px;
-  display: block;
   cursor: pointer;
   border: none;
   outline: none;
@@ -185,6 +185,18 @@ ul, li {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+@media (min-width: 320px) {
+  .b-slider-controls > .previous, .b-slider-controls > .next {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .b-slider-controls > .previous, .b-slider-controls > .next {
+    display: block;
+  }
 }
 
 .b-slider-controls > .previous.endpoint, .b-slider-controls > .next.endpoint {
@@ -221,13 +233,10 @@ ul, li {
   width: 19px;
   height: 19px;
   border-radius: 50%;
+  border: 1px solid #00a031;
+  background-color: transparent;
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
-}
-
-.b-slider-navigation li a.is-active {
-  border: 1px solid #00a031;
-  background: transparent;
 }
 
 .b-slider-navigation li a.is-active > div {
@@ -235,7 +244,7 @@ ul, li {
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background-color: green;
+  background-color: #00a031;
 }
 
 @media (min-width: 320px) {
@@ -756,11 +765,14 @@ ul, li {
 /* Services */
 .services__chain {
   position: absolute;
+  left: 0;
+  width: 100%;
   fill: none;
   z-index: -1;
 }
 
 .services__chain-path {
+  width: 100%;
   stroke: #29A0EC;
 }
 
@@ -777,10 +789,10 @@ ul, li {
 }
 
 .services__chain-point {
-  display: none;
   position: absolute;
-  margin: -83px 0 0 -63px;
-  z-index: -1;
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+  opacity: 0.2;
 }
 
 .services__item {
@@ -1609,12 +1621,14 @@ ul, li {
 @media (min-width: 320px) {
   .brand--footer .brand-logo {
     width: 40px;
+    height: 40px;
   }
 }
 
 @media (min-width: 768px) {
   .brand--footer .brand-logo {
     width: 45px;
+    height: 45px;
   }
 }
 
