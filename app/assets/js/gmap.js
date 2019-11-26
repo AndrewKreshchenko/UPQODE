@@ -129,7 +129,7 @@ function changeLocation(el) {
         map: map,
         title: feature.title,
     })
-    console.log(feature.center, feature.position.lat(), feature.position.lng());
+    
     if (typeof feature.center != 'undefined')
         map.setCenter(feature.center);
 }
