@@ -324,7 +324,7 @@
     var paginationList = '';
 
     for (var i = 0; i < this.items.length; i++) {
-      paginationList += '<li><a data-index=\"' + i + '\" href=\"#' + i + '"\></a></li>';
+      paginationList += '<li><a data-index=\"' + i + '\" href=\"#' + i + '"\><div></div></a></li>';
 
     }
 
