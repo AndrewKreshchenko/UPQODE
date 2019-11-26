@@ -1,16 +1,71 @@
 // Cache some variables
-const path = document.getElementById('s-chain-path'), dot = document.getElementById('s-chain-point'), // Init chain path and point globally to speed up browser calculation
+const path = document.getElementById('s-chain-path'), dot = document.getElementById('s-chain-circle'), // Init chain path and point globally to speed up browser calculation
     players = document.querySelectorAll('[data-videoid]'),
     header = document.querySelector('header'), header_cl = 'header-top--colored';
 var sl_curr_ind = 0, player, videos = new Array, paused = true; // Init varuables to control videos
-    
+var scale_k, trackPoints = [];
+
+
 /**
  * Scroll handlers
  */
+function getCurrentLength() {
+  let centreY = window.innerHeight / 2;
+  let trackBounds = () => path.getBoundingClientRect();
+  let currentY = centreY - trackBounds.y;
+  if (currentY < 0) return 0;
+  
+  // if currentY is greater that track height, that means the user has scrolled pass the track (and the whole svg) in such case the animation should be completed i.e. the head should be at the final position i.e. at totalLength 
+  if (currentY > trackBounds.height) {
+      return totalLength;
+  }
+  
+  for (let point of trackPoints) {
+    if (point.y >= currentY) {
+        return point.length;
+    }
+  }
+
+  return totalLength;
+}
+function setScaleFactor() {
+    scale_k = document.getElementById('services__chain-path').getBoundingClientRect().width;
+}
+
+function setTrackPoints() {
+  let divisions = 500, len = path.getTotalLength();
+  let unitLength = len/divisions;
+  trackPoints = [];
+  for (let i = 0; i < divisions; i++) {
+    let length = unitLength * i;
+    let {x,y} = path.getPointAtLength(length);
+    trackPoints.push({x: x, y: y, length});
+  }
+}
+
+function getCurrentLength() {
+    let centreY = window.innerHeight/2;
+    let trackBounds = path.getBoundingClientRect();
+    let currentY = centreY - trackBounds.y;
+    if (currentY < 0)
+        return 0;
+    // if currentY is greater that track height, that means the user has scrolled pass the track (and the whole svg) in such case the animation should be completed i.e. the head should be at the final position i.e. at totalLength 
+    if (currentY > trackBounds.height) {
+      return path.getTotalLength();
+    }
+    for (let p of trackPoints) {
+        if (p.y >= currentY) {
+            return p.length;
+        }
+    }
+    return path.getTotalLength();
+}
+
 function positionServicesPoint() {
-    let k = (document.documentElement.scrollTop+document.body.scrollTop)/(document.documentElement.scrollHeight-document.documentElement.clientHeight),
-        len = path.getTotalLength(), d = path.getPointAtLength(k*1.5*len);
-    dot.setAttribute('transform', 'translate('+(d.x-300)+','+(d.y-300)+')')
+    let len = getCurrentLength();
+    d = path.getPointAtLength(len);
+    dot.setAttribute('cx', d.x);
+    dot.setAttribute('cy', d.y);
 }
 
 const pauseVideos = callback => {
@@ -31,8 +86,15 @@ const pauseVideos = callback => {
 var _scroll = function() {
     const sc = window.scrollY || window.pageYOffset, ww = window.innerWidth, wh = window.innerHeight;
     if (sc > wh-wh/4 && sc < wh*2) {
+        positionServicesPoint();
         if (!header.classList.contains(header_cl))
             header.classList.add(header_cl);
+        
+        if (!paused) {
+            pauseVideos(todo => {
+                
+            })
+        }
     }
     else if (sc < wh-wh/4) {
         if (header.classList.contains(header_cl))
@@ -93,7 +155,6 @@ function onPlayerStateChange(e) {
         case YT.PlayerState.PAUSED:
             break;
         case YT.PlayerState.ENDED:
-            console.log('ended '+e.divid);
             e.target.playVideo();
             paused = false;
             break;
@@ -104,11 +165,9 @@ function controlYTPlayer(i, f) {
     // Take Control of all players
     videos.forEach(video => {
         if (video.getPlayerState() == 1) {
-            console.log('playing');
             video.pauseVideo();
         }
         else if (video.getPlayerState() == 2) {
-            console.log('paused');
             video.playVideo();
             paused = false;
             return;
@@ -184,6 +243,11 @@ function recalcDimensionYTPlayer() {
         video_dim.w = ww + expand;
         video_dim.h = wh + 130;
     }
+    else {
+        let expand = ww/wh*130;
+        video_dim.w = ww + expand;
+        video_dim.h = wh + 130;      
+    }
     return video_dim;
 }
 
@@ -191,6 +255,13 @@ function recalcDimensionYTPlayer() {
 // NOTE: It would be better to keep track if onYouTubeIframeAPIReady() will be fired allways after banner slider initialisation
 function onYouTubeIframeAPIReady() {
     // Init a video on the first slide
+    if (window.innerWidth < 768) {
+        document.querySelectorAll('.b-slider__item-wrapper').forEach(el => {
+            el.classList += ' b-slider__item-bg--static';
+        })
+        return;
+    }
+
     controlYTPlayer(0, false); // false - not after scroll event 
 
     // Navigation between slides
@@ -212,30 +283,28 @@ function onYouTubeIframeAPIReady() {
 function buildServicesPath() {
     // Position Service connection path
     var services = document.getElementById('services'), path_ = document.getElementById('s-chain'),
-        nodes = services.querySelectorAll('[data-node]'), node1_ch = nodes[0].firstElementChild,
+        nodes = services.querySelectorAll('[data-node]'), node1_ch = nodes[0].querySelector('img'),
         c_offset = services.querySelector('.container'), data = {},
-        path_el = document.getElementById('s-chain-path'), point = document.getElementById('s-chain-point');
+        path_el = document.getElementById('s-chain-path');
 
     data.C_shift = path_.parentElement.offsetHeight/1.5;
     data.inner_shift = node1_ch.offsetWidth;
+    data.left_offset = (path_.offsetWidth-c_offset.offsetWidth)/2;
     data.svg_width = c_offset.offsetWidth;
     data.svg_height = c_offset.offsetHeight;
-    if (window.innerWidth > 1600)
-        data.left_offset = data.inner_shift/4;
-    else
-        data.left_offset = path_.offsetLeft+data.inner_shift/4;
+    //data.dot_center = parseInt(dot.getAttribute('width'))/2;
 
     path_el.parentElement.parentElement.setAttribute('style', 'top: '+nodes[0].offsetTop+'px');
     
-    var svg_path = 'M'+(data.left_offset+data.inner_shift/4)+','+data.inner_shift/2+' C'+(data.svg_width-10)+','+(data.svg_height/2-data.C_shift)+' '+(data.svg_width-10)+','+(data.svg_height/2+data.C_shift)+' '+(data.left_offset+data.inner_shift/4)+','+(data.svg_height-data.inner_shift/2);
+    var svg_path = 'M'+(data.left_offset+data.inner_shift/2)+','+data.inner_shift/2+' C'+(data.svg_width-10)+','+(data.svg_height/2-data.C_shift)+' '+(data.svg_width-10)+','+(data.svg_height/2+data.C_shift)+' '+(data.left_offset+data.inner_shift/2)+','+(data.svg_height-data.inner_shift/2);
     
     path_el.parentElement.setAttribute('viewBox', '0 0 '+(data.svg_width+data.inner_shift/2)+' '+data.svg_height);
     path_el.parentElement.setAttribute('width', (data.svg_width+data.inner_shift/2)+'px');
     path_el.parentElement.setAttribute('height', data.svg_height+'px');
     path_el.setAttribute('d', svg_path);
 
-    point.style.top = (data.left_offset+data.inner_shift/2)+'px';
-    point.style.left = data.inner_shift/2+'px';
+    dot.style.top = data.inner_shift/2+'px';
+    dot.style.left = (data.left_offset+data.inner_shift/2)+'px';
 }
 
 function moveToTeamSlide(el, is_next) {
@@ -262,7 +331,6 @@ function moveToTeamSlide(el, is_next) {
     data.photo_path = dir+fields[ind-1].querySelector('[name="photo"]').value;
     data.photo_path_prev = dir+fields[ind_prev-1].querySelector('[name="photo"]').value;
     data.photo_path_next = dir+fields[ind_next-1].querySelector('[name="photo"]').value;
-    //is_next ? data.photo_slide = fields[ind].querySelector('[name="photo"]').value : data.photo_slide = fields[ind].querySelector('[name="photo"]').value;
     data.position = fields[ind-1].querySelector('[name="position"]').value;
     data.desc = fields[ind-1].querySelector('[name="desc"]').innerHTML;
     
@@ -349,14 +417,14 @@ document.addEventListener('DOMContentLoaded', () => {
     script_api.parentNode.insertBefore(tag, script_api);
 
     if (document.readyState === 'interactive' || document.readyState === 'complete') {
-        window.addEventListener('scroll', _scroll); // First listener of all after DOMContentLoaded completed
         buildServicesPath();
+        setScaleFactor();
+        setTrackPoints();
+        window.addEventListener('scroll', _scroll); // First listener of all after DOMContentLoaded completed
 
         document.querySelectorAll('nav li > a').forEach(link => {
             link.addEventListener('click', function() {
-                //window.removeEventListener('scroll', _scroll, false);
-
-                let id = this.getAttribute('href'); //window.removeEventListener('scroll');
+                let id = this.getAttribute('href');
                 id == '#' ? scrollTo(document.querySelector('body')) : scrollTo(document.querySelector(id));
                 
                 if (this.classList.contains('link--header')) {
