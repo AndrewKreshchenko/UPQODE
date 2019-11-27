@@ -201,11 +201,12 @@ function controlYTPlayer(i, f) {
 }
 
 function onChangeBannerSlide(obj) {
-    if (obj.classList.contains('is-active'))
-        return
-    
     // Set index for next slide
-    let ind, len = document.querySelectorAll('.b-slider-navigation li').length;
+    let ind = obj.dataset.index, len = document.querySelectorAll('.b-slider-navigation li').length;
+
+    if (document.querySelectorAll('[data-videoid]')[ind].tagName == 'IFRAME')
+        return;
+    
     if (typeof obj.dataset.index === 'undefined') {
         let prev_ind = document.querySelector('.b-slider-navigation .is-active').dataset.index;
 
