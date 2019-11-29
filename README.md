@@ -1,3 +1,3 @@
 # UPQODE
-### Landing webpage
-To see the web page go [there](https://andrewkreshchenko.github.io/UPQODE/).
+######Landing page [there](https://andrewkreshchenko.github.io/UPQODE/)
+*Not completed variant*
