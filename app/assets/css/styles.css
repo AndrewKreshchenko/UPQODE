@@ -1048,8 +1048,25 @@ ul, li {
 }
 
 .team__nav_photo {
-  max-width: 100px;
   text-align: right;
+}
+
+@media (min-width: 320px) {
+  .team__nav_photo {
+    max-width: 60px;
+  }
+}
+
+@media (min-width: 768px) {
+  .team__nav_photo {
+    max-width: 90px;
+  }
+}
+
+@media (min-width: 992px) {
+  .team__nav_photo {
+    max-width: 90px;
+  }
 }
 
 .team__nav_photo img {
@@ -1058,7 +1075,6 @@ ul, li {
 }
 
 .team__nav-next_name {
-  margin-top: 10px;
   color: #00a031;
   font-weight: 600;
   font-size: 18px;
@@ -1084,14 +1100,37 @@ ul, li {
 
 .team__nav-text .team__nav-text_content.team__nav--next .team__nav-text_move::after {
   content: url(../img/team/arrow-next.svg);
-  width: 40px;
   text-align: right;
+}
+
+@media (min-width: 320px) {
+  .team__nav-text .team__nav-text_content.team__nav--next .team__nav-text_move::after {
+    width: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .team__nav-text .team__nav-text_content.team__nav--next .team__nav-text_move::after {
+    width: 40px;
+  }
 }
 
 .team__nav-text .team__nav-text_content.team__nav--prev .team__nav-text_move::before {
   content: url(../img/team/arrow-prev.svg);
-  -webkit-transform: translateX(-40px);
-  transform: translateX(-40px);
+}
+
+@media (min-width: 320px) {
+  .team__nav-text .team__nav-text_content.team__nav--prev .team__nav-text_move::before {
+    -webkit-transform: translateX(-30px);
+    transform: translateX(-30px);
+  }
+}
+
+@media (min-width: 768px) {
+  .team__nav-text .team__nav-text_content.team__nav--prev .team__nav-text_move::before {
+    -webkit-transform: translateX(-40px);
+    transform: translateX(-40px);
+  }
 }
 
 .team__nav-text .team__nav-text_content.team__nav--endpoint {
@@ -1115,11 +1154,35 @@ ul, li {
   letter-spacing: 1px;
 }
 
+@media (min-width: 320px) {
+  .team__nav-text_move {
+    font-size: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .team__nav-text_move {
+    font-size: 18px;
+  }
+}
+
 .team__nav-text_name {
   display: block;
   font-size: 18px;
   font-weight: 600;
-  line-height: 2.5;
+}
+
+@media (min-width: 320px) {
+  .team__nav-text_name {
+    margin-top: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .team__nav-text_name {
+    margin-top: 0;
+    line-height: 2.5;
+  }
 }
 
 .team__slider {
