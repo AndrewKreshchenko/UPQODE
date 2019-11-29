@@ -208,7 +208,7 @@ function onChangeBannerSlide(obj) {
         return;
     
     if (typeof obj.dataset.index === 'undefined') {
-        let prev_ind = document.querySelector('.b-slider-navigation .is-active').dataset.index;
+        let prev_ind = obj.dataset.index;
 
         if (obj.classList == 'next')
             ind = prev_ind++
