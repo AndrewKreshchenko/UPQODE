@@ -220,19 +220,3 @@
     }
   }
 }
-
-.brand {
-  font-weight: 600;
-  line-height: 32px;
-  @include prefix(transition, all .3s, webkit);
-  .brand-logo {
-    width: 31.5px;
-    height: 31.5px;
-    fill: none;
-    path {
-      fill-rule: evenodd;
-      clip-rule: evenodd;
-      fill: $white
-    }
-  }
-}

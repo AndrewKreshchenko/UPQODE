@@ -4,43 +4,44 @@
 // --------------------------------------------------
 
 /* Header */
+@include keyframe(menu_open) {
+  0% {
+    height: 56px;
+  }
+  to {
+    height: 212px;
+  }
+}
 .header-top {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   width: 100%;
-  @include sm {
-    max-height: fit-content
-  }
-  @include md {
-    max-height: 48px
-  }
   text-align: left;
   z-index: 4;
+  overflow: hidden;
   $this: &;
   * {
     color: $white
   }
-  // h1 {
-  //   display: inline-block;
-  //   font-size: 22px;
-  //   font-weight: bold;
-  //   margin-top: 25px;
-  // }
-
+  &.opened {
+    @include animation(menu_open, .3s, ease);
+  }
+  &--mob {
+    background-color: rgba(34, 34, 34, 0.95);
+    @include prefix(transition, all .3s, webkit);
+  }
   &--colored {
     background-color: $dark_grey_alpha;
-    //box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.08);
-    @include prefix(transition, .3s, webkit)
   }
   &__navbar {
     @include sm {
-      margin-top: 27px;
+      margin: 15px 0 5px;
       float: left;
     }
     @include md {
-      margin-top: 30px;
+      margin: 30px 0 0;
       float: right
     }
     @include prefix(transition, all .3s, webkit);
@@ -60,6 +61,7 @@
         display: none
       }
     }
+    // for mobile screen
     &--opened > .menu {
       @include sm {
         display: block;
@@ -77,30 +79,55 @@
       @include prefix(transition, all .3s, webkit)
     }
     .brand {
-      @include sm {
-        margin-top: 12px;
-      }
       @include md {
         margin-top: 6px;
       }
-      @include prefix(transition, all .3s, webkit);
       &-logo {
-        width: 25px;
-        vertical-align: sub;
+        @include md {
+          width: 25px;
+          vertical-align: sub;
+        }
       }
     }
   }
 }
 
-.brand--header {
-  margin-top: 24px;
-  display: inline-block;
-  font-size: 28px;
-  @include sm {
-    float: right
+.brand {
+  font-weight: 600;
+  line-height: 32px;
+  @include prefix(transition, all .3s, webkit);
+  &--header {
+    @include sm {
+      margin-top: 12px
+    }
+    @include md {
+      margin-top: 24px
+    }
+    display: inline-block;
+    font-size: 28px;
+    @include sm {
+      float: right
+    }
+    @include md {
+      float: none
+    }
   }
-  @include md {
-    float: none
+  &-logo {
+    fill: none;
+    @include sm {
+      width: 25px;
+      vertical-align: inherit
+    }
+    @include md {
+      width: 31.5px;
+      height: 31.5px;
+      vertical-align: auto
+    }
+    path {
+      fill-rule: evenodd;
+      clip-rule: evenodd;
+      fill: $white
+    }
   }
 }
 

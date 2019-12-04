@@ -57,6 +57,10 @@
       &--static {
         background-image: #{$bg_shadow}, url(../img/banner/banner-photo1.png);
         background-size: cover;
+        // &.bg--preloaded {
+        //   position: absolute;
+
+        // }
       }
     }
     &-title {
@@ -64,7 +68,7 @@
       font-size: 90px;
       line-height: 100px;
       @include sm {
-        font-size: 3rem;
+        font-size: 2rem;
         line-height: 1.5;
         margin-bottom: 30px;
       }

@@ -25,7 +25,6 @@
       position: absolute;
       transform-origin: 50% 50%;
       opacity: .2
-      //z-index: -1
     }
   }
   &__item {
@@ -54,7 +53,6 @@
       }
       @include xll {
         max-width: 415px;
-        //height: 520px;
         &#{$this}--right {
           margin: -35px 75px 0 0;
           max-width: 500px;
@@ -70,19 +68,6 @@
       }
     }
   }
-  // &__item-visual {
-  //   img {
-  //     @include sm {
-  //       max-width: 100%
-  //     }
-  //     @include md {
-  //       max-width: 50%
-  //     }
-  //     @include xll {
-  //       max-width: initial
-  //     }
-  //   }
-  // }
   &__item-title {
     font-weight: 800;
     letter-spacing: .4px;
@@ -130,12 +115,6 @@
 .overlay-bg {
   height: 100%;
   text-align: center;
-  // .overlay-bg--left {
-  //   left: $decor_adjust;
-  // }
-  // .overlay-bg--right {
-  //   right: $decor_adjust;
-  // }
   &__ring {
     position: absolute;
     z-index: -1;
@@ -149,14 +128,12 @@
   &__bullet {
     @include sm {
       width: 75%;
-      //height: 15vw
     }
     @include md {
       width: 35vw
     }
     @include xll {
       width: 520px;
-      //height: 520px;
     }
   }
 }

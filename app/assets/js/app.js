@@ -84,17 +84,24 @@ const pauseVideos = callback => {
 }
 
 var _scroll = function() {
-    const sc = window.scrollY || window.pageYOffset, ww = window.innerWidth, wh = window.innerHeight;
+    const sc = window.scrollY || window.pageYOffset, wh = window.innerHeight;
     if (sc > wh-wh/4 && sc < wh*2) {
         positionServicesPoint();
         if (!header.classList.contains(header_cl))
             header.classList.add(header_cl);
-        
-        if (!paused) {
-            pauseVideos(todo => {
-                
-            })
-        }
+        //if (!paused) {pauseVideos(todo => {})}
+    }
+    else if (sc < wh-wh/4) {
+        if (header.classList.contains(header_cl))
+            header.classList.remove(header_cl)
+    }
+}
+// mobile scroll
+var _mscroll = function() {
+    const sc = window.scrollY || window.pageYOffset, wh = window.innerHeight;
+    if (sc > wh-wh/4 && sc < wh*2) {
+        if (!header.classList.contains(header_cl))
+            header.classList.add(header_cl);
     }
     else if (sc < wh-wh/4) {
         if (header.classList.contains(header_cl))
@@ -149,7 +156,10 @@ function onYouTubePlayerReady(e) {
 }
 
 function onPlayerStateChange(e) {
+    let el = document.getElementById(e.target.divid).parentElement.children[0], cl = 'b-slider__item-bg--static'
     switch (e.data) {
+        case (1):
+            el.classList.contains(cl) ? el.classList.remove(cl) : false;
         case YT.PlayerState.PLAYING:
             break;
         case YT.PlayerState.PAUSED:
@@ -173,6 +183,8 @@ function controlYTPlayer(i, f) {
             return;
         }
     });
+    if (f)
+        return;
 
     // If new video - initialize it
     var dim = recalcDimensionYTPlayer();
@@ -203,24 +215,25 @@ function controlYTPlayer(i, f) {
 function onChangeBannerSlide(obj) {
     // Set index for next slide
     let ind = obj.dataset.index, len = document.querySelectorAll('.b-slider-navigation li').length;
-
-    if (document.querySelectorAll('[data-videoid]')[ind].tagName == 'IFRAME')
-        return;
     
+    // If arrow btn was clicked
     if (typeof obj.dataset.index === 'undefined') {
-        let prev_ind = obj.dataset.index;
-
+        let prev_ind = document.querySelector('.b-slider-navigation .is-active').dataset.index;
         if (obj.classList == 'next')
             ind = prev_ind++
         else if (obj.classList == 'previous')
             ind = prev_ind--
         else {
-            console.warn('Faild to Navigate to another slide. Classes of navigation elements might cause problems.');
+            console.warn('Faild to Navigate to another slide.');
             return;
         }
     }
-    else 
-        ind = obj.dataset.index;
+
+    // Check if video for the slide was already initialized
+    if (document.querySelectorAll('[data-videoid]')[ind].tagName == 'IFRAME') {
+        controlYTPlayer(ind, true); // false - if video was already initialized for this div
+        return;
+    }
     
     let arrows = document.querySelector('.b-slider-controls');
     ind == len-1 ? arrows.querySelector('.next').classList.add('endpoint')
@@ -231,24 +244,16 @@ function onChangeBannerSlide(obj) {
     let cl = 'b-slider__item', slide = document.querySelectorAll('.'+cl)[ind];
     if (slide.querySelector('[data-videoid]') === null)
         slide.querySelector('.'+cl+'-bg').classList += ' '+cl+'-bg--static';
-    else {
-        let bg_el = slide.querySelector('.'+cl+'-bg');
-        controlYTPlayer(ind, false); // false - not after scroll event 
-    }
+    else
+        controlYTPlayer(ind, false); // false - if video wasn't initialized for this div 
 }
 
 function recalcDimensionYTPlayer() {
     var ww = window.innerWidth, wh = window.innerHeight, video_dim = {};
-    if (ww > wh) {
-        let expand = ww/wh*130;
+    let expand = ww/wh*130;
         video_dim.w = ww + expand;
         video_dim.h = wh + 130;
-    }
-    else {
-        let expand = ww/wh*130;
-        video_dim.w = ww + expand;
-        video_dim.h = wh + 130;      
-    }
+    //if (ww > wh) {}
     return video_dim;
 }
 
@@ -293,7 +298,6 @@ function buildServicesPath() {
     data.left_offset = (path_.offsetWidth-c_offset.offsetWidth)/2;
     data.svg_width = c_offset.offsetWidth;
     data.svg_height = c_offset.offsetHeight;
-    //data.dot_center = parseInt(dot.getAttribute('width'))/2;
 
     path_el.parentElement.parentElement.setAttribute('style', 'top: '+nodes[0].offsetTop+'px');
     
@@ -418,15 +422,29 @@ document.addEventListener('DOMContentLoaded', () => {
     script_api.parentNode.insertBefore(tag, script_api);
 
     if (document.readyState === 'interactive' || document.readyState === 'complete') {
-        buildServicesPath();
-        setScaleFactor();
-        setTrackPoints();
-        window.addEventListener('scroll', _scroll); // First listener of all after DOMContentLoaded completed
+        // First listener of all after DOMContentLoaded completed
+        if (window.innerWidth > 767) {
+            buildServicesPath();
+            setScaleFactor();
+            setTrackPoints();
+            window.addEventListener('scroll', _scroll);
+        }
+        else
+            window.addEventListener('scroll', _mscroll);
 
         document.querySelectorAll('nav li > a').forEach(link => {
             link.addEventListener('click', function() {
-                let id = this.getAttribute('href');
-                id == '#' ? scrollTo(document.querySelector('body')) : scrollTo(document.querySelector(id));
+                let el = document.querySelector('.header-top'), id = this.getAttribute('href');
+                if (id == '#') {
+                    scrollTo(document.querySelector('body'));
+                    if (el.classList.contains(header_cl))
+                        el.classList.remove(header_cl);
+                }
+                else {
+                    scrollTo(document.querySelector(id));
+                    if (!el.classList.contains(header_cl))
+                        el.classList.add(header_cl);
+                }
                 
                 if (this.classList.contains('link--header')) {
                     document.querySelector('.menu .active').classList.remove('active');
@@ -449,6 +467,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (window.innerWidth < 768) {
+            let header_top = document.querySelector('.header-top');
+            header_top.classList.add('header-top--mob');
+            document.getElementById('hmenu-toggler').addEventListener('click', function() {
+                header_top.classList.toggle('opened');
+            });
+            document.getElementById('c-info-more').addEventListener('click', function() {
+                var el = document.getElementById('c-info-more').parentElement;
+                if (!el.classList.contains('opened'))
+                    el.classList.add('opened');
+                this.classList.add('c--hidden');
+                document.getElementById('c-info-less').classList.remove('c--hidden');
+            });
             document.getElementById('c-info-more').addEventListener('click', function() {
                 var el = document.getElementById('c-info-more').parentElement;
                 if (!el.classList.contains('opened'))

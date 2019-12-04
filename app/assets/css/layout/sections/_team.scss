@@ -102,9 +102,6 @@
           width: 40px
         }
       }
-      // & &_content#{$this}--next_end &_move::after {
-      //   content: url(../img/team/arrow-next-end.svg);
-      // }
       & &_content#{$this}--prev &_move::before {
         @extend %elem-before;
         content: url(../img/team/arrow-prev.svg);
