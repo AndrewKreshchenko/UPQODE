@@ -145,8 +145,22 @@ ul, li {
   }
 }
 
-.b-slider__item-btn {
-  margin-top: 70px;
+@media (min-width: 320px) {
+  .b-slider__item-btn {
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .b-slider__item-btn {
+    margin-top: 40px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .b-slider__item-btn {
+    margin-top: 70px;
+  }
 }
 
 .b-slider__item-video {
@@ -1001,6 +1015,10 @@ ul, li {
   }
 }
 
+.team__item-container {
+  min-height: 260px;
+}
+
 .team__item-title {
   font-weight: 800;
   font-size: 38px;
@@ -1056,7 +1074,7 @@ ul, li {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-top: 70px;
+  margin-top: 35px;
   max-height: 490px;
 }
 
